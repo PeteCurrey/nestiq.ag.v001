@@ -1,125 +1,91 @@
 export const allProperties = [
   {
     slug: "parkhall-lane-spinkhill-sheffield",
-    title: "Park Hall Stately Residence",
+    title: "9 Bedroom Detached House",
     price: 3250000,
     address: "Parkhall Lane, Spinkhill, Sheffield, S21",
     bedrooms: 9,
     bathrooms: 7,
     sqft: 16006,
-    description: "A spectacularly rare 17th Century Grade II* listed stately residence dating back to 1656. Set in approximately 4.5 acres with heated outdoor pool, leisure suite, and equestrian facilities.",
-    features: [
-      "Grade II* Listed Stately Home",
-      "4.5 Acres of Private Grounds",
-      "Outdoor Heated Swimming Pool",
-      "Extensive Equestrian Facilities",
-      "16,006 Sq Ft of Living Space"
-    ],
+    description: "A spectacular 17th Century Grade II* listed home dating back to 1656. Set in approximately 4.5 acres with heated outdoor pool, leisure suite, and equestrian facilities.",
+    features: ["Grade II* Listed", "4.5 Acres", "Outdoor Pool", "Equestrian Facilities"],
     images: [
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/C0aPq4B4PEClE8FmDhVChg.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/hVWHISFmFEyMCmp7c88pag.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/ZZYjGnQeHk6OSL5_fsfiiw.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/S2f4YdDk0Eq0m_W9V857lA.jpg"
+      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/hVWHISFmFEyMCmp7c88pag.jpg"
     ],
     imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/C0aPq4B4PEClE8FmDhVChg.jpg",
     status: "for-sale" as const,
     lat: 53.3213,
     lng: -1.3547,
-    agencyName: "Dales & Peaks",
-    agency: {
-      name: "Dales & Peaks",
-      phone: "01246 567567"
-    }
+    agencyName: "Dales & Peaks"
   },
   {
-    slug: "chesterfield-road-matlock-moor-matlock",
-    title: "Cuckoostone Grange Portfolio",
-    price: 2750000,
-    address: "Chesterfield Road, Matlock Moor, Matlock",
-    bedrooms: 13,
-    bathrooms: 11,
-    sqft: 8500,
-    description: "An iconic Derbyshire residence with 13 bedrooms and 11 bathrooms. Set in extensive grounds including a separate cottage and leisure suite.",
-    features: [
-      "13 Bedrooms / 11 Bathrooms",
-      "Iconic Derbyshire Estate",
-      "Separate Guest Cottage",
-      "Extensive Leisure Suite",
-      "Private Gated Grounds"
-    ],
-    images: [
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/v_K_1bV8mkm4A6lM067Y0A.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/_hPjP7R7O0y4m5_L-P0vKw.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/hVWHISFmFEyMCmp7c88pag.jpg"
-    ],
+    slug: "riggotts-lane-walton-chesterfield",
+    title: "6 Bedroom Detached House",
+    price: 1295000,
+    address: "Riggotts Lane, Walton, Chesterfield, S42",
+    bedrooms: 6,
+    bathrooms: 4,
+    sqft: 3200,
+    description: "A stunning 6 bedroom family home in the sought-after location of Walton. Features include a large open plan kitchen, landscaped gardens and triple garage.",
+    features: ["Highly Sought After Location", "Open Plan Living", "Triple Garage", "Landscaped Gardens"],
+    images: ["https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/v_K_1bV8mkm4A6lM067Y0A.jpg"],
     imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/v_K_1bV8mkm4A6lM067Y0A.jpg",
     status: "for-sale" as const,
-    lat: 53.1411,
-    lng: -1.5603,
-    agencyName: "Dales & Peaks",
-    agency: {
-      name: "Dales & Peaks",
-      phone: "01246 567567"
-    }
+    lat: 53.2205,
+    lng: -1.4580,
+    agencyName: "Dales & Peaks"
   },
   {
-    slug: "walton-back-lane-walton-chesterfield",
-    title: "Contemporary Detached Masterpiece",
-    price: 1495000,
-    address: "Walton Back Lane, Walton, Chesterfield",
-    bedrooms: 5,
-    bathrooms: 4,
-    sqft: 3000,
-    description: "A contemporary 5-bedroom detached home with open-plan living, a stunning island kitchen, and a private gated plot in a highly sought-after location.",
-    features: [
-      "Contemporary Open-Plan Design",
-      "Luxury Island Kitchen",
-      "Private Gated Plot",
-      "Energy Efficient Build",
-      "Triple Garage"
-    ],
-    images: [
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/9p_3-1PT4kmTVmyz6P73-w.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/ZZYjGnQeHk6OSL5_fsfiiw.jpg"
-    ],
+    slug: "ashover-road-tupton-chesterfield",
+    title: "3 Bedroom Semi-Detached House",
+    price: 245000,
+    address: "Ashover Road, Tupton, Chesterfield, S42",
+    bedrooms: 3,
+    bathrooms: 1,
+    sqft: 950,
+    description: "A beautifully presented 3 bedroom semi-detached home in the popular village of Tupton. Ideal for first-time buyers or families.",
+    features: ["Village Location", "Modern Kitchen", "Private Garden", "Driveway Parking"],
+    images: ["https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/9p_3-1PT4kmTVmyz6P73-w.jpg"],
     imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/9p_3-1PT4kmTVmyz6P73-w.jpg",
     status: "for-sale" as const,
-    lat: 53.2200,
-    lng: -1.4440,
-    agencyName: "Dales & Peaks",
-    agency: {
-      name: "Dales & Peaks",
-      phone: "01246 567567"
-    }
+    lat: 53.1900,
+    lng: -1.4250,
+    agencyName: "Dales & Peaks"
   },
   {
-    slug: "northedge-lane-tupton-chesterfield",
-    title: "Architectural Rural Residence",
-    price: 1495000,
-    address: "Northedge Lane, Tupton, Chesterfield",
-    bedrooms: 4,
-    bathrooms: 3,
-    sqft: 4200,
-    description: "An architecturally designed 4-bedroom residence set in a rural location with panoramic views and high-end finishes throughout.",
-    features: [
-      "Architectural Design",
-      "Panoramic Rural Views",
-      "High-End Finishes",
-      "4 Double Bedrooms",
-      "Extensive Glazing"
-    ],
-    images: [
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/DRZGR1I64kqALacXcrdkPA.jpg",
-      "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/hVWHISFmFEyMCmp7c88pag.jpg"
-    ],
+    slug: "london-road-derby",
+    title: "2 Bedroom Apartment",
+    price: 165000,
+    address: "London Road, Derby, DE1",
+    bedrooms: 2,
+    bathrooms: 2,
+    sqft: 750,
+    description: "A modern 2 bedroom apartment in the heart of Derby city centre. Perfect for investors or young professionals.",
+    features: ["City Centre Location", "En-suite to Master", "Secure Parking", "No Upward Chain"],
+    images: ["https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/DRZGR1I64kqALacXcrdkPA.jpg"],
     imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/DRZGR1I64kqALacXcrdkPA.jpg",
     status: "for-sale" as const,
-    lat: 53.1990,
-    lng: -1.4220,
-    agencyName: "Dales & Peaks",
-    agency: {
-      name: "Dales & Peaks",
-      phone: "01246 567567"
-    }
+    lat: 52.9225,
+    lng: -1.4746,
+    agencyName: "Redbrik"
+  },
+  {
+    slug: "chatsworth-road-chesterfield",
+    title: "4 Bedroom Detached House",
+    price: 475000,
+    address: "Chatsworth Road, Chesterfield, S40",
+    bedrooms: 4,
+    bathrooms: 2,
+    sqft: 1400,
+    description: "A spacious 4 bedroom detached family home located on the popular Chatsworth Road. Close to local amenities and excellent schools.",
+    features: ["Excellent School Catchment", "Spacious Garden", "Garage and Driveway", "Open Plan Dining"],
+    images: ["https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/ZZYjGnQeHk6OSL5_fsfiiw.jpg"],
+    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/ZZYjGnQeHk6OSL5_fsfiiw.jpg",
+    status: "for-sale" as const,
+    lat: 53.2320,
+    lng: -1.4550,
+    agencyName: "Dales & Peaks"
   }
 ];
+

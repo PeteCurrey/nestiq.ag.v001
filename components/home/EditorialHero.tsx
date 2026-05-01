@@ -3,6 +3,39 @@
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useState, useEffect } from "react";
+
+function TypewriterLoop({ words }: { words: string[] }) {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [speed, setSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const fullText = words[index];
+      setText(
+        isDeleting
+          ? fullText.substring(0, text.length - 1)
+          : fullText.substring(0, text.length + 1)
+      );
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % words.length);
+      }
+
+      setSpeed(isDeleting ? 75 : 150);
+    };
+
+    const timer = setTimeout(handleTyping, speed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, index, words, speed]);
+
+  return <span>{text}</span>;
+}
 
 export function EditorialHero() {
   return (
@@ -34,22 +67,34 @@ export function EditorialHero() {
           >
             <div className="inline-flex items-center gap-4 text-silk font-medium text-[10px] uppercase tracking-[0.5em] mb-10">
               <div className="w-12 h-px bg-gold" />
-              The Institutional Standard in Property Discovery
+              Search thousands of properties across the UK. Free for buyers and renters, always.
             </div>
             
             <h1 className="text-silk text-[clamp(3rem,8vw,6.5rem)] font-display leading-[0.85] mb-12 tracking-tight">
-              Curated Estates. <br />
-              <span className="italic font-normal">Global Authority.</span>
+              Find Your Next <br />
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="italic font-normal text-gold inline-block"
+              >
+                <TypewriterLoop 
+                  words={["Home", "Flat", "Rental", "Investment", "Forever Place"]} 
+                />
+              </motion.span>
             </h1>
 
             <div className="flex flex-col md:flex-row gap-8 items-start md:items-center mb-24">
               <div className="flex flex-col border-l border-gold pl-6">
-                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Portfolio Value</span>
-                <span className="text-silk font-display text-3xl">£4.8Bn+</span>
+                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Properties Found</span>
+                <span className="text-silk font-display text-3xl">12,400+</span>
               </div>
               <div className="flex flex-col border-l border-silk/20 pl-6">
-                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Exclusive Listings</span>
-                <span className="text-silk font-display text-3xl">1,240+</span>
+                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Partner Agents</span>
+                <span className="text-silk font-display text-3xl">800+</span>
+              </div>
+              <div className="flex flex-col border-l border-silk/20 pl-6">
+                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Market Search</span>
+                <span className="text-silk font-display text-3xl italic">Always Free</span>
               </div>
             </div>
           </motion.div>
@@ -73,8 +118,8 @@ export function EditorialHero() {
               <select className="w-full bg-transparent border-none focus:outline-none text-body-sm font-bold text-obsidian uppercase tracking-[0.2em] appearance-none cursor-pointer">
                 <option>For Sale</option>
                 <option>To Rent</option>
-                <option>Sold Prices</option>
-                <option>Institutional</option>
+                <option>Commercial</option>
+                <option>New Homes</option>
               </select>
             </div>
             <button className="flex-1 bg-obsidian text-silk px-12 py-7 font-bold uppercase tracking-[0.4em] text-[10px] hover:bg-gold hover:text-silk transition-all duration-700">

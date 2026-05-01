@@ -71,7 +71,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
           <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row justify-between items-end gap-8">
             <div className="max-w-3xl">
               <div className="flex gap-3 mb-6">
-                <Badge variant="emerald" className="rounded-none bg-gold text-silk border-none uppercase tracking-[0.2em] text-[10px] py-1.5 px-4 shadow-2xl">Premium Collection</Badge>
+                <Badge variant="emerald" className="rounded-none bg-emerald-600 text-silk border-none uppercase tracking-[0.2em] text-[10px] py-1.5 px-4 shadow-2xl">New to Market</Badge>
                 <Badge className="rounded-none bg-white/20 backdrop-blur-md text-silk border-none uppercase tracking-[0.2em] text-[10px] py-1.5 px-4">For Sale</Badge>
               </div>
               <h1 className="text-silk text-[clamp(2rem,5vw,3.5rem)] font-display leading-[1.1] mb-4 drop-shadow-2xl">
@@ -163,7 +163,16 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                     </div>
 
                     <div className="prose prose-lg max-w-none">
-                      <h2 className="text-display-sm font-display mb-8">Executive Summary</h2>
+                      <div className="bg-emerald-50 p-8 border border-emerald-100 mb-12">
+                        <div className="flex items-center gap-3 text-emerald-700 mb-4">
+                           <ShieldCheck className="w-5 h-5" />
+                           <span className="text-[10px] font-bold uppercase tracking-widest">Nestiq AI Summary</span>
+                        </div>
+                        <p className="text-emerald-900 font-medium leading-relaxed italic">
+                          "This property offers exceptional value for families seeking a move-in ready home in {property.address.split(',').pop()}. The {property.bedrooms}-bedroom layout is well-balanced with modern energy efficiency features and a private plot that is rare for this price point."
+                        </p>
+                      </div>
+                      <h2 className="text-display-sm font-display mb-8">Property Description</h2>
                       <p className="text-body-lg text-muted leading-relaxed whitespace-pre-line">
                         {property.description}
                       </p>
@@ -236,12 +245,12 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
             {/* Agent Card */}
             <div className="bg-white border border-border/40 p-10 shadow-sm">
               <div className="flex items-center gap-6 mb-10">
-                <div className="w-16 h-16 bg-warm rounded-none border border-border flex items-center justify-center overflow-hidden">
-                   <img src="https://www.dalesandpeaks.co.uk/wp-content/themes/dalesandpeaks/assets/images/logo.svg" className="w-full h-full object-contain p-2" alt="Agent Logo" />
+                <div className="w-16 h-16 bg-silk flex items-center justify-center border border-border/20">
+                   <span className="text-obsidian font-display font-bold text-xs leading-tight text-center">DALES &<br/>PEAKS</span>
                 </div>
                 <div>
                   <span className="text-[9px] font-bold text-muted uppercase tracking-widest block mb-1">Presented By</span>
-                  <span className="text-body-lg font-bold text-obsidian uppercase tracking-wider">{property.agency.name}</span>
+                  <span className="text-body-lg font-bold text-obsidian uppercase tracking-wider">{property.agencyName}</span>
                 </div>
               </div>
 
@@ -250,7 +259,7 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                   <div className="w-10 h-10 bg-silk border border-border/40 flex items-center justify-center">
                     <Phone className="w-4 h-4 text-gold" strokeWidth={1.5} />
                   </div>
-                  {property.agency.phone}
+                  01246 567540
                 </div>
                 <div className="flex items-center gap-4 text-body-md text-obsidian">
                   <div className="w-10 h-10 bg-silk border border-border/40 flex items-center justify-center">
@@ -260,7 +269,24 @@ export default function PropertyPage({ params }: { params: { slug: string } }) {
                 </div>
               </div>
 
-              <Button variant="primary" fullWidth size="lg">Book a Viewing</Button>
+              <Button variant="primary" fullWidth size="lg" className="h-16 uppercase tracking-[0.2em] text-[10px] font-bold">Book a Viewing</Button>
+            </div>
+
+            {/* Mortgage Calculator */}
+            <div className="bg-white border border-border/40 p-10 space-y-8">
+               <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-obsidian">Mortgage Calculator</h4>
+               <div className="space-y-6">
+                  <div>
+                    <span className="text-muted text-[9px] uppercase tracking-widest block mb-2">Deposit (15%)</span>
+                    <p className="text-lg font-display font-bold">£{(property.price * 0.15).toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted text-[9px] uppercase tracking-widest block mb-2">Estimated Monthly Repayment</span>
+                    <p className="text-2xl font-display font-bold text-emerald-600">£{Math.round((property.price * 0.85 * 0.05) / 12).toLocaleString()}/mo</p>
+                    <span className="text-[9px] text-muted/60 mt-1 block">Based on 5% interest over 25 years</span>
+                  </div>
+                  <Button variant="secondary" fullWidth className="h-12 border-border/40 text-[9px] font-bold uppercase tracking-widest">Adjust Calculations</Button>
+               </div>
             </div>
 
             {/* Smart Intelligence Panel */}

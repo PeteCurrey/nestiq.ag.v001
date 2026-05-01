@@ -74,25 +74,25 @@ export default function Home() {
         <MarketTicker />
       </div>
       
-      {/* Institutional Mission */}
+      {/* The Nestiq Difference */}
       <section className="py-32 px-6 md:px-12 max-w-[1800px] mx-auto border-b border-border/30">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div>
             <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-8 block">The Nestiq Standard</span>
             <h2 className="text-display-lg leading-[1.1] mb-12">
-              Bespoke Asset Discovery for <span className="italic font-normal">Modern Portfolio Managers.</span>
+              A smarter, fairer way <br /> to find your <span className="italic font-normal text-gold">next move.</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
               <Shield className="w-6 h-6 text-gold mb-6" strokeWidth={1} />
-              <h3 className="text-body-lg font-bold mb-3 uppercase tracking-wider">Verified Chain</h3>
-              <p className="text-body-sm text-muted leading-relaxed">Direct integration with institutional management systems ensures 100% data fidelity and chain of custody.</p>
+              <h3 className="text-body-lg font-bold mb-3 uppercase tracking-wider">Trusted Data</h3>
+              <p className="text-body-sm text-muted leading-relaxed">Direct integration with agent CRM systems ensures 100% accurate information and real-time listing updates.</p>
             </div>
             <div>
               <Globe className="w-6 h-6 text-gold mb-6" strokeWidth={1} />
-              <h3 className="text-body-lg font-bold mb-3 uppercase tracking-wider">Global Reach</h3>
-              <p className="text-body-sm text-muted leading-relaxed">Connecting high-net-worth liquidity with exclusive UK residential and commercial assets.</p>
+              <h3 className="text-body-lg font-bold mb-3 uppercase tracking-wider">Direct Access</h3>
+              <p className="text-body-sm text-muted leading-relaxed">Connecting buyers and renters directly with local independent agents for a better property experience.</p>
             </div>
           </div>
         </div>
@@ -104,8 +104,8 @@ export default function Home() {
           <div className="max-w-2xl">
             <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-8 block">The Collection</span>
             <h2 className="text-display-md leading-[1.1]">
-              Curated Estates. <br />
-              Peerless Standards.
+              Featured <br />
+              Homes.
             </h2>
           </div>
           <Button variant="secondary" className="group">
@@ -124,15 +124,15 @@ export default function Home() {
 
       <AgentShowcase />
 
-      {/* Institutional Press */}
+      {/* Partner Agencies */}
       <section className="py-32 bg-obsidian text-silk overflow-hidden">
          <div className="max-w-[1800px] mx-auto px-6 md:px-12">
-            <p className="text-center text-[10px] font-medium uppercase tracking-[0.4em] text-silk/40 mb-16">Global Authority & Recognition</p>
+            <p className="text-center text-[10px] font-medium uppercase tracking-[0.4em] text-silk/40 mb-16">Trusted by Leading Independent Agencies</p>
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-32 opacity-60">
-               <span className="text-display-sm font-display lowercase italic opacity-80">The Financial Times</span>
-               <span className="text-display-sm font-display font-medium tracking-tighter">Bloomberg</span>
-               <span className="text-display-sm font-display font-bold uppercase tracking-widest text-[14px]">Forbes</span>
-               <span className="text-display-sm font-display italic">Reuters</span>
+               <span className="text-display-sm font-display font-bold uppercase tracking-widest text-[18px]">Dales & Peaks</span>
+               <span className="text-display-sm font-display lowercase italic opacity-80">Redbrik</span>
+               <span className="text-display-sm font-display font-medium tracking-tighter">Saxton Mee</span>
+               <span className="text-display-sm font-display italic">Blenheim</span>
             </div>
          </div>
       </section>

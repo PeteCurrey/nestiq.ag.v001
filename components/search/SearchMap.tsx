@@ -9,7 +9,9 @@ import { Crosshair, RefreshCw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "pk.eyJ1IjoibmVzdGlxLWFwaSIsImEiOiJjbHRoYnF2bGQwMzFhMmtvNXN3amV6eHZnIn0.placeholder";
-mapboxgl.accessToken = MAPBOX_TOKEN;
+if (typeof window !== "undefined") {
+  mapboxgl.accessToken = MAPBOX_TOKEN;
+}
 
 interface SearchMapProps {
   properties: any[];
@@ -72,9 +74,9 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/dark-v11",
-      center: [-1.5491, 53.8008], // Leeds
-      zoom: 12,
+      style: "mapbox://styles/mapbox/light-v11",
+      center: [-1.4550, 53.2320], // Chesterfield
+      zoom: 11,
     });
 
     map.current.on("load", () => {
@@ -103,9 +105,11 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
         source: "properties",
         filter: ["has", "point_count"],
         paint: {
-          "circle-color": "#C5A059",
-          "circle-radius": ["step", ["get", "point_count"], 20, 10, 30, 50, 40],
-          "circle-opacity": 1,
+          "circle-color": "#1A6B4A",
+          "circle-radius": ["step", ["get", "point_count"], 25, 10, 35, 50, 45],
+          "circle-opacity": 0.9,
+          "circle-stroke-width": 2,
+          "circle-stroke-color": "#ffffff"
         },
       });
 

@@ -5,12 +5,12 @@ import { Building2, Mail, Phone, MapPin, Globe, Shield } from "lucide-react";
 
 const footerLinks = [
   {
-    title: "Portfolio",
+    title: "Search",
     links: [
-      { name: "Luxury Estates", href: "/search?type=estate" },
-      { name: "City Penthouses", href: "/search?type=penthouse" },
-      { name: "Development Sites", href: "/search?type=development" },
-      { name: "Institutional Assets", href: "/search?type=institutional" },
+      { name: "Houses for Sale", href: "/search?type=house" },
+      { name: "Flats to Rent", href: "/search?type=flat" },
+      { name: "New Builds", href: "/search?type=newbuild" },
+      { name: "Commercial", href: "/search?type=commercial" },
     ],
   },
   {
@@ -50,7 +50,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-silk/40 text-body-sm leading-relaxed max-w-sm">
-              The UK's premier institutional property portal. Connecting global liquidity with exclusive residential and commercial assets through verifiable data.
+              The UK property portal built for agents, not against them. Providing a faster, fairer way to find your next home.
             </p>
             <div className="flex gap-6">
               <Globe className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
@@ -79,14 +79,15 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-12 border-t border-silk/10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-wrap justify-center gap-8 text-[9px] font-bold uppercase tracking-widest text-silk/20">
-            <span>© 2026 Nestiq Global Ltd</span>
+            <span>© 2026 Nestiq Ltd</span>
             <Link href="/privacy" className="hover:text-silk transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-silk transition-colors">Terms of Service</Link>
             <Link href="/cookies" className="hover:text-silk transition-colors">Cookie Policy</Link>
           </div>
-          <div className="flex items-center gap-4 text-[9px] font-bold uppercase tracking-widest text-silk/40">
-            <div className="w-2 h-2 bg-emerald rounded-full animate-pulse" />
-            System Status: Nominal
+          <div className="flex items-center gap-6 opacity-20 grayscale brightness-200">
+             <span className="text-[10px] font-bold border px-2 py-1">NAEA PROPERTMARK</span>
+             <span className="text-[10px] font-bold border px-2 py-1">ARLA PROPERTMARK</span>
+             <span className="text-[10px] font-bold border px-2 py-1">THE PROPERTY OMBUDSMAN</span>
           </div>
         </div>
       </div>

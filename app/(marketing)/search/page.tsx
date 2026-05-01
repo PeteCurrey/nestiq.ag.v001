@@ -31,10 +31,10 @@ export default function SearchPage() {
           <div className="max-w-[800px] mx-auto">
             <div className="flex items-center justify-between mb-8">
               <h1 className="text-display-sm font-display font-bold text-obsidian uppercase tracking-tight">
-                Premium Properties for Sale
+                Properties for Sale
               </h1>
               <span className="text-[10px] font-bold text-muted uppercase tracking-[0.2em]">
-                {allProperties.length} Institutional Assets
+                {allProperties.length} Properties Available
               </span>
             </div>
 

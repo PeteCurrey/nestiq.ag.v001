@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils/cn";
 import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CookieBanner } from "@/components/shared/CookieBanner";
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <Toaster position="bottom-right" theme="dark" />
+        <CookieBanner />
       </body>
     </html>
   );
