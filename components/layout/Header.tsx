@@ -8,11 +8,11 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
 
 const navLinks = [
-  { name: "Buy", href: "/buy" },
-  { name: "Rent", href: "/rent" },
-  { name: "Commercial", href: "/commercial" },
+  { name: "Buy", href: "/search?type=for-sale" },
+  { name: "Rent", href: "/search?type=to-rent" },
   { name: "Agents", href: "/agents" },
-  { name: "AI Search", href: "/ai-search", accent: true },
+  { name: "Valuation", href: "/valuation" },
+  { name: "Market Data", href: "/market-data" },
 ];
 
 export function Header() {
