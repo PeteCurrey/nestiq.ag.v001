@@ -1,0 +1,1 @@
+const https = require('https'); https.get('https://www.pexels.com/search/videos/mansion/', res => { let data = ''; res.on('data', d => { data += d; }); res.on('end', () => { const match = data.match(/https:\/\/videos\.pexels\.com\/video-files\/\d+\/[^\"']+\.mp4/); if (match) console.log(match[0]); else console.log('No match'); }); });
