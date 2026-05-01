@@ -9,18 +9,15 @@ export function EditorialHero() {
     <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-obsidian">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-obsidian/40 z-10" />
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          key="hero-video"
-          poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"
-          className="w-full h-full object-cover scale-105"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-luxury-house-exterior-at-night-42880-large.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-beautiful-modern-house-exterior-at-sunset-42884-large.mp4" type="video/mp4" />
-        </video>
+        {/* Vimeo Background Player - Highly reliable, ignores CDN token expiry */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+          <iframe
+            src="https://player.vimeo.com/video/517728211?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2"
+            allow="autoplay; fullscreen"
+            style={{ pointerEvents: "none" }}
+          />
+        </div>
       </div>
 
       <div className="relative z-20 w-full px-6 md:px-12">
