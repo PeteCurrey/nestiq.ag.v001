@@ -15,10 +15,11 @@ export function EditorialHero() {
           muted 
           playsInline
           key="hero-video"
+          poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"
           className="w-full h-full object-cover scale-105"
         >
-          <source src="https://player.vimeo.com/external/517728211.hd.mp4?s=7a72661592395d3c8702f232491a6e9a38573229&profile_id=175" type="video/mp4" />
-          <source src="https://player.vimeo.com/external/494252666.hd.mp4?s=727af30c6a993e390c2941e97669d57a4a275f96&profile_id=170" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-luxury-house-exterior-at-night-42880-large.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-beautiful-modern-house-exterior-at-sunset-42884-large.mp4" type="video/mp4" />
         </video>
       </div>
 
