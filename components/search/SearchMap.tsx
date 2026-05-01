@@ -21,6 +21,43 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
   const map = useRef<mapboxgl.Map | null>(null);
   const [showSearchButton, setShowSearchButton] = useState(false);
 
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
+
+  const updateMarkers = () => {
+    if (!map.current) return;
+
+    // Clear existing markers
+    markersRef.current.forEach((m) => m.remove());
+    markersRef.current = [];
+
+    // Only add markers for unclustered points or when zoomed in
+    properties.forEach((p) => {
+      const el = document.createElement("div");
+      el.className = "map-pin";
+      el.innerHTML = `£${(p.price / 1000).toFixed(0)}k`;
+      el.style.backgroundColor = "#1A6B4A";
+      el.style.color = "white";
+      el.style.padding = "4px 8px";
+      el.style.borderRadius = "20px";
+      el.style.fontSize = "11px";
+      el.style.fontWeight = "bold";
+      el.style.fontFamily = "monospace";
+      el.style.cursor = "pointer";
+      el.style.boxShadow = "0 2px 4px rgba(0,0,0,0.2)";
+      el.style.transition = "transform 0.2s";
+
+      el.addEventListener("mouseenter", () => (el.style.transform = "scale(1.1)"));
+      el.addEventListener("mouseleave", () => (el.style.transform = "scale(1)"));
+      el.addEventListener("click", () => onMarkerClick?.(p.id));
+
+      const marker = new mapboxgl.Marker(el)
+        .setLngLat([p.lng, p.lat])
+        .addTo(map.current!);
+      
+      markersRef.current.push(marker);
+    });
+  };
+
   useEffect(() => {
     if (!mapContainer.current) return;
 
@@ -93,43 +130,6 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
   useEffect(() => {
     updateMarkers();
   }, [properties]);
-
-  const markersRef = useRef<mapboxgl.Marker[]>([]);
-
-  const updateMarkers = () => {
-    if (!map.current) return;
-
-    // Clear existing markers
-    markersRef.current.forEach((m) => m.remove());
-    markersRef.current = [];
-
-    // Only add markers for unclustered points or when zoomed in
-    properties.forEach((p) => {
-      const el = document.createElement("div");
-      el.className = "map-pin";
-      el.innerHTML = `£${(p.price / 1000).toFixed(0)}k`;
-      el.style.backgroundColor = "#1A6B4A";
-      el.style.color = "white";
-      el.style.padding = "4px 8px";
-      el.style.borderRadius = "20px";
-      el.style.fontSize = "11px";
-      el.style.fontWeight = "bold";
-      el.style.fontFamily = "monospace";
-      el.style.cursor = "pointer";
-      el.style.boxShadow = "0 2px 4px rgba(0,0,0,0.2)";
-      el.style.transition = "transform 0.2s";
-
-      el.addEventListener("mouseenter", () => (el.style.transform = "scale(1.1)"));
-      el.addEventListener("mouseleave", () => (el.style.transform = "scale(1)"));
-      el.addEventListener("click", () => onMarkerClick?.(p.id));
-
-      const marker = new mapboxgl.Marker(el)
-        .setLngLat([p.lng, p.lat])
-        .addTo(map.current!);
-      
-      markersRef.current.push(marker);
-    });
-  };
 
   return (
     <div className="relative w-full h-full">
