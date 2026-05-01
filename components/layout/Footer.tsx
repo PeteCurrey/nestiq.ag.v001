@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Building2, Mail, Phone, MapPin, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Building2, Mail, Phone, MapPin, Globe, Shield } from "lucide-react";
 
 const footerLinks = [
   {
