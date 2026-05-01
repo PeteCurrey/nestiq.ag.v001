@@ -53,9 +53,9 @@ export function Footer() {
               The UK's premier institutional property portal. Connecting global liquidity with exclusive residential and commercial assets through verifiable data.
             </p>
             <div className="flex gap-6">
-              <Linkedin className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
-              <Twitter className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
-              <Instagram className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
+              <Globe className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
+              <Shield className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
+              <Mail className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
             </div>
           </div>
 
