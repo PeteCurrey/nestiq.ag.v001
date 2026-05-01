@@ -41,19 +41,19 @@ export function AgentShowcase() {
                 Stop Paying Legacy Fees. <br />
                 <span className="italic font-normal">Own Your Data.</span>
               </h2>
-              <p className="text-body-xl text-silk/60 mb-16 max-w-xl leading-relaxed">
+              <p className="text-body-xl text-silk/80 mb-16 max-w-xl leading-relaxed">
                 Nestiq provides a sovereign asset management platform. No more opaque portals. Full CRM, AI listing tools, and performance analytics included.
               </p>
               
               <div className="space-y-12 mb-16">
                 {features.map((feature, i) => (
                   <div key={i} className="flex gap-6 items-start">
-                    <div className="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
                       {feature.icon}
                     </div>
                     <div>
-                      <h3 className="text-body-lg font-bold mb-2 uppercase tracking-wider">{feature.title}</h3>
-                      <p className="text-body-sm text-silk/40 leading-relaxed">{feature.description}</p>
+                      <h3 className="text-body-lg font-bold mb-2 uppercase tracking-wider text-silk">{feature.title}</h3>
+                      <p className="text-body-sm text-silk/70 leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
                 ))}
@@ -77,13 +77,13 @@ export function AgentShowcase() {
             >
               <div className="bg-obsidian rounded-none overflow-hidden border border-white/10">
                 {/* Browser Header */}
-                <div className="bg-white/5 border-b border-white/10 px-6 py-4 flex items-center gap-3">
+                <div className="bg-white/10 border-b border-white/10 px-6 py-4 flex items-center gap-3">
                   <div className="flex gap-2">
-                    <div className="w-2 h-2 rounded-full bg-white/20" />
-                    <div className="w-2 h-2 rounded-full bg-white/20" />
-                    <div className="w-2 h-2 rounded-full bg-white/20" />
+                    <div className="w-2 h-2 rounded-full bg-white/40" />
+                    <div className="w-2 h-2 rounded-full bg-white/40" />
+                    <div className="w-2 h-2 rounded-full bg-white/40" />
                   </div>
-                  <div className="mx-auto bg-white/5 rounded-none px-12 py-1 text-[9px] text-white/30 font-bold uppercase tracking-widest">
+                  <div className="mx-auto bg-white/5 border border-white/5 rounded-none px-12 py-1 text-[9px] text-white/50 font-bold uppercase tracking-[0.2em]">
                     nestiq.com/agent/dashboard
                   </div>
                 </div>
@@ -91,18 +91,18 @@ export function AgentShowcase() {
                 {/* Dashboard Wireframe */}
                 <div className="p-10 grid grid-cols-12 gap-8 aspect-video bg-obsidian">
                   <div className="col-span-3 space-y-4">
-                     <div className="h-2 bg-white/10 w-3/4 mb-8" />
-                     <div className="h-12 bg-white/5 border border-gold/20" />
-                     <div className="h-12 bg-white/5" />
-                     <div className="h-12 bg-white/5" />
+                     <div className="h-2 bg-white/20 w-3/4 mb-8" />
+                     <div className="h-12 bg-white/10 border border-gold/40" />
+                     <div className="h-12 bg-white/5 border border-white/10" />
+                     <div className="h-12 bg-white/5 border border-white/10" />
                   </div>
                   <div className="col-span-9 space-y-8">
                      <div className="grid grid-cols-3 gap-6">
-                        <div className="h-32 bg-white/5 border border-white/5" />
-                        <div className="h-32 bg-white/5 border border-white/5" />
-                        <div className="h-32 bg-white/5 border border-white/5" />
+                        <div className="h-32 bg-white/10 border border-white/10" />
+                        <div className="h-32 bg-white/10 border border-white/10" />
+                        <div className="h-32 bg-white/10 border border-white/10" />
                      </div>
-                     <div className="h-64 bg-white/5 border border-white/5" />
+                     <div className="h-64 bg-white/10 border border-white/10" />
                   </div>
                 </div>
               </div>
