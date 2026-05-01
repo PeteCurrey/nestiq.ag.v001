@@ -21,6 +21,11 @@ export const allProperties = [
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/ZZYjGnQeHk6OSL5_fsfiiw.jpg",
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/S2f4YdDk0Eq0m_W9V857lA.jpg"
     ],
+    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/C0aPq4B4PEClE8FmDhVChg.jpg",
+    status: "for-sale" as const,
+    lat: 53.3213,
+    lng: -1.3547,
+    agencyName: "Dales & Peaks",
     agency: {
       name: "Dales & Peaks",
       phone: "01246 567567"
@@ -47,6 +52,11 @@ export const allProperties = [
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/_hPjP7R7O0y4m5_L-P0vKw.jpg",
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/hVWHISFmFEyMCmp7c88pag.jpg"
     ],
+    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/v_K_1bV8mkm4A6lM067Y0A.jpg",
+    status: "for-sale" as const,
+    lat: 53.1411,
+    lng: -1.5603,
+    agencyName: "Dales & Peaks",
     agency: {
       name: "Dales & Peaks",
       phone: "01246 567567"
@@ -72,6 +82,11 @@ export const allProperties = [
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/9p_3-1PT4kmTVmyz6P73-w.jpg",
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/ZZYjGnQeHk6OSL5_fsfiiw.jpg"
     ],
+    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/9p_3-1PT4kmTVmyz6P73-w.jpg",
+    status: "for-sale" as const,
+    lat: 53.2200,
+    lng: -1.4440,
+    agencyName: "Dales & Peaks",
     agency: {
       name: "Dales & Peaks",
       phone: "01246 567567"
@@ -97,6 +112,11 @@ export const allProperties = [
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/DRZGR1I64kqALacXcrdkPA.jpg",
       "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/hVWHISFmFEyMCmp7c88pag.jpg"
     ],
+    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/DRZGR1I64kqALacXcrdkPA.jpg",
+    status: "for-sale" as const,
+    lat: 53.1990,
+    lng: -1.4220,
+    agencyName: "Dales & Peaks",
     agency: {
       name: "Dales & Peaks",
       phone: "01246 567567"
