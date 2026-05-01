@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/Button";
 import { Crosshair, RefreshCw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "pk.eyJ1IjoibmVzdGlxLWFwaSIsImEiOiJjbHRoYnF2bGQwMzFhMmtvNXN3amV6eHZnIn0.placeholder";
+mapboxgl.accessToken = MAPBOX_TOKEN;
 
 interface SearchMapProps {
   properties: any[];
@@ -35,19 +36,27 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
       const el = document.createElement("div");
       el.className = "map-pin";
       el.innerHTML = `£${(p.price / 1000).toFixed(0)}k`;
-      el.style.backgroundColor = "#1A6B4A";
-      el.style.color = "white";
-      el.style.padding = "4px 8px";
-      el.style.borderRadius = "20px";
-      el.style.fontSize = "11px";
+      el.style.backgroundColor = "#C5A059";
+      el.style.color = "#0A0A0A";
+      el.style.padding = "6px 10px";
+      el.style.borderRadius = "0px";
+      el.style.fontSize = "10px";
       el.style.fontWeight = "bold";
-      el.style.fontFamily = "monospace";
+      el.style.fontFamily = "inherit";
       el.style.cursor = "pointer";
-      el.style.boxShadow = "0 2px 4px rgba(0,0,0,0.2)";
-      el.style.transition = "transform 0.2s";
+      el.style.boxShadow = "0 8px 16px rgba(0,0,0,0.2)";
+      el.style.transition = "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)";
 
-      el.addEventListener("mouseenter", () => (el.style.transform = "scale(1.1)"));
-      el.addEventListener("mouseleave", () => (el.style.transform = "scale(1)"));
+      el.addEventListener("mouseenter", () => {
+        el.style.transform = "translateY(-4px)";
+        el.style.backgroundColor = "#0A0A0A";
+        el.style.color = "#C5A059";
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.transform = "translateY(0)";
+        el.style.backgroundColor = "#C5A059";
+        el.style.color = "#0A0A0A";
+      });
       el.addEventListener("click", () => onMarkerClick?.(p.id));
 
       const marker = new mapboxgl.Marker(el)
@@ -63,7 +72,7 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
+      style: "mapbox://styles/mapbox/dark-v11",
       center: [-1.5491, 53.8008], // Leeds
       zoom: 12,
     });
@@ -94,9 +103,9 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
         source: "properties",
         filter: ["has", "point_count"],
         paint: {
-          "circle-color": "#1A6B4A",
+          "circle-color": "#C5A059",
           "circle-radius": ["step", ["get", "point_count"], 20, 10, 30, 50, 40],
-          "circle-opacity": 0.9,
+          "circle-opacity": 1,
         },
       });
 
@@ -172,7 +181,7 @@ export function SearchMap({ properties, onViewportChange, onMarkerClick }: Searc
         }}
         className="absolute bottom-10 right-6 z-10 bg-white p-3 rounded-full shadow-lg border border-border hover:bg-pearl transition-colors"
       >
-        <Crosshair className="w-5 h-5 text-forest" />
+        <Crosshair className="w-5 h-5 text-gold" />
       </button>
     </div>
   );
