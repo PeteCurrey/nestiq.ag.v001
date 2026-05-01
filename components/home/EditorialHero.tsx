@@ -8,17 +8,16 @@ export function EditorialHero() {
   return (
     <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden bg-obsidian">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-obsidian/40 z-10" />
+        <div className="absolute inset-0 bg-obsidian/30 z-10" />
         <video 
           autoPlay 
           loop 
           muted 
           playsInline
           poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop"
-          className="w-full h-full object-cover opacity-90"
+          className="w-full h-full object-cover opacity-100"
         >
-          <source src="https://player.vimeo.com/external/494252666.sd.mp4?s=727af30c6a993e390c2941e97669d57a4a275f96&profile_id=165" type="video/mp4" />
-          {/* Fallback image if video fails */}
+          <source src="https://player.vimeo.com/external/494252666.hd.mp4?s=727af30c6a993e390c2941e97669d57a4a275f96&profile_id=170" type="video/mp4" />
           <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop" className="w-full h-full object-cover" alt="Luxury Estate" />
         </video>
       </div>

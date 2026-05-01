@@ -11,38 +11,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils/cn";
-
-// Mock data for the demonstration
-const propertyData = {
-  title: "Park Hall - 7 Bedroom Grade II* Listed Stately Residence",
-  price: 3250000,
-  address: "Parkhall Lane, Spinkhill, Sheffield, Derbyshire, S21",
-  bedrooms: 9,
-  bathrooms: 7,
-  sqft: 16006,
-  description: `An incredibly rare opportunity to purchase a spectacular 17th Century Grade II* listed stately residence dating back to 1656. Set in approximately 4.5 acres of grounds with an outdoor heated pool, leisure suite, and equestrian facilities. Includes a further 2-bedroom detached cottage. 
-
-  Park Hall is steeped in history and offers a wealth of original features combined with modern luxury. The main residence provides extensive living accommodation across three floors, featuring grand reception rooms, a bespoke breakfast kitchen, and a master suite that defines opulence.`,
-  features: [
-    "Grade II* Listed Stately Home",
-    "4.5 Acres of Private Grounds",
-    "Outdoor Heated Swimming Pool",
-    "Extensive Equestrian Facilities",
-    "Detached 2-Bedroom Guest Cottage",
-    "Triple Garage & Ample Parking"
-  ],
-  images: [
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1600607687940-4ad2364b19a1?q=80&w=1200&auto=format&fit=crop"
-  ],
-  agency: {
-    name: "Dales & Peaks",
-    logo: "https://www.dalesandpeaks.co.uk/wp-content/themes/dalesandpeaks/assets/images/logo.svg",
-    agent: "Sarah Thompson",
-    phone: "01246 567567"
-  }
-};
+import { allProperties } from "@/lib/data/properties";
+import { notFound } from "next/navigation";
 
 const tabs = [
   { id: "description", label: "Description", icon: Info },
@@ -73,8 +43,13 @@ function Globe(props: any) {
   )
 }
 
-export default function PropertyPage() {
+export default function PropertyPage({ params }: { params: { slug: string } }) {
   const [activeTab, setActiveTab] = useState("description");
+  const property = allProperties.find((p) => p.slug === params.slug);
+
+  if (!property) {
+    notFound();
+  }
 
   return (
     <div className="min-h-screen bg-silk">
@@ -89,7 +64,7 @@ export default function PropertyPage() {
 
       {/* Hero Image Section */}
       <section className="relative h-[70vh] w-full overflow-hidden">
-        <ImageGallery images={propertyData.images} />
+        <ImageGallery images={property.images} />
         <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-transparent to-transparent pointer-events-none" />
         
         <div className="absolute bottom-12 left-0 right-0 px-6 md:px-12">
@@ -100,18 +75,18 @@ export default function PropertyPage() {
                 <Badge className="rounded-none bg-white/20 backdrop-blur-md text-silk border-none uppercase tracking-[0.2em] text-[10px] py-1.5 px-4">For Sale</Badge>
               </div>
               <h1 className="text-silk text-[clamp(2rem,5vw,3.5rem)] font-display leading-[1.1] mb-4 drop-shadow-2xl">
-                {propertyData.title}
+                {property.title}
               </h1>
               <div className="flex items-center gap-2 text-silk/80 text-body-md font-medium tracking-wide">
                 <MapPin className="w-4 h-4 text-gold" strokeWidth={2} />
-                {propertyData.address}
+                {property.address}
               </div>
             </div>
             
             <div className="bg-white/95 backdrop-blur-md p-8 md:p-10 border border-border/50 shadow-2xl min-w-[320px]">
               <span className="text-[10px] font-bold text-muted uppercase tracking-[0.3em] mb-2 block text-center">Guide Price</span>
               <div className="text-display-md font-display text-obsidian text-center mb-6">
-                £{propertyData.price.toLocaleString()}
+                £{property.price.toLocaleString()}
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <Button variant="primary" className="w-full">Enquire</Button>
@@ -167,17 +142,17 @@ export default function PropertyPage() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                        <div className="p-8 bg-white border border-border/40 text-center group hover:border-gold/30 transition-colors">
                           <Bed className="w-6 h-6 text-gold mx-auto mb-4" strokeWidth={1} />
-                          <span className="block text-display-xs font-display text-obsidian">{propertyData.bedrooms}</span>
+                          <span className="block text-display-xs font-display text-obsidian">{property.bedrooms}</span>
                           <span className="text-[10px] font-bold text-muted uppercase tracking-widest">Bedrooms</span>
                        </div>
                        <div className="p-8 bg-white border border-border/40 text-center group hover:border-gold/30 transition-colors">
                           <Bath className="w-6 h-6 text-gold mx-auto mb-4" strokeWidth={1} />
-                          <span className="block text-display-xs font-display text-obsidian">{propertyData.bathrooms}</span>
+                          <span className="block text-display-xs font-display text-obsidian">{property.bathrooms}</span>
                           <span className="text-[10px] font-bold text-muted uppercase tracking-widest">Bathrooms</span>
                        </div>
                        <div className="p-8 bg-white border border-border/40 text-center group hover:border-gold/30 transition-colors">
                           <Move className="w-6 h-6 text-gold mx-auto mb-4" strokeWidth={1} />
-                          <span className="block text-display-xs font-display text-obsidian">{propertyData.sqft.toLocaleString()}</span>
+                          <span className="block text-display-xs font-display text-obsidian">{property.sqft.toLocaleString()}</span>
                           <span className="text-[10px] font-bold text-muted uppercase tracking-widest">Sq Ft</span>
                        </div>
                        <div className="p-8 bg-white border border-border/40 text-center group hover:border-gold/30 transition-colors">
@@ -190,14 +165,14 @@ export default function PropertyPage() {
                     <div className="prose prose-lg max-w-none">
                       <h2 className="text-display-sm font-display mb-8">Executive Summary</h2>
                       <p className="text-body-lg text-muted leading-relaxed whitespace-pre-line">
-                        {propertyData.description}
+                        {property.description}
                       </p>
                     </div>
 
                     <div>
                       <h3 className="text-body-lg font-bold uppercase tracking-[0.2em] mb-8 border-b border-border/30 pb-4">Key Features</h3>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-12">
-                        {propertyData.features.map((feature, i) => (
+                        {property.features.map((feature, i) => (
                           <li key={i} className="flex items-center gap-4 text-body-md text-obsidian group">
                             <div className="w-1.5 h-1.5 bg-gold rounded-full" />
                             {feature}
@@ -233,7 +208,7 @@ export default function PropertyPage() {
                 {activeTab === "tour" && (
                   <div className="w-full h-[600px] bg-obsidian flex items-center justify-center border border-border/50 overflow-hidden relative">
                     <video autoPlay loop muted className="w-full h-full object-cover opacity-60">
-                      <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-luxury-house-exterior-at-night-42880-large.mp4" type="video/mp4" />
+                      <source src="https://player.vimeo.com/external/494252666.sd.mp4?s=727af30c6a993e390c2941e97669d57a4a275f96&profile_id=165" type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                       <Box className="w-16 h-16 text-gold mb-6 animate-pulse" strokeWidth={1} />
@@ -266,7 +241,7 @@ export default function PropertyPage() {
                 </div>
                 <div>
                   <span className="text-[9px] font-bold text-muted uppercase tracking-widest block mb-1">Presented By</span>
-                  <span className="text-body-lg font-bold text-obsidian uppercase tracking-wider">{propertyData.agency.name}</span>
+                  <span className="text-body-lg font-bold text-obsidian uppercase tracking-wider">{property.agency.name}</span>
                 </div>
               </div>
 
@@ -275,7 +250,7 @@ export default function PropertyPage() {
                   <div className="w-10 h-10 bg-silk border border-border/40 flex items-center justify-center">
                     <Phone className="w-4 h-4 text-gold" strokeWidth={1.5} />
                   </div>
-                  {propertyData.agency.phone}
+                  {property.agency.phone}
                 </div>
                 <div className="flex items-center gap-4 text-body-md text-obsidian">
                   <div className="w-10 h-10 bg-silk border border-border/40 flex items-center justify-center">
@@ -315,6 +290,7 @@ export default function PropertyPage() {
     </div>
   );
 }
+
 
 function ImageGallery({ images }: { images: string[] }) {
   const [current, setCurrent] = useState(0);

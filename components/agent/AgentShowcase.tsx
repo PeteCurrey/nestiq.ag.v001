@@ -113,6 +113,3 @@ export function AgentShowcase() {
     </section>
   );
 }
-
-  );
-}
