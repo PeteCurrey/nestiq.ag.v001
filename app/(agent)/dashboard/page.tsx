@@ -93,7 +93,7 @@ export default function AgentDashboard() {
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-sm font-bold uppercase tracking-widest text-obsidian">Listing Views</h3>
             <select className="text-[10px] font-bold uppercase tracking-widest bg-transparent border-none focus:outline-none">
-              <Last 30 Days />
+              <Last>Last 30 Days</Last>
             </select>
           </div>
           <div className="h-64">
@@ -119,7 +119,7 @@ export default function AgentDashboard() {
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-sm font-bold uppercase tracking-widest text-obsidian">Enquiries</h3>
             <select className="text-[10px] font-bold uppercase tracking-widest bg-transparent border-none focus:outline-none">
-              <Last 30 Days />
+              <Last>Last 30 Days</Last>
             </select>
           </div>
           <div className="h-64">
