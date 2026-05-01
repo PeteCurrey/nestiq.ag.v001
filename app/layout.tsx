@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils/cn";
 import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -51,13 +52,13 @@ export default function RootLayout({
           dmSans.variable,
           syne.variable,
           jetbrainsMono.variable,
-          "min-h-screen bg-pearl font-sans antialiased selection:bg-emerald/30 selection:text-forest"
+          "min-h-screen bg-silk font-sans antialiased selection:bg-emerald/30 selection:text-forest"
         )}
       >
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>
-          {/* Footer will go here */}
+          <Footer />
         </div>
         <Toaster position="bottom-right" theme="dark" />
       </body>

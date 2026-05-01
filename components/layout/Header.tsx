@@ -37,10 +37,16 @@ export function Header() {
       <div className="max-w-[1800px] mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="bg-obsidian p-1 rounded-none group-hover:bg-forest transition-colors duration-500">
-            <Building2 className="w-5 h-5 text-silk" strokeWidth={1.5} />
+          <div className={cn(
+            "p-1 rounded-none transition-colors duration-500",
+            isScrolled ? "bg-obsidian group-hover:bg-forest" : "bg-silk group-hover:bg-gold"
+          )}>
+            <Building2 className={cn("w-5 h-5 transition-colors duration-500", isScrolled ? "text-silk" : "text-obsidian")} strokeWidth={1.5} />
           </div>
-          <span className="text-lg font-display font-medium tracking-[0.2em] text-obsidian uppercase">
+          <span className={cn(
+            "text-lg font-display font-medium tracking-[0.2em] uppercase transition-colors duration-500",
+            isScrolled ? "text-obsidian" : "text-silk"
+          )}>
             NESTIQ
           </span>
         </Link>
@@ -51,7 +57,10 @@ export function Header() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-[10px] font-bold uppercase tracking-[0.25em] text-obsidian/60 hover:text-forest transition-colors duration-500"
+              className={cn(
+                "text-[10px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
+                isScrolled ? "text-obsidian/60 hover:text-forest" : "text-silk/80 hover:text-gold"
+              )}
             >
               {link.name}
             </Link>
@@ -60,10 +69,16 @@ export function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-8">
-          <Link href="/saved" className="hidden sm:flex text-obsidian/40 hover:text-forest transition-colors duration-500">
+          <Link href="/saved" className={cn(
+            "hidden sm:flex transition-colors duration-500",
+            isScrolled ? "text-obsidian/40 hover:text-forest" : "text-silk/60 hover:text-gold"
+          )}>
             <Heart className="w-4 h-4" strokeWidth={1.5} />
           </Link>
-          <Link href="/login" className="text-[10px] font-bold uppercase tracking-[0.25em] text-obsidian/80 hover:text-forest transition-colors duration-500">
+          <Link href="/login" className={cn(
+            "text-[10px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
+            isScrolled ? "text-obsidian/80 hover:text-forest" : "text-silk hover:text-gold"
+          )}>
             Sign In / Register
           </Link>
         </div>
