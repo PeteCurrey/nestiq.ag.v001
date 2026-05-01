@@ -1,0 +1,48 @@
+{
+  "name": "nestiq",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.92.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@sentry/nextjs": "^10.51.0",
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.105.1",
+    "algoliasearch": "^5.52.0",
+    "cloudinary": "^2.10.0",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^1.14.0",
+    "mapbox-gl": "^3.23.0",
+    "next": "^15.2.1",
+    "posthog-js": "^1.372.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.74.0",
+    "react-instantsearch": "^7.31.0",
+    "recharts": "^3.8.1",
+    "resend": "^6.12.2",
+    "sonner": "^2.0.7",
+    "stripe": "^22.1.0",
+    "tailwind-merge": "^3.5.0",
+    "zod": "^3.25.76",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

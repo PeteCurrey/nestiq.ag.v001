@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary */
+  --color-forest: #1A6B4A;
+  --color-emerald: #2ECC87;
+  --color-obsidian: #0A0A0A;
+
+  /* Neutrals */
+  --color-pearl: #F9FAFB;
+  --color-warm: #F4F0E8;
+  --color-border: #E5E7EB;
+  --color-muted: #6B7280;
+  --color-subtle: #9CA3AF;
+
+  /* Semantic */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Property status */
+  --color-for-sale: #1A6B4A;
+  --color-to-rent: #2563EB;
+  --color-sold: #6B7280;
+  --color-let: #7C3AED;
+  --color-new-build: #D97706;
+
+  /* Font Families */
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui;
+  --font-display: var(--font-display), ui-sans-serif, system-ui;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
+
+  /* Font Sizes */
+  --font-size-display-2xl: 4.5rem;
+  --font-size-display-xl: 3.75rem;
+  --font-size-display-lg: 3rem;
+  --font-size-display-md: 2.25rem;
+  --font-size-display-sm: 1.875rem;
+  --font-size-body-xl: 1.25rem;
+  --font-size-body-lg: 1.125rem;
+  --font-size-body-md: 1rem;
+  --font-size-body-sm: 0.875rem;
+  --font-size-label: 0.8125rem;
+
+  /* Line Heights */
+  --line-height-display: 1.1;
+  --line-height-body: 1.7;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-label: 0.05em;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(26,107,74,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 8px 24px rgba(26,107,74,0.12), 0 4px 8px rgba(0,0,0,0.06);
+}
+
+@layer base {
+  :root {
+    --background: var(--color-pearl);
+    --foreground: var(--color-obsidian);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-obsidian);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-forest hover:bg-emerald text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 shadow-sm active:scale-[0.97];
+  }
+
+  .btn-secondary {
+    @apply bg-warm hover:bg-border text-obsidian font-semibold py-3 px-6 rounded-md transition-all duration-300;
+  }
+
+  .glass-header {
+    @apply bg-white/80 backdrop-blur-md border-b border-border;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
