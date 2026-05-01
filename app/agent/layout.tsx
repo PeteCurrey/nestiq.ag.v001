@@ -1,56 +1,133 @@
-import { AgentSidebar } from "@/components/agent/AgentSidebar";
-import { Search, Bell, HelpCircle } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { 
+  LayoutDashboard, Building2, Users, BarChart3, 
+  Settings, LogOut, Bell, Search, Menu, X,
+  ShieldCheck, ArrowUpRight
+} from "lucide-react";
+import { cn } from "@/lib/utils/cn";
+
+const navigation = [
+  { name: "Dashboard", href: "/agent/dashboard", icon: LayoutDashboard },
+  { name: "My Listings", href: "/agent/properties", icon: Building2 },
+  { name: "Leads & Enquiries", href: "/agent/leads", icon: Users },
+  { name: "Market Intelligence", href: "/agent/analytics", icon: BarChart3 },
+  { name: "Settings", href: "/agent/settings", icon: Settings },
+];
 
 export default function AgentLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex bg-pearl min-h-screen">
-      <AgentSidebar />
-      
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Dashboard Top Header */}
-        <header className="h-16 border-b border-border bg-white sticky top-0 z-30 px-8 flex items-center justify-between">
-           <div className="flex-1 max-w-xl">
-              <div className="relative group">
-                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-subtle group-focus-within:text-forest transition-colors" />
-                 <input 
-                   type="text" 
-                   placeholder="Search listings, leads, or agents..." 
-                   className="w-full h-10 pl-10 pr-4 bg-warm border-none rounded-md text-body-sm focus:ring-2 focus:ring-forest transition-all"
-                 />
-              </div>
-           </div>
+  const pathname = usePathname();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-           <div className="flex items-center gap-6">
-              <button className="text-muted hover:text-forest transition-colors">
-                 <HelpCircle className="w-5 h-5" />
-              </button>
-              <div className="relative">
-                 <button className="text-muted hover:text-forest transition-colors">
-                    <Bell className="w-5 h-5" />
-                 </button>
-                 <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-white" />
+  return (
+    <div className="min-h-screen bg-silk flex">
+      {/* Sidebar */}
+      <aside 
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 w-72 bg-obsidian text-silk transition-transform duration-500 ease-in-out border-r border-silk/10",
+          !isSidebarOpen && "-translate-x-full"
+        )}
+      >
+        <div className="h-full flex flex-col p-8">
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-16">
+            <div className="bg-gold p-1.5 rounded-none">
+              <Building2 className="w-5 h-5 text-obsidian" strokeWidth={1.5} />
+            </div>
+            <span className="text-lg font-display font-medium tracking-[0.2em] uppercase">
+              NESTIQ
+            </span>
+          </div>
+
+          {/* Nav Links */}
+          <nav className="flex-1 space-y-2">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-4 px-4 py-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 group",
+                    isActive 
+                      ? "bg-silk text-obsidian" 
+                      : "text-silk/40 hover:text-silk hover:bg-white/5"
+                  )}
+                >
+                  <item.icon className={cn("w-4 h-4 transition-colors", isActive ? "text-gold" : "text-silk/20 group-hover:text-gold")} strokeWidth={1.5} />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* User Profile Footer */}
+          <div className="pt-8 border-t border-silk/10 mt-auto">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-10 h-10 bg-gold/20 flex items-center justify-center border border-gold/30">
+                <span className="text-gold font-bold">DP</span>
               </div>
-              <div className="h-8 w-px bg-border mx-2" />
-              <div className="flex items-center gap-3">
-                 <div className="text-right hidden sm:block">
-                    <p className="text-xs font-bold text-obsidian">Pete Currey</p>
-                    <p className="text-[10px] text-muted font-bold uppercase tracking-widest">Branch Manager</p>
-                 </div>
-                 <div className="w-8 h-8 rounded-full bg-forest text-white flex items-center justify-center font-bold text-xs">
-                    PC
-                 </div>
+              <div>
+                <span className="block text-[10px] font-bold uppercase tracking-widest text-silk">Dales & Peaks</span>
+                <span className="block text-[9px] text-silk/40 uppercase tracking-widest">Premium Agent</span>
               </div>
-           </div>
+            </div>
+            <button className="flex items-center gap-4 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-red-400 hover:bg-red-400/10 w-full transition-colors">
+              <LogOut className="w-4 h-4" />
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content Area */}
+      <main className={cn(
+        "flex-1 transition-all duration-500",
+        isSidebarOpen ? "pl-72" : "pl-0"
+      )}>
+        {/* Header */}
+        <header className="h-24 bg-white border-b border-border/40 flex items-center justify-between px-12 sticky top-0 z-40">
+          <div className="flex items-center gap-8 flex-1">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="p-2 text-obsidian/40 hover:text-obsidian"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="relative max-w-md w-full">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted/40" />
+              <input 
+                type="text" 
+                placeholder="Search leads, listings or intelligence..."
+                className="w-full bg-silk border-none pl-12 pr-6 py-3 text-[10px] font-bold uppercase tracking-widest focus:ring-1 focus:ring-gold/30 outline-none"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-8">
+             <div className="flex items-center gap-2 px-4 py-2 bg-emerald/5 border border-emerald/20 text-emerald">
+                <ShieldCheck className="w-4 h-4" />
+                <span className="text-[10px] font-bold uppercase tracking-widest">Verified Connection</span>
+             </div>
+             <button className="relative p-2 text-obsidian/40 hover:text-obsidian">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-red-500 rounded-full" />
+             </button>
+          </div>
         </header>
 
-        <main className="p-8">
+        {/* Content Container */}
+        <div className="p-12">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
