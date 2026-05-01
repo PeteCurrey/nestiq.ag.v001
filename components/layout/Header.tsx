@@ -64,7 +64,7 @@ export function Header() {
             <Heart className="w-4 h-4" strokeWidth={1.5} />
           </Link>
           <Link href="/login" className="text-[10px] font-bold uppercase tracking-[0.25em] text-obsidian/80 hover:text-forest transition-colors duration-500">
-            Private Office
+            Sign In / Register
           </Link>
         </div>
       </div>

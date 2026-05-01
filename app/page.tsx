@@ -7,80 +7,61 @@ import { Button } from "@/components/ui/Button";
 import { ArrowRight, TrendingUp, Globe, Shield } from "lucide-react";
 
 const featuredProperties = [
-  // ... (keeping properties but will sharpen their UI)
   {
-    id: "1",
-    title: "The Ash Manor",
-    price: 1450000,
-    address: "Chelsea, London • SW3",
-    bedrooms: 4,
-    bathrooms: 3,
-    sqft: 2200,
+    id: "1209",
+    slug: "park-hall-7-bedroom-stately-residence",
+    title: "Park Hall",
+    price: 3250000,
+    address: "Parkhall Lane, Spinkhill, Derbyshire",
+    bedrooms: 9,
+    bathrooms: 7,
+    sqft: 16006,
     imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
     status: "for-sale" as const,
     featured: true,
-    agencyName: "Savills Chelsea"
+    agencyName: "Dales & Peaks"
   },
   {
-    id: "2",
-    title: "Vanguard Penthouse",
-    price: 3250,
-    address: "Manchester City Centre • M1",
-    bedrooms: 2,
-    bathrooms: 2,
-    sqft: 1100,
+    id: "1204",
+    slug: "contemporary-barn-conversion-portfolio",
+    title: "Cuckoostone Grange Portfolio",
+    price: 2750000,
+    address: "Matlock Moor, Matlock, DE4",
+    bedrooms: 13,
+    bathrooms: 10,
+    sqft: 8500,
     imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop",
-    status: "to-rent" as const,
-    agencyName: "Knight Frank"
+    status: "for-sale" as const,
+    featured: true,
+    agencyName: "Dales & Peaks"
   },
   {
-    id: "3",
-    title: "The Old Rectory",
-    price: 875000,
-    address: "Guildford, Surrey • GU1",
+    id: "924",
+    slug: "yew-tree-farm-5-bedroom-detached",
+    title: "Yew Tree Farm",
+    price: 1495000,
+    address: "Walton Back Lane, Chesterfield",
     bedrooms: 5,
-    bathrooms: 3,
-    sqft: 2800,
+    bathrooms: 4,
+    sqft: 3000,
     imageUrl: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop",
     status: "for-sale" as const,
-    agencyName: "Hamptons"
+    featured: true,
+    agencyName: "Dales & Peaks"
   },
   {
-    id: "4",
-    title: "Riverside Apartment",
-    price: 450000,
-    address: "Bristol • BS1",
-    bedrooms: 2,
-    bathrooms: 1,
-    sqft: 850,
-    imageUrl: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?q=80&w=800&auto=format&fit=crop",
-    status: "sold" as const,
-    agencyName: "Savills"
-  },
-  {
-    id: "5",
-    title: "Modern Townhouse",
-    price: 650000,
-    address: "Oxford • OX1",
-    bedrooms: 3,
-    bathrooms: 2,
-    sqft: 1400,
+    id: "1214",
+    slug: "box-farm-equestrian-property",
+    title: "Box Farm",
+    price: 1495000,
+    address: "Northedge Lane, Tupton, Derbyshire",
+    bedrooms: 4,
+    bathrooms: 3,
+    sqft: 4200,
     imageUrl: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=800&auto=format&fit=crop",
     status: "for-sale" as const,
     featured: true,
-    agencyName: "Knight Frank"
-  },
-  {
-    id: "6",
-    title: "Eco Development",
-    price: 525000,
-    address: "Cambridge • CB1",
-    bedrooms: 3,
-    bathrooms: 2,
-    sqft: 1300,
-    imageUrl: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
-    status: "new-build" as const,
-    agencyName: "Bidwells"
+    agencyName: "Dales & Peaks"
   }
 ];
 
