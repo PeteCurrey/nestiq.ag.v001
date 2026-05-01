@@ -10,8 +10,8 @@ export async function updateSession(request: NextRequest) {
   });
 
   const supabase = createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mock.supabase.co',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'mock_key',
     {
       cookies: {
         getAll() {
@@ -34,9 +34,13 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+  } catch (err) {
+    console.error("Middleware Supabase Auth Error:", err);
+  }
 
   // Protect agent routes
   if (request.nextUrl.pathname.startsWith("/agent")) {
