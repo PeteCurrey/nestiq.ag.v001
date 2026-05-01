@@ -1,59 +1,61 @@
 @import "tailwindcss";
 
 @theme {
-  /* Primary */
-  --color-forest: #1A6B4A;
-  --color-emerald: #2ECC87;
+  /* Primary - Luxury Institutional Palette */
+  --color-forest: #0B241A; /* Deeper British Racing Green */
+  --color-emerald: #154734; /* Muted Emerald */
   --color-obsidian: #0A0A0A;
+  --color-gold: #C5A059; /* Champagne Gold Accent */
+  --color-silk: #FDFCFB; /* Off-white silk */
 
   /* Neutrals */
-  --color-pearl: #F9FAFB;
-  --color-warm: #F4F0E8;
-  --color-border: #E5E7EB;
-  --color-muted: #6B7280;
+  --color-pearl: #F5F5F7;
+  --color-warm: #EFEBE4;
+  --color-border: #D1D5DB;
+  --color-muted: #4B5563;
   --color-subtle: #9CA3AF;
 
   /* Semantic */
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
-  --color-info: #3B82F6;
+  --color-success: #065F46;
+  --color-warning: #B45309;
+  --color-error: #991B1B;
+  --color-info: #1E40AF;
 
   /* Property status */
-  --color-for-sale: #1A6B4A;
-  --color-to-rent: #2563EB;
-  --color-sold: #6B7280;
-  --color-let: #7C3AED;
-  --color-new-build: #D97706;
+  --color-for-sale: #0B241A;
+  --color-to-rent: #111827;
+  --color-sold: #4B5563;
+  --color-let: #374151;
+  --color-new-build: #854D0E;
 
   /* Font Families */
   --font-sans: var(--font-sans), ui-sans-serif, system-ui;
-  --font-display: var(--font-display), ui-sans-serif, system-ui;
+  --font-display: var(--font-display), ui-serif, serif; /* Favor Serif for display */
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
 
   /* Font Sizes */
-  --font-size-display-2xl: 4.5rem;
-  --font-size-display-xl: 3.75rem;
-  --font-size-display-lg: 3rem;
-  --font-size-display-md: 2.25rem;
-  --font-size-display-sm: 1.875rem;
+  --font-size-display-2xl: 5rem;
+  --font-size-display-xl: 4rem;
+  --font-size-display-lg: 3.25rem;
+  --font-size-display-md: 2.5rem;
+  --font-size-display-sm: 2rem;
   --font-size-body-xl: 1.25rem;
   --font-size-body-lg: 1.125rem;
   --font-size-body-md: 1rem;
   --font-size-body-sm: 0.875rem;
-  --font-size-label: 0.8125rem;
+  --font-size-label: 0.75rem;
 
   /* Line Heights */
-  --line-height-display: 1.1;
-  --line-height-body: 1.7;
+  --line-height-display: 1.05;
+  --line-height-body: 1.6;
 
   /* Letter Spacing */
-  --letter-spacing-tight: -0.03em;
-  --letter-spacing-label: 0.05em;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-label: 0.15em;
 
-  /* Shadows */
-  --shadow-card: 0 2px 8px rgba(26,107,74,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-card-hover: 0 8px 24px rgba(26,107,74,0.12), 0 4px 8px rgba(0,0,0,0.06);
+  /* Shadows - Flat & Subtle */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 @layer base {
@@ -70,22 +72,23 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 500; /* Lighter weight for luxury serifs */
     color: var(--color-obsidian);
+    letter-spacing: var(--letter-spacing-tight);
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-forest hover:bg-emerald text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 shadow-sm active:scale-[0.97];
+    @apply bg-forest hover:bg-obsidian text-white font-medium py-4 px-10 rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px];
   }
 
   .btn-secondary {
-    @apply bg-warm hover:bg-border text-obsidian font-semibold py-3 px-6 rounded-md transition-all duration-300;
+    @apply bg-transparent border border-obsidian hover:bg-obsidian hover:text-white text-obsidian font-medium py-4 px-10 rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px];
   }
 
-  .glass-header {
-    @apply bg-white/80 backdrop-blur-md border-b border-border;
+  .hairline {
+    @apply border border-border/50;
   }
 }
 
@@ -98,3 +101,4 @@
     scrollbar-width: none;
   }
 }
+
