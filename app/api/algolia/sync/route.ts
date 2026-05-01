@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { algoliasearch } from 'algoliasearch'
 
 const client = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.ALGOLIA_ADMIN_KEY!
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || 'mock_app_id',
+  process.env.ALGOLIA_ADMIN_KEY || 'mock_admin_key'
 )
 
 export async function POST(req: Request) {
