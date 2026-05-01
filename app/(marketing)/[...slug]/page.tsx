@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import { generatePageMetadata } from "@/lib/utils/seo";
 import { StructuredData, schemas } from "@/components/shared/StructuredData";
 import { PropertyCard } from "@/components/property/PropertyCard";
@@ -10,9 +10,14 @@ interface Props {
   params: Promise<{ slug: string[] }>;
 }
 
+const getStaticSupabase = () => createSupabaseClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || 'mock',
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'mock'
+);
+
 // Pre-generate top 200 high-traffic locations
 export async function generateStaticParams() {
-  const supabase = await createClient();
+  const supabase = getStaticSupabase();
   const { data: pages } = await supabase
     .from("location_pages")
     .select("slug")
@@ -25,7 +30,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug.join("/");
-  const supabase = await createClient();
+  const supabase = getStaticSupabase();
 
   const { data: page } = await supabase
     .from("location_pages")
@@ -44,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LocationPage({ params }: Props) {
   const slug = (await params).slug.join("/");
-  const supabase = await createClient();
+  const supabase = getStaticSupabase();
 
   // 1. Fetch location details
   const { data: page } = await supabase
