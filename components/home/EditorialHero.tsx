@@ -9,11 +9,11 @@ export function EditorialHero() {
     <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-obsidian">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-obsidian/40 z-10" />
-        {/* Vimeo Background Player - Highly reliable, ignores CDN token expiry */}
+        {/* YouTube Background Player - Highly reliable, uses a playlist of prime UK properties */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
           <iframe
-            src="https://player.vimeo.com/video/517728211?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
-            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2"
+            src="https://www.youtube.com/embed/aT149tQpAqw?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=aT149tQpAqw,Y_4x4Z9L61s,w8yR3q7q9_0&modestbranding=1&playsinline=1"
+            className="absolute top-1/2 left-1/2 w-[150vw] h-[150vh] -translate-x-1/2 -translate-y-1/2 object-cover"
             allow="autoplay; fullscreen"
             style={{ pointerEvents: "none" }}
           />
