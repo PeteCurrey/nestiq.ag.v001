@@ -14,9 +14,12 @@ export function EditorialHero() {
           loop 
           muted 
           playsInline
-          className="w-full h-full object-cover opacity-80"
+          poster="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop"
+          className="w-full h-full object-cover opacity-90"
         >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-luxury-house-exterior-at-night-42880-large.mp4" type="video/mp4" />
+          <source src="https://player.vimeo.com/external/494252666.sd.mp4?s=727af30c6a993e390c2941e97669d57a4a275f96&profile_id=165" type="video/mp4" />
+          {/* Fallback image if video fails */}
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop" className="w-full h-full object-cover" alt="Luxury Estate" />
         </video>
       </div>
 
