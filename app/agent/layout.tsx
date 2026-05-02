@@ -12,9 +12,9 @@ import { cn } from "@/lib/utils/cn";
 
 const navigation = [
   { name: "Dashboard", href: "/agent/dashboard", icon: LayoutDashboard },
-  { name: "My Listings", href: "/agent/properties", icon: Building2 },
-  { name: "Leads & Enquiries", href: "/agent/leads", icon: Users },
-  { name: "Market Intelligence", href: "/agent/analytics", icon: BarChart3 },
+  { name: "My Listings", href: "/agent/listings", icon: Building2 },
+  { name: "Leads & CRM", href: "/agent/leads", icon: Users },
+  { name: "Analytics", href: "/agent/analytics", icon: BarChart3 },
   { name: "Settings", href: "/agent/settings", icon: Settings },
 ];
 

@@ -2,26 +2,21 @@
 
 import React, { useState } from "react";
 import { 
-  Plug, 
   CheckCircle2, 
   RefreshCw, 
-  Plus,
-  ArrowRight,
   Database,
-  ExternalLink,
   Settings as SettingsIcon,
-  XCircle,
   Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/cn";
 
 const integrations = [
-  { id: "alto", name: "Alto CRM", logo: "https://www.alto-software.com/wp-content/themes/alto/assets/images/alto-logo-black.svg", description: "UK's leading agency software. Automated 2-way sync.", usage: 34, status: "connected" },
-  { id: "street", name: "Street.co.uk", logo: "/logos/street.png", description: "Modern, next-gen CRM for independent agents.", usage: 12, status: "available" },
-  { id: "jupix", name: "Jupix", logo: "/logos/jupix.png", description: "Reliable, industry-standard agency management.", usage: 18, status: "available" },
-  { id: "vebra", name: "Vebra Alto", logo: "/logos/vebra.png", description: "Cloud-based software for residential agencies.", usage: 8, status: "available" },
-  { id: "reapit", name: "Reapit Foundations", logo: "/logos/reapit.png", description: "Enterprise-grade property technology ecosystem.", usage: 14, status: "available" },
+  { id: "alto", name: "Alto CRM", description: "UK's leading agency software. Automated 2-way sync.", usage: 34, status: "connected" },
+  { id: "street", name: "Street.co.uk", description: "Modern, next-gen CRM for independent agents.", usage: 12, status: "available" },
+  { id: "jupix", name: "Jupix", description: "Reliable, industry-standard agency management.", usage: 18, status: "available" },
+  { id: "vebra", name: "Vebra Alto", description: "Cloud-based software for residential agencies.", usage: 8, status: "available" },
+  { id: "reapit", name: "Reapit Foundations", description: "Enterprise-grade property technology ecosystem.", usage: 14, status: "available" },
 ];
 
 export default function IntegrationsPage() {
@@ -51,7 +46,7 @@ export default function IntegrationsPage() {
                  </div>
                  <div>
                     <h4 className="text-lg font-display font-bold text-obsidian">Alto CRM</h4>
-                    <p className="text-sm text-muted mt-1">Branch: Dales & Peaks Chesterfield</p>
+                    <p className="text-sm text-muted mt-1">Branch: Dales &amp; Peaks Chesterfield</p>
                     <div className="flex items-center gap-3 mt-4">
                        <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 uppercase tracking-wider flex items-center gap-1.5">
                           <CheckCircle2 className="w-3 h-3" />
@@ -137,9 +132,9 @@ export default function IntegrationsPage() {
       {/* Help Card */}
       <div className="bg-obsidian text-silk p-12 flex flex-col md:flex-row items-center justify-between gap-12">
          <div className="max-w-xl">
-           <h3 className="text-display-sm font-display font-bold leading-tight mb-4 italic">Can't see your CRM?</h3>
+           <h3 className="text-display-sm font-display font-bold leading-tight mb-4 italic">Can&apos;t see your CRM?</h3>
            <p className="text-silk/60 text-sm leading-relaxed">
-             We're constantly adding new integrations. If your software isn't listed, we can usually build a custom normaliser for you within 48 hours, free of charge.
+             We&apos;re constantly adding new integrations. If your software isn&apos;t listed, we can usually build a custom normaliser for you within 48 hours, free of charge.
            </p>
          </div>
          <Button className="bg-silk text-obsidian hover:bg-gold hover:text-silk border-none h-14 px-12 uppercase tracking-widest text-[10px] font-bold">
