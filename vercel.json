@@ -7,6 +7,10 @@
     {
       "path": "/api/cron/lead-scores",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/sync-integrations",
+      "schedule": "0 */2 * * *"
     }
   ],
   "headers": [

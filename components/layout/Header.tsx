@@ -3,16 +3,16 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Heart, Building2 } from "lucide-react";
+import { Menu, X, Heart, Building2, Search } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
 
 const navLinks = [
-  { name: "Listings", href: "/search" },
+  { name: "Search", href: "/search" },
   { name: "Market Data", href: "/market-data" },
-  { name: "Intelligence", href: "/intelligence" },
   { name: "Agents", href: "/agents" },
   { name: "Valuation", href: "/valuation" },
+  { name: "Pricing", href: "/pricing" },
 ];
 
 export function Header() {
@@ -68,19 +68,41 @@ export function Header() {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-8">
-          <Link href="/saved" className={cn(
+        <div className="flex items-center gap-6">
+          <Link href="/account/saved" className={cn(
             "hidden sm:flex transition-colors duration-500",
             isScrolled ? "text-obsidian/40 hover:text-forest" : "text-silk/60 hover:text-gold"
           )}>
             <Heart className="w-4 h-4" strokeWidth={1.5} />
           </Link>
           <Link href="/login" className={cn(
-            "text-[10px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
+            "hidden sm:block text-[10px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
             isScrolled ? "text-obsidian/80 hover:text-forest" : "text-silk hover:text-gold"
           )}>
-            Sign In / Register
+            Sign In
           </Link>
+          <Link
+            href="/agent/dashboard"
+            className={cn(
+              "hidden sm:flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500",
+              isScrolled
+                ? "bg-obsidian text-silk hover:bg-forest"
+                : "bg-silk/10 border border-silk/30 text-silk hover:bg-gold hover:border-gold"
+            )}
+          >
+            For Agents
+          </Link>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={cn(
+              "lg:hidden p-2 transition-colors duration-500",
+              isScrolled ? "text-obsidian" : "text-silk"
+            )}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
 

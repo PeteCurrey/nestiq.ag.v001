@@ -84,7 +84,7 @@ export function AgentShowcase() {
                     <div className="w-2 h-2 rounded-full bg-white/40" />
                   </div>
                   <div className="mx-auto bg-white/5 border border-white/5 rounded-none px-12 py-1 text-[9px] text-white/50 font-bold uppercase tracking-[0.2em]">
-                    nestiq.com/agent/dashboard
+                   nestiq-ag-v001.vercel.app/agent/dashboard
                   </div>
                 </div>
                 
