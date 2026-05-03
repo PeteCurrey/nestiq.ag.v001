@@ -9,10 +9,8 @@ import { Button } from "@/components/ui/Button";
 
 const navLinks = [
   { name: "Search", href: "/search" },
-  { name: "Market Data", href: "/market-data" },
-  { name: "Agents", href: "/agents" },
   { name: "Valuation", href: "/valuation" },
-  { name: "Pricing", href: "/pricing" },
+  { name: "Market Data", href: "/market-data" },
 ];
 
 export function Header() {
@@ -81,17 +79,7 @@ export function Header() {
           )}>
             Sign In
           </Link>
-          <Link
-            href="/agent/dashboard"
-            className={cn(
-              "hidden sm:flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500",
-              isScrolled
-                ? "bg-obsidian text-silk hover:bg-forest"
-                : "bg-silk/10 border border-silk/30 text-silk hover:bg-gold hover:border-gold"
-            )}
-          >
-            For Agents
-          </Link>
+
           {/* Mobile hamburger */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

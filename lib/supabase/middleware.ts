@@ -38,8 +38,8 @@ export async function updateSession(request: NextRequest) {
     console.error("Middleware Supabase Auth Error:", err);
   }
 
-  // Protect agent routes
-  if (request.nextUrl.pathname.startsWith("/agent")) {
+  // Protect agent dashboard routes (singular /agent)
+  if (request.nextUrl.pathname === "/agent" || request.nextUrl.pathname.startsWith("/agent/")) {
     if (!user) {
       return NextResponse.redirect(
         new URL("/login?redirect=" + request.nextUrl.pathname, request.url)

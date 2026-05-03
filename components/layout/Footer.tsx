@@ -17,16 +17,17 @@ const footerLinks = [
     title: "Intelligence",
     links: [
       { name: "Market Reports", href: "/market-data" },
-      { name: "Agent Portal", href: "/agent/dashboard" },
+      { name: "Pricing & Plans", href: "/pricing" },
+      { name: "Partner Login", href: "/login?role=agent" },
       { name: "Valuation API", href: "/valuation" },
-      { name: "Nestiq Index", href: "/intelligence" },
     ],
   },
   {
     title: "Company",
     links: [
       { name: "Our Standard", href: "/about" },
-      { name: "Partner Network", href: "/agents" },
+      { name: "Agent Benefits", href: "/agents" },
+      { name: "Partner Network", href: "/agents/directory" },
       { name: "Press Office", href: "/press" },
       { name: "Contact", href: "/contact" },
     ],
