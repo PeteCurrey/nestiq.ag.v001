@@ -39,21 +39,23 @@ function TypewriterLoop({ words }: { words: string[] }) {
 
 export function EditorialHero() {
   return (
-    <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-obsidian">
+    <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-stone-900">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-obsidian/40 z-10" />
-        {/* High-Definition UK Manor Video Reel - Direct MP4 to ensure reliability and no branding */}
-        <video 
-          autoPlay 
-          loop 
-          muted 
+        {/* Gradient overlay — dark at top for text legibility, lighter at bottom to show estate detail */}
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/35 to-obsidian/60 z-10" />
+        {/* Countryside stone equestrian estate — poster shows while video loads */}
+        <video
+          autoPlay
+          loop
+          muted
           playsInline
-          key="hero-video-final"
-          poster="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"
-          className="w-full h-full object-cover scale-105"
+          key="hero-equestrian"
+          poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=90&w=2400&auto=format&fit=crop"
+          className="w-full h-full object-cover scale-105 object-center"
         >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxury-manor-house-44023-large.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-luxury-house-exterior-at-night-42880-large.mp4" type="video/mp4" />
+          {/* Aerial countryside estate footage */}
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-over-a-rural-landscape-29506-large.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-countryside-4379-large.mp4" type="video/mp4" />
         </video>
       </div>
 
