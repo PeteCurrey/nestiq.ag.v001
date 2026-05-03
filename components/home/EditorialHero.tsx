@@ -45,28 +45,28 @@ export function EditorialHero() {
         <div className="absolute inset-0 bg-gradient-to-b from-obsidian/75 via-obsidian/40 to-obsidian/65 z-10" />
 
         {/*
-          Poster: Verified Derbyshire/Peak District style stone manor house.
-          photo-1564013799919 = beautiful golden-stone manor exterior, no people.
-
           Video sources:
-          1. Pexels 5255474 — Aerial view of an English village with stone houses and green hills.
-          2. Pexels 5255531 — Steady aerial view of a stone house in a lush landscape.
+          1. Pexels 3571264 — Aerial shot of gently crashing waves on the beach
+          2. Pexels 6474855 — Secondary wave/beach footage
+          
+          Note: No 'poster' attribute is used here. By omitting it, the browser
+          natively extracts and displays the very first frame of the video as the
+          fallback image, ensuring a 100% seamless transition without a mismatched poster.
         */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          key="hero-derbyshire-estate"
-          poster="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=90&w=2400&auto=format&fit=crop"
+          key="hero-waves-video"
           className="w-full h-full object-cover scale-[1.04] object-center"
         >
           <source
-            src="https://videos.pexels.com/video-files/5255474/5255474-uhd_2560_1440_30fps.mp4"
+            src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4"
             type="video/mp4"
           />
           <source
-            src="https://videos.pexels.com/video-files/5255531/5255531-uhd_2560_1440_30fps.mp4"
+            src="https://videos.pexels.com/video-files/6474855/6474855-uhd_3840_2160_25fps.mp4"
             type="video/mp4"
           />
         </video>

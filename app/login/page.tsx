@@ -3,16 +3,35 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { Sparkles, Mail, Lock, ArrowRight } from "lucide-react";
+import { Sparkles, Mail, Lock, ArrowRight, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { loginWithPassword } from "@/lib/supabase/actions";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    // Supabase auth logic here
+    setError(null);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      await loginWithPassword(email, password);
+      router.push(redirect);
+      router.refresh();
+    } catch (err: any) {
+      setError(err.message || "An error occurred during sign in");
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,17 +46,23 @@ export default function LoginPage() {
         </div>
 
         <div className="bg-white p-10 rounded-2xl border border-border shadow-xl">
-          <form onSubmit={handleLogin} className="space-y-6">
+           <form onSubmit={handleLogin} className="space-y-6">
+            {error && (
+              <div className="bg-red-50 border border-red-100 p-4 rounded-xl flex items-center gap-3 text-red-700 text-body-sm font-medium">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                {error}
+              </div>
+            )}
             <div>
               <label className="text-label font-bold text-muted uppercase tracking-widest block mb-2">Email Address</label>
-              <Input type="email" placeholder="name@example.com" icon={<Mail className="w-4 h-4" />} required />
+              <Input name="email" type="email" placeholder="name@example.com" icon={<Mail className="w-4 h-4" />} required />
             </div>
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-label font-bold text-muted uppercase tracking-widest">Password</label>
                 <Link href="/forgot-password" size="sm" className="text-xs font-bold text-forest hover:text-emerald uppercase tracking-widest">Forgot?</Link>
               </div>
-              <Input type="password" placeholder="••••••••" icon={<Lock className="w-4 h-4" />} required />
+              <Input name="password" type="password" placeholder="••••••••" icon={<Lock className="w-4 h-4" />} required />
             </div>
 
             <Button variant="primary" fullWidth size="lg" loading={loading}>

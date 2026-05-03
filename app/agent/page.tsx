@@ -25,6 +25,7 @@ import {
   Area
 } from "recharts";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils/cn";
 
 const data = [
   { name: "Mon", views: 4000, leads: 24 },
@@ -206,6 +207,4 @@ export default function AgentOverview() {
   );
 }
 
-function cn(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
-}
+

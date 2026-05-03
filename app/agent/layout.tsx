@@ -8,7 +8,9 @@ import {
   Settings, LogOut, Bell, Search, Menu, X,
   ShieldCheck, ArrowUpRight
 } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/cn";
+import { signOut } from "@/lib/supabase/actions";
 
 const navigation = [
   { name: "Dashboard", href: "/agent/dashboard", icon: LayoutDashboard },
@@ -79,7 +81,10 @@ export default function AgentLayout({
                 <span className="block text-[9px] text-silk/40 uppercase tracking-widest">Premium Agent</span>
               </div>
             </div>
-            <button className="flex items-center gap-4 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-red-400 hover:bg-red-400/10 w-full transition-colors">
+            <button 
+              onClick={() => signOut()}
+              className="flex items-center gap-4 px-4 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-red-400 hover:bg-red-400/10 w-full transition-colors"
+            >
               <LogOut className="w-4 h-4" />
               Sign Out
             </button>
