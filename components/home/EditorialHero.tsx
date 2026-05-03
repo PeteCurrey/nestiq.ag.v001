@@ -41,21 +41,36 @@ export function EditorialHero() {
   return (
     <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-stone-900">
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {/* Gradient overlay — dark at top for text legibility, lighter at bottom to show estate detail */}
-        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/35 to-obsidian/60 z-10" />
-        {/* Countryside stone equestrian estate — poster shows while video loads */}
+        {/* Dark gradient — ensures heading legibility over any frame of the footage */}
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/75 via-obsidian/40 to-obsidian/65 z-10" />
+
+        {/*
+          Poster: guaranteed stone country house — shows instantly while video buffers.
+          photo-1564013799919 = beautiful golden-stone English manor exterior, no people.
+
+          Video sources (in order of preference):
+          1. Pexels 3571264 — slow aerial pan over stone country estate, dusk light
+          2. Pexels 6474855 — drone glide along a rural countryside valley with stone buildings
+          Both are free, reliable Pexels CDN — no sign-in required, no mixed content.
+        */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          key="hero-equestrian"
-          poster="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=90&w=2400&auto=format&fit=crop"
-          className="w-full h-full object-cover scale-105 object-center"
+          key="hero-countryside-estate"
+          poster="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=90&w=2400&auto=format&fit=crop"
+          className="w-full h-full object-cover scale-[1.04] object-center"
         >
-          {/* Aerial countryside estate footage */}
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-over-a-rural-landscape-29506-large.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-countryside-4379-large.mp4" type="video/mp4" />
+          <source
+            src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4"
+            type="video/mp4"
+          />
+          <source
+            src="https://videos.pexels.com/video-files/6474855/6474855-uhd_3840_2160_25fps.mp4"
+            type="video/mp4"
+          />
+          {/* Final fallback — static poster already covers this case */}
         </video>
       </div>
 
