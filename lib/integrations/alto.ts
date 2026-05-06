@@ -34,59 +34,104 @@ export interface AltoProperty {
 }
 
 export async function fetchAltoProperties(apiKey: string): Promise<AltoProperty[]> {
-  // In a real scenario, this would call the Alto API
-  // For the demo, we will simulate the response with Dales & Peaks listings
   console.log(`Fetching properties from Alto with key: ${apiKey.substring(0, 4)}...`);
   
-  // Simulation of pagination
   const all: AltoProperty[] = [];
   let page = 1;
   let hasMore = true;
 
-  // Real implementation (commented out for now as we don't have a live token)
-  /*
-  while (hasMore) {
-    const res = await fetch(
-      `https://api.alto-software.com/v1/properties?status=active&limit=100&page=${page}`,
-      { headers: { Authorization: `Bearer ${apiKey}` } }
-    )
-    const data = await res.json()
-    all.push(...data.properties)
-    hasMore = data.hasMore ?? false
-    page++
+  // Since we don't have a real API key yet, we mock the fetch conditionally,
+  // but we leave the real code active if a key is provided.
+  if (apiKey === "mock" || !apiKey) {
+    // Return empty array or mock data if we are just testing without key
+    return [];
   }
-  */
+
+  try {
+    while (hasMore) {
+      const res = await fetch(
+        `https://api.alto-software.com/v1/properties?status=active&limit=100&page=${page}`,
+        { headers: { Authorization: `Bearer ${apiKey}` } }
+      );
+      if (!res.ok) {
+        throw new Error(`Alto API error: ${res.status} ${res.statusText}`);
+      }
+      const data = await res.json();
+      if (data.properties && Array.isArray(data.properties)) {
+        all.push(...data.properties);
+      }
+      hasMore = data.hasMore ?? false;
+      page++;
+    }
+  } catch (error) {
+    console.error("Error fetching from Alto:", error);
+    throw error;
+  }
 
   return all;
 }
 
-export function normaliseAltoProperty(p: AltoProperty, agencyId: string, agencyName: string): NormalisedProperty {
+function mapStatus(altoStatus: string): string {
+  switch (altoStatus) {
+    case 'active': return 'for-sale';
+    case 'under_offer': return 'under-offer';
+    case 'sold': return 'sold';
+    case 'let': return 'let';
+    case 'withdrawn': return 'withdrawn';
+    default: return 'for-sale';
+  }
+}
+
+function mapPropertyType(altoType: string): string {
+  // Mapping standard Alto property types to Nestiq enums if needed
+  const t = altoType.toLowerCase();
+  if (t.includes('flat') || t.includes('apartment')) return 'flat';
+  if (t.includes('bungalow')) return 'bungalow';
+  if (t.includes('terraced')) return 'terraced';
+  if (t.includes('semi')) return 'semi-detached';
+  if (t.includes('detached')) return 'detached';
+  return altoType; // fallback
+}
+
+function generateSlug(address: string, externalId: string): string {
+  const safeAddress = address.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  return `${safeAddress}-${externalId.substring(0, 6)}`;
+}
+
+export function normaliseAltoProperty(p: AltoProperty, agencyId: string, agencyName: string): any {
+  const mappedStatus = mapStatus(p.status);
+  // Re-map rent statuses
+  const finalStatus = (p.listingType === 'rent' && mappedStatus === 'for-sale') ? 'to-rent' : mappedStatus;
+
+  const addressString = `${p.address.line1}, ${p.address.town}`;
+  
   return {
-    id: p.id,
-    reference: p.reference,
-    status: p.status,
-    listingType: p.listingType,
+    external_id: p.id,
+    agency_id: agencyId,
+    title: `${p.bedrooms} Bed ${p.propertyType} in ${p.address.town}`,
+    slug: generateSlug(addressString, p.id),
+    description: p.description,
     price: p.price,
-    rentFrequency: p.rentFrequency,
-    title: `${p.bedrooms} Bedroom ${p.propertyType} in ${p.address.town}`,
-    address: p.address,
-    coordinates: p.coordinates,
-    propertyType: p.propertyType,
+    price_qualifier: null,
+    listing_type: p.listingType,
+    property_type: mapPropertyType(p.propertyType),
+    status: finalStatus,
     bedrooms: p.bedrooms,
     bathrooms: p.bathrooms,
-    receptions: p.receptions,
-    sqft: p.sqft,
-    description: p.description,
-    features: p.features,
-    epcRating: p.epcRating,
-    councilTaxBand: p.councilTaxBand,
-    photos: p.photos,
-    floorplanUrl: p.floorplanUrl,
-    virtualTourUrl: p.virtualTourUrl,
-    agencyId,
-    agencyName,
-    branchId: p.branchId,
-    createdAt: p.createdAt,
-    updatedAt: p.updatedAt,
+    reception_rooms: p.receptions,
+    sqft: p.sqft || null,
+    lat: p.coordinates?.lat || null,
+    lng: p.coordinates?.lng || null,
+    address_line1: p.address.line1,
+    town: p.address.town,
+    county: p.address.county || null,
+    postcode: p.address.postcode,
+    features: p.features || [],
+    epc_rating: p.epcRating || null,
+    council_tax_band: p.councilTaxBand || null,
+    virtual_tour_url: p.virtualTourUrl || null,
+    published_at: p.createdAt,
+    // Note: Photos will be handled separately as property_images rows
+    _photos: p.photos 
   };
 }
