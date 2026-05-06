@@ -162,7 +162,7 @@ export default function AgentMarketingPage() {
               className="relative bg-obsidian p-2 shadow-2xl border border-white/10"
             >
               <img 
-                src="/agent_marketing_dashboard_preview_1778097973784.png" 
+                src="/agent-dashboard-preview.png" 
                 className="w-full h-auto"
                 alt="Agent Dashboard Preview"
               />
