@@ -152,19 +152,11 @@ export function Header() {
                 size="sm" 
                 onClick={() => router.push('/login')}
                 className={cn(
-                  "text-[9px] uppercase tracking-[0.2em] font-bold border",
+                  "text-[9px] uppercase tracking-[0.2em] font-bold border px-6",
                   isScrolled ? "border-obsidian/20 text-obsidian hover:bg-obsidian/5" : "border-silk/20 text-silk hover:bg-silk/10"
                 )}
               >
                 Sign In
-              </Button>
-              <Button 
-                variant="primary" 
-                size="sm" 
-                onClick={() => router.push('/pricing')}
-                className="text-[9px] uppercase tracking-[0.2em] font-bold bg-emerald text-white hover:bg-emerald/90 border-none"
-              >
-                List Your Property
               </Button>
             </div>
           )}
@@ -207,7 +199,6 @@ export function Header() {
                 {!user ? (
                   <>
                     <Button variant="outline" className="w-full" onClick={() => { router.push('/login'); setIsMobileMenuOpen(false); }}>Sign In</Button>
-                    <Button variant="primary" className="w-full bg-emerald text-white" onClick={() => { router.push('/pricing'); setIsMobileMenuOpen(false); }}>List Your Property</Button>
                   </>
                 ) : (
                   <>

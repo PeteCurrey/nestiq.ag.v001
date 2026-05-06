@@ -16,6 +16,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
+  const role = searchParams.get("role");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,11 +41,17 @@ function LoginForm() {
     <div className="min-h-screen bg-pearl flex items-center justify-center pt-20 pb-20 px-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-12">
-          <Link href="/" className="text-display-sm font-display font-extrabold tracking-tighter text-forest mb-8 inline-block">
+          <Link href="/" className="text-display-sm font-display font-extrabold tracking-tighter text-emerald mb-8 inline-block">
             NESTIQ
           </Link>
-          <h1 className="text-display-md font-display font-bold text-obsidian mb-4">Welcome Back</h1>
-          <p className="text-body-md text-muted">Sign in to manage your saved properties and searches.</p>
+          <h1 className="text-display-md font-display font-bold text-obsidian mb-4">
+            {role === 'agent' ? 'Partner Sign In' : 'Welcome Back'}
+          </h1>
+          <p className="text-body-md text-muted">
+            {role === 'agent' 
+              ? 'Access your NestIQ agency dashboard and listing tools.' 
+              : 'Sign in to manage your saved properties and searches.'}
+          </p>
         </div>
 
         <div className="bg-white p-10 rounded-2xl border border-border shadow-xl">

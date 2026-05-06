@@ -9,7 +9,9 @@ import {
   BarChart3, 
   CheckCircle2,
   Globe,
-  Database
+  Database,
+  LineChart,
+  Scale
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
@@ -20,40 +22,47 @@ export default function AgentMarketingPage() {
     <div className="bg-silk min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center overflow-hidden bg-obsidian">
-        <div className="absolute inset-0 z-0 opacity-40">
-          <img 
+        <div className="absolute inset-0 z-0 opacity-50">
+          <motion.img 
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2400&auto=format&fit=crop" 
-            className="w-full h-full object-cover"
-            alt="Modern Office"
+            className="w-full h-full object-cover grayscale brightness-50"
+            alt="Modern Agency Hub"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-transparent" />
         </div>
         
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full">
           <div className="max-w-3xl">
-            <motion.span 
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-[10px] font-bold text-gold uppercase tracking-[0.5em] mb-8 block"
+              className="inline-flex items-center gap-3 px-4 py-2 bg-gold/10 border border-gold/20 rounded-full mb-8"
             >
-              The Agent-First Portal
-            </motion.span>
+              <Building2 className="w-4 h-4 text-gold" />
+              <span className="text-[10px] font-bold text-gold uppercase tracking-[0.5em]">The Agent-First Revolution</span>
+            </motion.div>
+            
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-silk text-[clamp(2.5rem,6vw,5.5rem)] font-display leading-[1.05] mb-8"
+              className="text-white text-[clamp(2.5rem,6vw,5.5rem)] font-display leading-[1.05] mb-8"
             >
-              The platform built <br /> <span className="italic font-normal">for your growth.</span>
+              Built for <span className="italic font-normal text-gold">Agencies.</span> <br /> Not against them.
             </motion.h1>
+            
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-silk/50 text-body-xl mb-12 max-w-xl leading-relaxed"
+              className="text-white/50 text-body-xl mb-12 max-w-xl leading-relaxed"
             >
-              NestIQ is the first UK property portal that prioritizes independent agents. We provide the tools, data, and leads you need to win instructions and close deals faster.
+              NestIQ is the first UK property portal that prioritizes independent agents. No hidden fees, no data harvesting, and a platform designed to win you instructions.
             </motion.p>
+            
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -63,17 +72,17 @@ export default function AgentMarketingPage() {
               <Button 
                 variant="primary" 
                 size="lg" 
-                className="bg-gold text-obsidian hover:bg-silk px-12 h-16 text-[10px] font-bold uppercase tracking-[0.3em]"
+                className="bg-gold text-obsidian hover:bg-white px-12 h-16 text-[11px] font-bold uppercase tracking-[0.3em] transition-all"
               >
-                Become a Partner <ArrowRight className="ml-3 w-4 h-4" />
+                Join the Network <ArrowRight className="ml-3 w-4 h-4" />
               </Button>
               <Link href="/agents/directory">
                 <Button 
                   variant="secondary" 
                   size="lg" 
-                  className="border-silk/20 text-silk hover:bg-silk/5 px-12 h-16 text-[10px] font-bold uppercase tracking-[0.3em]"
+                  className="border-white/20 text-white hover:bg-white/5 px-12 h-16 text-[11px] font-bold uppercase tracking-[0.3em]"
                 >
-                  View Partner Network
+                  View Directory
                 </Button>
               </Link>
             </motion.div>
@@ -82,19 +91,24 @@ export default function AgentMarketingPage() {
       </section>
 
       {/* Core Advantages */}
-      <section className="py-32 px-6 md:px-12 max-w-[1800px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+      <section className="py-40 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="text-center mb-32">
+          <span className="text-[10px] font-bold text-gold uppercase tracking-[0.5em] mb-6 block">The NestIQ Standard</span>
+          <h2 className="text-display-md font-display">A fairer ecosystem for <span className="italic font-normal">Independent Agents.</span></h2>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-20">
           <div className="space-y-8">
-            <div className="w-16 h-16 bg-obsidian text-gold flex items-center justify-center">
-              <Zap className="w-8 h-8" strokeWidth={1} />
+            <div className="w-16 h-16 bg-gold/10 text-gold flex items-center justify-center rounded-2xl">
+              <Scale className="w-8 h-8" strokeWidth={1.5} />
             </div>
-            <h3 className="text-display-sm font-display leading-tight">Instant Sync Integration</h3>
+            <h3 className="text-display-sm font-display leading-tight">Fairer Fee Structure</h3>
             <p className="text-body-lg text-muted leading-relaxed">
-              Stop double-keying data. NestIQ syncs directly with Alto, Street, and other leading CRMs to keep your listings accurate and up-to-date in real-time.
+              Ditch the complex tiered pricing. We offer simple, flat-rate subscriptions with zero multi-year lock-ins. You pay for value, not access.
             </p>
-            <ul className="space-y-4">
-              {['Auto-Listing Creation', 'Real-time Lead Injection', 'Status Syncing'].map(f => (
-                <li key={f} className="flex items-center gap-3 text-body-sm font-bold uppercase tracking-widest text-obsidian">
+            <ul className="space-y-4 pt-4 border-t border-border">
+              {['No Locked Contracts', 'Flat-Rate Pricing', 'No Pay-to-Play Listings'].map(f => (
+                <li key={f} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-obsidian">
                   <CheckCircle2 className="w-4 h-4 text-gold" /> {f}
                 </li>
               ))}
@@ -102,16 +116,16 @@ export default function AgentMarketingPage() {
           </div>
 
           <div className="space-y-8">
-            <div className="w-16 h-16 bg-obsidian text-gold flex items-center justify-center">
-              <Users className="w-8 h-8" strokeWidth={1} />
+            <div className="w-16 h-16 bg-gold/10 text-gold flex items-center justify-center rounded-2xl">
+              <Zap className="w-8 h-8" strokeWidth={1.5} />
             </div>
-            <h3 className="text-display-sm font-display leading-tight">Qualified, High-Intent Leads</h3>
+            <h3 className="text-display-sm font-display leading-tight">Better Lead Intelligence</h3>
             <p className="text-body-lg text-muted leading-relaxed">
-              We don't just send emails. Every lead from NestIQ is scored and enriched with market data, so you know exactly which ones to prioritize for valuation.
+              Our AI doesn't just send leads; it scores them. Every enquiry includes buyer readiness data and valuation intent insights.
             </p>
-            <ul className="space-y-4">
-              {['Lead Scoring AI', 'Valuation Intent Tracking', 'Buyer Readiness Data'].map(f => (
-                <li key={f} className="flex items-center gap-3 text-body-sm font-bold uppercase tracking-widest text-obsidian">
+            <ul className="space-y-4 pt-4 border-t border-border">
+              {['AI Lead Scoring', 'Valuation Intent Data', 'Zero Duplicate Charges'].map(f => (
+                <li key={f} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-obsidian">
                   <CheckCircle2 className="w-4 h-4 text-gold" /> {f}
                 </li>
               ))}
@@ -119,16 +133,16 @@ export default function AgentMarketingPage() {
           </div>
 
           <div className="space-y-8">
-            <div className="w-16 h-16 bg-obsidian text-gold flex items-center justify-center">
-              <ShieldCheck className="w-8 h-8" strokeWidth={1} />
+            <div className="w-16 h-16 bg-gold/10 text-gold flex items-center justify-center rounded-2xl">
+              <ShieldCheck className="w-8 h-8" strokeWidth={1.5} />
             </div>
-            <h3 className="text-display-sm font-display leading-tight">Fair Fees, No Locks</h3>
+            <h3 className="text-display-sm font-display leading-tight">Data Sovereignty</h3>
             <p className="text-body-lg text-muted leading-relaxed">
-              Transparent, flat-rate pricing designed for independent agencies. No hidden costs, no multi-year lock-ins, and no competing with your own data.
+              Your data belongs to you. We never use your listings to train models that compete with your valuation services.
             </p>
-            <ul className="space-y-4">
-              {['Month-to-Month Flex', 'Data Ownership Guarantee', 'Fair Listing Priority'].map(f => (
-                <li key={f} className="flex items-center gap-3 text-body-sm font-bold uppercase tracking-widest text-obsidian">
+            <ul className="space-y-4 pt-4 border-t border-border">
+              {['No Data Scraping', 'GDPR-First Privacy', 'Transparent API Access'].map(f => (
+                <li key={f} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-obsidian">
                   <CheckCircle2 className="w-4 h-4 text-gold" /> {f}
                 </li>
               ))}
@@ -137,61 +151,73 @@ export default function AgentMarketingPage() {
         </div>
       </section>
 
-      {/* Feature Showcase */}
-      <section className="py-32 bg-silk border-y border-border/40">
+      {/* Analytics Showcase */}
+      <section className="py-40 bg-obsidian text-white overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-          <div>
-            <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-8 block">Agent Intelligence</span>
-            <h2 className="text-display-md leading-[1.1] mb-8">Win more instructions with <span className="italic font-normal">Market Intel.</span></h2>
-            <p className="text-body-lg text-muted mb-12 leading-relaxed">
-              Our agent dashboard provides deep insights into local market velocity, competitor performance, and buyer sentiment. Use our data to build the most compelling case for every valuation visit.
+          <div className="order-2 lg:order-1 relative">
+            <div className="absolute -inset-20 bg-gold/20 blur-[120px] rounded-full" />
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              className="relative bg-obsidian p-2 shadow-2xl border border-white/10"
+            >
+              <img 
+                src="/agent_marketing_dashboard_preview_1778097973784.png" 
+                className="w-full h-auto"
+                alt="Agent Dashboard Preview"
+              />
+            </motion.div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <span className="text-[10px] font-bold text-gold uppercase tracking-[0.5em] mb-8 block">Intelligence at Scale</span>
+            <h2 className="text-display-md leading-[1.1] mb-8">Win the instruction <br /> <span className="italic font-normal text-gold">before the visit.</span></h2>
+            <p className="text-white/40 text-body-lg mb-12 leading-relaxed">
+              Our agent dashboard provides deep insights into local market velocity and buyer sentiment. Use our data to build the most compelling case for every valuation visit.
             </p>
             <div className="grid grid-cols-2 gap-8 mb-12">
-               <div>
-                  <BarChart3 className="w-6 h-6 text-gold mb-4" />
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-obsidian">Yield Analysis</p>
-               </div>
-               <div>
-                  <Database className="w-6 h-6 text-gold mb-4" />
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-obsidian">Sold Price Intel</p>
-               </div>
-               <div>
-                  <Globe className="w-6 h-6 text-gold mb-4" />
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-obsidian">Hyper-local Search Data</p>
-               </div>
-               <div>
-                  <Zap className="w-6 h-6 text-gold mb-4" />
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-obsidian">Real-time Lead Sync</p>
-               </div>
+               {[
+                 { icon: <LineChart className="w-5 h-5" />, label: "Velocity Tracking" },
+                 { icon: <Database className="w-5 h-5" />, label: "CRM Auto-Sync" },
+                 { icon: <Globe className="w-5 h-5" />, label: "Market Heatmaps" },
+                 { icon: <Zap className="w-5 h-5" />, label: "Real-time Alerts" }
+               ].map((item, i) => (
+                 <div key={i} className="flex items-center gap-4">
+                   <div className="text-gold">{item.icon}</div>
+                   <p className="text-[11px] font-bold uppercase tracking-widest text-white/80">{item.label}</p>
+                 </div>
+               ))}
             </div>
-            <Button variant="primary">Request a Demo</Button>
+            <Button variant="outline" className="border-gold text-gold hover:bg-gold hover:text-obsidian px-10">Request Platform Demo</Button>
           </div>
-          <div className="relative">
-             <div className="bg-obsidian p-2 shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" 
-                  className="w-full h-auto grayscale opacity-80"
-                  alt="Dashboard Preview"
-                />
-             </div>
-             <div className="absolute -bottom-8 -left-8 bg-gold p-10 text-obsidian max-w-xs shadow-2xl">
-                <p className="text-display-sm font-display mb-4">800+</p>
-                <p className="text-[10px] font-bold uppercase tracking-widest">Independent agencies already partnered</p>
-             </div>
-          </div>
+        </div>
+      </section>
+
+      {/* Integration Logos / Trust */}
+      <section className="py-24 border-b border-border bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 text-center">
+           <p className="text-[10px] font-bold text-muted uppercase tracking-[0.5em] mb-12">Seamless CRM Integrations</p>
+           <div className="flex flex-wrap justify-center items-center gap-16 opacity-30 grayscale contrast-125">
+              <span className="text-2xl font-display font-bold">ALTO</span>
+              <span className="text-2xl font-display font-bold">STREET.CO.UK</span>
+              <span className="text-2xl font-display font-bold">REAPIT</span>
+              <span className="text-2xl font-display font-bold">JUPIX</span>
+              <span className="text-2xl font-display font-bold">STREET</span>
+           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-40 text-center bg-obsidian text-silk">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-display-md font-display mb-12">Ready to list with the <span className="italic font-normal text-gold">future of property?</span></h2>
+      <section className="py-40 text-center bg-obsidian text-silk relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05),transparent)] pointer-events-none" />
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <h2 className="text-display-md font-display mb-12">The future of property is <br /> <span className="italic font-normal text-gold">Independent.</span></h2>
           <div className="flex flex-col md:flex-row justify-center gap-6">
-            <Button size="lg" className="bg-gold text-obsidian px-12">Become a Partner</Button>
-            <Button size="lg" variant="secondary" className="border-silk/20 text-silk px-12">Contact Sales</Button>
+            <Button size="lg" className="bg-gold text-obsidian px-12 h-16 text-[11px] font-bold uppercase tracking-widest shadow-xl hover:bg-white transition-all">Become a Partner</Button>
+            <Button size="lg" variant="secondary" className="border-white/20 text-white px-12 h-16 text-[11px] font-bold uppercase tracking-widest hover:bg-white/5">Contact Partnership Team</Button>
           </div>
         </div>
       </section>
     </div>
   );
 }
+
