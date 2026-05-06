@@ -147,7 +147,7 @@ export default function Home() {
           <Button 
             variant="primary" 
             size="lg" 
-            onClick={() => window.location.href = '/pricing'}
+            href="/pricing"
             className="bg-forest text-white px-12 h-16"
           >
             Partner With Us <ArrowRight className="ml-3 w-4 h-4" />

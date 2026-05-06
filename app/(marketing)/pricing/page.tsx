@@ -149,7 +149,7 @@ export default function PricingPage() {
               fullWidth 
               size="lg"
               className={cn(plan.popular && "bg-forest hover:bg-forest/90", "mt-auto")}
-              onClick={() => window.location.href = `/register?role=agent&plan=${plan.name.toLowerCase()}`}
+              href={`/register?role=agent&plan=${plan.name.toLowerCase()}`}
             >
               {plan.button}
             </Button>

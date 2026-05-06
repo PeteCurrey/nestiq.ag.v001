@@ -62,7 +62,7 @@ export function AgentShowcase() {
               <div className="flex flex-wrap gap-4">
                 <Button 
                   variant="primary" 
-                  onClick={() => router.push('/agents')}
+                  href="/agents"
                   className="bg-silk text-obsidian hover:bg-gold hover:text-silk border-none group min-w-[200px]"
                 >
                   See Agent Plans
@@ -70,7 +70,7 @@ export function AgentShowcase() {
                 </Button>
                 <Button 
                   variant="primary" 
-                  onClick={() => router.push('/agent/dashboard')}
+                  href="/agent/dashboard"
                   className="bg-emerald text-white hover:bg-emerald/90 border-none group min-w-[200px]"
                 >
                   Go to Dashboard
