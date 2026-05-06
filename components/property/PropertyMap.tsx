@@ -10,12 +10,16 @@ import { cn } from "@/lib/utils/cn";
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 
 interface PropertyMapProps {
-  lat: number;
-  lng: number;
+  lat?: number;
+  lng?: number;
   exactLocation?: boolean;
 }
 
-export function PropertyMap({ lat, lng, exactLocation = true }: PropertyMapProps) {
+export function PropertyMap({ 
+  lat = 53.2350, // Chesterfield default
+  lng = -1.4273, // Chesterfield default
+  exactLocation = true 
+}: PropertyMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [skyView, setSkyView] = useState(false);
@@ -26,11 +30,12 @@ export function PropertyMap({ lat, lng, exactLocation = true }: PropertyMapProps
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/streets-v12",
+      style: "mapbox://styles/mapbox/light-v11",
       center: [lng, lat],
       zoom: 15,
       pitch: 0,
     });
+
 
     map.current.on("load", () => {
       if (!map.current) return;
@@ -105,8 +110,12 @@ export function PropertyMap({ lat, lng, exactLocation = true }: PropertyMapProps
   ];
 
   return (
-    <div className="relative w-full h-[500px] rounded-2xl overflow-hidden border border-border shadow-xl">
-      <div ref={mapContainer} className="w-full h-full" />
+    <div className="relative w-full h-[500px] rounded-2xl overflow-hidden border border-border shadow-xl bg-pearl">
+      <div 
+        ref={mapContainer} 
+        className="w-full h-full mix-blend-multiply" 
+        style={{ filter: "grayscale(30%) sepia(20%) hue-rotate(80deg) opacity(90%)" }}
+      />
       
       {/* SkyView Toggle */}
       <div className="absolute top-6 right-6 flex flex-col gap-3">
