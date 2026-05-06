@@ -149,6 +149,7 @@ export default function PricingPage() {
               fullWidth 
               size="lg"
               className={cn(plan.popular && "bg-forest hover:bg-forest/90", "mt-auto")}
+              onClick={() => window.location.href = `/register?role=agent&plan=${plan.name.toLowerCase()}`}
             >
               {plan.button}
             </Button>
@@ -172,14 +173,13 @@ export default function PricingPage() {
                </thead>
                <tbody className="divide-y divide-border">
                   {[
-                    { f: "Monthly Fee", n: "From £199", r: "£1,500–£6,500+" },
-                    { f: "AI Listing Tools", n: "Included", r: "Not available" },
-                    { f: "Full CRM", n: "Included", r: "Not available" },
-                    { f: "Compliance Hub", n: "Included", r: "Not available" },
-                    { f: "Contract Term", n: "Monthly", r: "12–24 months" },
-                    { f: "Price Increases", n: "Capped annually", r: "18% in 2025 alone" },
-                    { f: "Data Ownership", n: "Yours", r: "Theirs" },
-                    { f: "Setup Fee", n: "None", r: "Up to £500" },
+                    { f: "Monthly Fee", n: "From £199", r: "£1,500–£6,000+" },
+                    { f: "AI Description Gen", n: "Included", r: "Not available" },
+                    { f: "Branch Limit", n: "Unlimited (Pro)", r: "Per Branch Fee" },
+                    { f: "CRM Integration", n: "Included", r: "£250/mo Extra" },
+                    { f: "Listing Limit", n: "25 — Unlimited", r: "Per-Listing Fees" },
+                    { f: "Contract Term", n: "Monthly", r: "12–24 Months" },
+                    { f: "Data Sovereignty", n: "You own it", r: "They own it" },
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-pearl transition-colors">
                        <td className="p-6 text-body-sm font-bold text-obsidian">{row.f}</td>

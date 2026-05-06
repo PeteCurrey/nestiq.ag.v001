@@ -21,6 +21,7 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -34,15 +35,31 @@ export function Header() {
 
   useEffect(() => {
     const supabase = createClient();
+    
+    const fetchProfile = async (userId: string) => {
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
+      setProfile(data);
+    };
+
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) {
         setUser(user);
+        fetchProfile(user.id);
       }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
+        if (session?.user) {
+          fetchProfile(session.user.id);
+        } else {
+          setProfile(null);
+        }
       }
     );
 
@@ -128,14 +145,25 @@ export function Header() {
                     exit={{ opacity: 0, y: 10 }}
                     className="absolute right-0 mt-4 w-56 bg-white border border-border shadow-2xl rounded-none py-2"
                   >
-                    <Link href="/account/saved" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">Saved Properties</Link>
-                    <Link href="/account/searches" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Searches</Link>
-                    <Link href="/account/enquiries" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Enquiries</Link>
+                    {profile?.role === 'agent' ? (
+                      <>
+                        <Link href="/agent/dashboard" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-emerald hover:text-emerald/80 hover:bg-emerald/5">Agency Dashboard</Link>
+                        <Link href="/agent/listings" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Listings</Link>
+                        <Link href="/agent/leads" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">Agency Leads</Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/account/saved" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">Saved Properties</Link>
+                        <Link href="/account/searches" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Searches</Link>
+                        <Link href="/account/enquiries" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Enquiries</Link>
+                      </>
+                    )}
                     <div className="h-px bg-border/40 my-2" />
                     <button 
-                      onClick={() => {
-                        signOut();
+                      onClick={async () => {
+                        await signOut();
                         setIsDropdownOpen(false);
+                        router.push('/');
                       }}
                       className="block w-full text-left px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-red-500 hover:bg-red-50"
                     >
@@ -157,6 +185,14 @@ export function Header() {
                 )}
               >
                 Sign In
+              </Button>
+              <Button 
+                variant="primary" 
+                size="sm" 
+                onClick={() => router.push('/agents')}
+                className="text-[9px] uppercase tracking-[0.2em] font-bold bg-emerald text-white hover:bg-emerald/90 border-none px-6"
+              >
+                Partner With Us
               </Button>
             </div>
           )}
@@ -199,13 +235,24 @@ export function Header() {
                 {!user ? (
                   <>
                     <Button variant="outline" className="w-full" onClick={() => { router.push('/login'); setIsMobileMenuOpen(false); }}>Sign In</Button>
+                    <Button variant="primary" className="w-full bg-emerald text-white" onClick={() => { router.push('/agents'); setIsMobileMenuOpen(false); }}>Partner With Us</Button>
                   </>
                 ) : (
                   <>
-                    <Link href="/account/saved" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>Saved Properties</Link>
-                    <Link href="/account/searches" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Searches</Link>
-                    <Link href="/account/enquiries" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Enquiries</Link>
-                    <button onClick={() => { signOut(); setIsMobileMenuOpen(false); }} className="text-left text-body-md font-medium text-red-500 mt-4">Sign Out</button>
+                    {profile?.role === 'agent' ? (
+                      <>
+                        <Link href="/agent/dashboard" className="text-body-md font-medium text-emerald" onClick={() => setIsMobileMenuOpen(false)}>Agency Dashboard</Link>
+                        <Link href="/agent/listings" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Listings</Link>
+                        <Link href="/agent/leads" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>Agency Leads</Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href="/account/saved" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>Saved Properties</Link>
+                        <Link href="/account/searches" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Searches</Link>
+                        <Link href="/account/enquiries" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Enquiries</Link>
+                      </>
+                    )}
+                    <button onClick={async () => { await signOut(); setIsMobileMenuOpen(false); router.push('/'); }} className="text-left text-body-md font-medium text-red-500 mt-4">Sign Out</button>
                   </>
                 )}
               </div>

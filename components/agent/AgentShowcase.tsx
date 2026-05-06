@@ -59,10 +59,24 @@ export function AgentShowcase() {
                 ))}
               </div>
 
-              <Button variant="primary" className="bg-silk text-obsidian hover:bg-gold hover:text-silk border-none group min-w-[280px]">
-                See Agent Plans
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
-              </Button>
+              <div className="flex flex-wrap gap-4">
+                <Button 
+                  variant="primary" 
+                  onClick={() => router.push('/agents')}
+                  className="bg-silk text-obsidian hover:bg-gold hover:text-silk border-none group min-w-[200px]"
+                >
+                  See Agent Plans
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
+                </Button>
+                <Button 
+                  variant="primary" 
+                  onClick={() => router.push('/agent/dashboard')}
+                  className="bg-emerald text-white hover:bg-emerald/90 border-none group min-w-[200px]"
+                >
+                  Go to Dashboard
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
+                </Button>
+              </div>
             </motion.div>
           </div>
 
@@ -84,7 +98,7 @@ export function AgentShowcase() {
                     <div className="w-2 h-2 rounded-full bg-white/40" />
                   </div>
                   <div className="mx-auto bg-white/5 border border-white/5 rounded-none px-12 py-1 text-[9px] text-white/50 font-bold uppercase tracking-[0.2em]">
-                   nestiq.avorria.com/agent/dashboard
+                    nestiq.avorria.com/agent/dashboard
                   </div>
                 </div>
                 

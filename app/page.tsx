@@ -24,7 +24,7 @@ const featuredProperties = [
   {
     id: "1204",
     slug: "chesterfield-road-matlock-moor-matlock",
-    title: "Cuckoostone Grange Portfolio",
+    title: "Cuckoostone Grange Estate",
     price: 2750000,
     address: "Chesterfield Road, Matlock Moor, Matlock",
     bedrooms: 13,
@@ -135,6 +135,24 @@ export default function Home() {
                <span className="text-display-sm font-display italic">Blenheim</span>
             </div>
          </div>
+      </section>
+
+      {/* Agent CTA */}
+      <section className="py-32 bg-silk border-t border-border/30">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-display-sm font-display mb-8">Are you an estate agent?</h2>
+          <p className="text-body-xl text-muted mb-12 leading-relaxed">
+            Partner with Nestiq from £199/month and take control of your data, leads, and brand.
+          </p>
+          <Button 
+            variant="primary" 
+            size="lg" 
+            onClick={() => window.location.href = '/pricing'}
+            className="bg-forest text-white px-12 h-16"
+          >
+            Partner With Us <ArrowRight className="ml-3 w-4 h-4" />
+          </Button>
+        </div>
       </section>
     </div>
   );

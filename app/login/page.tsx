@@ -69,7 +69,7 @@ function LoginForm() {
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-label font-bold text-muted uppercase tracking-widest">Password</label>
-                <Link href="/forgot-password" size="sm" className="text-xs font-bold text-forest hover:text-emerald uppercase tracking-widest">Forgot?</Link>
+                <Link href="/forgot-password" className="text-xs font-bold text-forest hover:text-emerald uppercase tracking-widest">Forgot?</Link>
               </div>
               <Input name="password" type="password" placeholder="••••••••" icon={<Lock className="w-4 h-4" />} required />
             </div>
