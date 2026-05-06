@@ -62,7 +62,7 @@ export function PropertyCard({
             sizes="(max-width: 768px) 100vw, 45vw"
           />
           <div className="absolute top-6 left-6 flex flex-col gap-2">
-            {property.featured && <Badge variant="emerald" className="rounded-none uppercase tracking-[0.2em] text-[8px] bg-obsidian text-silk border-none">The Collection</Badge>}
+            {property.featured && <Badge variant="emerald" className="rounded-none uppercase tracking-[0.2em] text-[8px] bg-obsidian text-silk border-none">Featured</Badge>}
             <Badge status={property.status} className="rounded-none uppercase tracking-[0.2em] text-[8px] border-none">{property.status.replace("-", " ")}</Badge>
           </div>
         </div>
@@ -129,7 +129,7 @@ export function PropertyCard({
         </div>
         {property.featured && (
           <div className="absolute bottom-6 left-6">
-             <Badge variant="emerald" className="rounded-none uppercase tracking-[0.2em] text-[8px] bg-obsidian text-silk border-none shadow-xl">Private Collection</Badge>
+             <Badge variant="emerald" className="rounded-none uppercase tracking-[0.2em] text-[8px] bg-obsidian text-silk border-none shadow-xl">Featured</Badge>
           </div>
         )}
       </div>

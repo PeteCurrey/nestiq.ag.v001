@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: LocationPageProps) {
     title,
     description,
     alternates: {
-       canonical: `https://nestiq.co.uk/properties-for-sale/${params.slug.join('/')}`
+       canonical: `https://nestiq.avorria.com/properties-for-sale/${params.slug.join('/')}`
     }
   };
 }

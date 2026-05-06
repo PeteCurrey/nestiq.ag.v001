@@ -117,7 +117,7 @@ export default function LeadsPage() {
                            <div className="w-12 h-10 bg-white rounded border border-border" />
                            <div>
                               <p className="text-xs font-bold text-obsidian">{selectedLead.property}</p>
-                              <p className="text-[10px] text-muted font-bold uppercase tracking-widest">Enquired on nestiq.co.uk</p>
+                              <p className="text-[10px] text-muted font-bold uppercase tracking-widest">Enquired on nestiq.avorria.com</p>
                            </div>
                         </div>
                      </div>

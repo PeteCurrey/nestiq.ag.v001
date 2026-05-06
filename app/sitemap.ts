@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://nestiq.co.uk'
+  const baseUrl = 'https://nestiq.avorria.com'
 
   // Standard Pages
   const routes = [

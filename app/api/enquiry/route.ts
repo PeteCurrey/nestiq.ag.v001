@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 
     // 2. Send Email to Agent
     await resend.emails.send({
-      from: 'NESTIQ <leads@nestiq.co.uk>',
+      from: 'NESTIQ <leads@nestiq.avorria.com>',
       to: 'agent@example.com', // In reality, fetch agency email
       reply_to: validated.email,
       subject: `New enquiry for ${validated.address} from ${validated.name}`,
@@ -54,13 +54,13 @@ export async function POST(req: Request) {
         Message: ${validated.message}
         Preferred Contact: ${validated.preferredContact}
         
-        View Lead: https://nestiq.co.uk/agent/leads/${enquiry.id}
+        View Lead: https://nestiq.avorria.com/agent/leads/${enquiry.id}
       `
     })
 
     // 3. Send Confirmation to Enquirer
     await resend.emails.send({
-      from: 'NESTIQ <hello@nestiq.co.uk>',
+      from: 'NESTIQ <hello@nestiq.avorria.com>',
       to: validated.email,
       subject: 'Your enquiry has been sent',
       text: `
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
         Your enquiry for ${validated.address} has been sent to the agent.
         They will be in touch shortly.
         
-        Property: https://nestiq.co.uk/property/${validated.propertyId}
+        Property: https://nestiq.avorria.com/property/${validated.propertyId}
       `
     })
 

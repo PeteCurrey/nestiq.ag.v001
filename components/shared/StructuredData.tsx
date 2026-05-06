@@ -20,7 +20,7 @@ export const schemas = {
     "@type": "RealEstateListing",
     "name": property.title,
     "description": property.description,
-    "url": `https://nestiq.co.uk/property/${property.slug}`,
+    "url": `https://nestiq.avorria.com/property/${property.slug}`,
     "image": property.images?.[0]?.url,
     "offers": {
       "@type": "Offer",
@@ -46,7 +46,7 @@ export const schemas = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": agency.name,
-    "url": `https://nestiq.co.uk/agents/${agency.slug}`,
+    "url": `https://nestiq.avorria.com/agents/${agency.slug}`,
     "address": {
       "@type": "PostalAddress",
       "streetAddress": agency.address_line1,

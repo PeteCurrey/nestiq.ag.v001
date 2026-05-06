@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Heart, Building2, Search } from "lucide-react";
+import { Menu, X, Heart, Building2, Search, User } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
+import { createClient } from "@/lib/supabase/client";
+import { signOut } from "@/lib/supabase/actions";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { name: "Search", href: "/search" },
@@ -16,6 +19,10 @@ const navLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +31,40 @@ export function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const getInitials = (email: string) => {
+    if (!email) return "U";
+    return email.charAt(0).toUpperCase();
+  };
 
   return (
     <header
@@ -67,18 +108,66 @@ export function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-6">
-          <Link href="/account/saved" className={cn(
-            "hidden sm:flex transition-colors duration-500",
-            isScrolled ? "text-obsidian/40 hover:text-forest" : "text-silk/60 hover:text-gold"
-          )}>
-            <Heart className="w-4 h-4" strokeWidth={1.5} />
-          </Link>
-          <Link href="/login" className={cn(
-            "hidden sm:block text-[10px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
-            isScrolled ? "text-obsidian/80 hover:text-forest" : "text-silk hover:text-gold"
-          )}>
-            Sign In
-          </Link>
+          {user ? (
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={cn(
+                  "flex items-center justify-center w-8 h-8 rounded-full border transition-all",
+                  isScrolled ? "border-obsidian/20 text-obsidian bg-white hover:border-forest hover:text-forest" : "border-silk/20 text-silk bg-obsidian/20 hover:border-gold hover:text-gold"
+                )}
+              >
+                <span className="text-xs font-bold">{getInitials(user.email)}</span>
+              </button>
+
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute right-0 mt-4 w-56 bg-white border border-border shadow-2xl rounded-none py-2"
+                  >
+                    <Link href="/account/saved" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">Saved Properties</Link>
+                    <Link href="/account/searches" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Searches</Link>
+                    <Link href="/account/enquiries" className="block px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-obsidian/70 hover:text-forest hover:bg-forest/5">My Enquiries</Link>
+                    <div className="h-px bg-border/40 my-2" />
+                    <button 
+                      onClick={() => {
+                        signOut();
+                        setIsDropdownOpen(false);
+                      }}
+                      className="block w-full text-left px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-red-500 hover:bg-red-50"
+                    >
+                      Sign Out
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ) : (
+            <div className="hidden sm:flex items-center gap-4">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => router.push('/login')}
+                className={cn(
+                  "text-[9px] uppercase tracking-[0.2em] font-bold border",
+                  isScrolled ? "border-obsidian/20 text-obsidian hover:bg-obsidian/5" : "border-silk/20 text-silk hover:bg-silk/10"
+                )}
+              >
+                Sign In
+              </Button>
+              <Button 
+                variant="primary" 
+                size="sm" 
+                onClick={() => router.push('/pricing')}
+                className="text-[9px] uppercase tracking-[0.2em] font-bold bg-emerald text-white hover:bg-emerald/90 border-none"
+              >
+                List Your Property
+              </Button>
+            </div>
+          )}
 
           {/* Mobile hamburger */}
           <button
@@ -115,7 +204,19 @@ export function Header() {
                 </Link>
               ))}
               <div className="flex flex-col gap-4 mt-4">
-                <Button variant="primary" className="w-full">Sign In</Button>
+                {!user ? (
+                  <>
+                    <Button variant="outline" className="w-full" onClick={() => { router.push('/login'); setIsMobileMenuOpen(false); }}>Sign In</Button>
+                    <Button variant="primary" className="w-full bg-emerald text-white" onClick={() => { router.push('/pricing'); setIsMobileMenuOpen(false); }}>List Your Property</Button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/account/saved" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>Saved Properties</Link>
+                    <Link href="/account/searches" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Searches</Link>
+                    <Link href="/account/enquiries" className="text-body-md font-medium text-obsidian" onClick={() => setIsMobileMenuOpen(false)}>My Enquiries</Link>
+                    <button onClick={() => { signOut(); setIsMobileMenuOpen(false); }} className="text-left text-body-md font-medium text-red-500 mt-4">Sign Out</button>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>

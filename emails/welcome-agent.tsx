@@ -51,7 +51,7 @@ export const WelcomeAgentEmail = ({ agencyName }: { agencyName: string }) => {
               </Text>
             </Section>
 
-            <Button style={button} href="https://nestiq.co.uk/agent/dashboard">
+            <Button style={button} href="https://nestiq.avorria.com/agent/dashboard">
               Go to Dashboard
             </Button>
 

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NESTIQ | Find Home. Fair and Fast.",
     description: "The AI-powered property marketplace for buying, selling, renting and letting.",
-    url: "https://nestiq.co.uk",
+    url: "https://nestiq.avorria.com",
     siteName: "NESTIQ",
     locale: "en_GB",
     type: "website",

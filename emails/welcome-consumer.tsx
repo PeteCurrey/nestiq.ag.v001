@@ -44,7 +44,7 @@ export const WelcomeConsumerEmail = ({ userName }: { userName: string }) => {
               </div>
             </Section>
 
-            <Button style={button} href="https://nestiq.co.uk/search">
+            <Button style={button} href="https://nestiq.avorria.com/search">
               Start Searching
             </Button>
 

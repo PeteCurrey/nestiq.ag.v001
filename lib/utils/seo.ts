@@ -15,12 +15,12 @@ export function generatePageMetadata({
   title,
   description,
   canonical,
-  ogImage = "https://nestiq.co.uk/og-image.jpg",
+  ogImage = "https://nestiq.avorria.com/og-image.jpg",
   ogType = "website",
   noindex = false,
 }: SEOProps): Metadata {
   const fullTitle = `${title} | NESTIQ`;
-  const url = canonical ? `https://nestiq.co.uk${canonical}` : "https://nestiq.co.uk";
+  const url = canonical ? `https://nestiq.avorria.com${canonical}` : "https://nestiq.avorria.com";
 
   return {
     title: fullTitle,

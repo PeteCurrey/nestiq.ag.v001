@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/agent/', '/account/', '/api/'],
     },
-    sitemap: 'https://nestiq.co.uk/sitemap.xml',
+    sitemap: 'https://nestiq.avorria.com/sitemap.xml',
   }
 }

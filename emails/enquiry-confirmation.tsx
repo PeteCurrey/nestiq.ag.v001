@@ -81,7 +81,7 @@ export const EnquiryConfirmationEmail = ({
 
             <Button
               style={button}
-              href={`https://nestiq.co.uk/property/${propertyId}`}
+              href={`https://nestiq.avorria.com/property/${propertyId}`}
             >
               View Property
             </Button>
