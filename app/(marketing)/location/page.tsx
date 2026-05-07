@@ -24,7 +24,7 @@ export default async function LocationsIndexPage() {
       
       <main className="max-w-[1400px] mx-auto px-6 md:px-12 py-32">
         <div className="mb-24">
-          <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-6 block">Regional Coverage</span>
+          <span className="text-[10px] font-bold text-emerald uppercase tracking-[0.4em] mb-6 block">Regional Coverage</span>
           <h1 className="text-display-md font-display leading-tight mb-8">
             Property by <br />
             <span className="italic font-normal">Location.</span>
@@ -46,15 +46,15 @@ export default async function LocationsIndexPage() {
                   <Link 
                     key={loc.slug} 
                     href={`/properties-for-sale/${loc.slug}`}
-                    className="group flex items-center justify-between p-4 bg-white border border-border/40 hover:border-gold/30 hover:shadow-lg transition-all duration-500"
+                    className="group flex items-center justify-between p-4 bg-white border border-border/40 hover:border-emerald/30 hover:shadow-lg transition-all duration-500"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 bg-silk flex items-center justify-center group-hover:bg-gold group-hover:text-white transition-colors">
+                      <div className="w-8 h-8 bg-silk flex items-center justify-center group-hover:bg-emerald group-hover:text-white transition-colors">
                         <MapPin className="w-4 h-4" />
                       </div>
-                      <span className="text-body-sm font-bold text-obsidian group-hover:text-gold transition-colors">{loc.town || loc.h1}</span>
+                      <span className="text-body-sm font-bold text-obsidian group-hover:text-emerald transition-colors">{loc.town || loc.h1}</span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-muted group-hover:text-gold group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-muted group-hover:text-emerald group-hover:translate-x-1 transition-all" />
                   </Link>
                 ))}
               </div>
@@ -64,14 +64,14 @@ export default async function LocationsIndexPage() {
 
         {/* Rapid Expansion CTA */}
         <div className="mt-32 p-16 bg-obsidian text-silk text-center relative overflow-hidden">
-           <div className="absolute top-0 right-0 w-96 h-96 bg-gold/5 blur-[100px] rounded-full -mr-48 -mt-48" />
+           <div className="absolute top-0 right-0 w-96 h-96 bg-emerald/5 blur-[100px] rounded-full -mr-48 -mt-48" />
            <div className="relative z-10">
              <h3 className="text-display-sm font-display mb-8">Agent in an unlisted area?</h3>
              <p className="text-body-lg text-silk/60 mb-12 max-w-2xl mx-auto">
                We are launching in new towns every week. Partner with Nestiq to secure your territory and start receiving premium leads.
              </p>
              <Link href="/agents">
-               <Button variant="primary" className="bg-gold text-obsidian px-12 h-16">Partner With Us</Button>
+               <Button variant="primary" className="bg-emerald text-obsidian px-12 h-16">Partner With Us</Button>
              </Link>
            </div>
         </div>

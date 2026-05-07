@@ -40,7 +40,7 @@ export default function AgentLayout({
         <div className="h-full flex flex-col p-8">
           {/* Logo */}
           <div className="flex items-center gap-3 mb-16">
-            <div className="bg-gold p-1.5 rounded-none">
+            <div className="bg-emerald p-1.5 rounded-none">
               <Building2 className="w-5 h-5 text-obsidian" strokeWidth={1.5} />
             </div>
             <span className="text-lg font-display font-medium tracking-[0.2em] uppercase">
@@ -63,7 +63,7 @@ export default function AgentLayout({
                       : "text-silk/40 hover:text-silk hover:bg-white/5"
                   )}
                 >
-                  <item.icon className={cn("w-4 h-4 transition-colors", isActive ? "text-gold" : "text-silk/20 group-hover:text-gold")} strokeWidth={1.5} />
+                  <item.icon className={cn("w-4 h-4 transition-colors", isActive ? "text-emerald" : "text-silk/20 group-hover:text-emerald")} strokeWidth={1.5} />
                   {item.name}
                 </Link>
               );
@@ -73,8 +73,8 @@ export default function AgentLayout({
           {/* User Profile Footer */}
           <div className="pt-8 border-t border-silk/10 mt-auto">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-10 h-10 bg-gold/20 flex items-center justify-center border border-gold/30">
-                <span className="text-gold font-bold">DP</span>
+              <div className="w-10 h-10 bg-emerald/20 flex items-center justify-center border border-emerald/30">
+                <span className="text-emerald font-bold">DP</span>
               </div>
               <div>
                 <span className="block text-[10px] font-bold uppercase tracking-widest text-silk">Dales & Peaks</span>
@@ -111,7 +111,7 @@ export default function AgentLayout({
               <input 
                 type="text" 
                 placeholder="Search leads, listings or intelligence..."
-                className="w-full bg-silk border-none pl-12 pr-6 py-3 text-[10px] font-bold uppercase tracking-widest focus:ring-1 focus:ring-gold/30 outline-none"
+                className="w-full bg-silk border-none pl-12 pr-6 py-3 text-[10px] font-bold uppercase tracking-widest focus:ring-1 focus:ring-emerald/30 outline-none"
               />
             </div>
           </div>

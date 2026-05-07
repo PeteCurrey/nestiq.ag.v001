@@ -9,17 +9,17 @@ export function AgentShowcase() {
     {
       title: "AI Listing Tools",
       description: "Automated description generation and compliance verification.",
-      icon: <Database className="w-5 h-5 text-gold" />
+      icon: <Database className="w-5 h-5 text-emerald" />
     },
     {
       title: "Full CRM Suite",
       description: "Direct lead management pipeline with real-time analytics.",
-      icon: <ShieldCheck className="w-5 h-5 text-gold" />
+      icon: <ShieldCheck className="w-5 h-5 text-emerald" />
     },
     {
       title: "Market Analytics",
       description: "Advanced performance metrics and market sentiment tracking.",
-      icon: <BarChart3 className="w-5 h-5 text-gold" />
+      icon: <BarChart3 className="w-5 h-5 text-emerald" />
     }
   ];
 
@@ -36,7 +36,7 @@ export function AgentShowcase() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-8 block">The Agent Standard</span>
+              <span className="text-[10px] font-bold text-emerald uppercase tracking-[0.4em] mb-8 block">The Agent Standard</span>
               <h2 className="text-display-lg font-display mb-12 leading-[1.1]">
                 Stop Paying Rightmove. <br />
                 <span className="italic font-normal">Start Growing With Nestiq.</span>
@@ -63,7 +63,7 @@ export function AgentShowcase() {
                 <Button 
                   variant="primary" 
                   href="/agents"
-                  className="bg-silk text-obsidian hover:bg-gold hover:text-silk border-none group min-w-[200px]"
+                  className="bg-silk text-obsidian hover:bg-emerald hover:text-silk border-none group min-w-[200px]"
                 >
                   See Agent Plans
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" />
@@ -106,7 +106,7 @@ export function AgentShowcase() {
                 <div className="p-10 grid grid-cols-12 gap-8 aspect-video bg-obsidian">
                   <div className="col-span-3 space-y-4">
                      <div className="h-2 bg-white/20 w-3/4 mb-8" />
-                     <div className="h-12 bg-white/10 border border-gold/40" />
+                     <div className="h-12 bg-white/10 border border-emerald/40" />
                      <div className="h-12 bg-white/5 border border-white/10" />
                      <div className="h-12 bg-white/5 border border-white/10" />
                   </div>

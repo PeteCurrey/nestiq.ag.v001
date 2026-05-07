@@ -47,7 +47,7 @@ export default function SettingsPage() {
               className={cn(
                 "flex items-center gap-2 px-6 py-4 text-[10px] font-bold uppercase tracking-[0.25em] transition-colors relative",
                 activeTab === tab.id
-                  ? "text-obsidian after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-gold"
+                  ? "text-obsidian after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-emerald"
                   : "text-muted hover:text-obsidian"
               )}
             >

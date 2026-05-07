@@ -90,7 +90,6 @@ export function PropertyDetail({ property }: { property: Property }) {
                 {property.title}
               </h1>
               <div className="flex items-center gap-3 text-white/70 text-body-lg font-medium tracking-wide">
-              <div className="flex items-center gap-3 text-white/70 text-body-lg font-medium tracking-wide">
                 <MapPin className="w-5 h-5 text-emerald" strokeWidth={2} />
                 {property.address_line1}, {property.town}
               </div>

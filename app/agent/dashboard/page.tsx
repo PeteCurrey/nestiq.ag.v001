@@ -70,7 +70,7 @@ export default function AgentDashboard() {
   if (loading) {
     return (
       <div className="h-[60vh] flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-gold animate-spin" />
+        <Loader2 className="w-8 h-8 text-emerald animate-spin" />
       </div>
     );
   }
@@ -80,7 +80,7 @@ export default function AgentDashboard() {
       {/* Welcome Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div>
-          <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-4 block">Institutional Command</span>
+          <span className="text-[10px] font-bold text-emerald uppercase tracking-[0.4em] mb-4 block">Institutional Command</span>
           <h1 className="text-display-sm md:text-display-md font-display leading-tight">
             Welcome back, <br />
             <span className="italic font-normal">{agency?.name || 'Partner Agent'}.</span>
@@ -95,9 +95,9 @@ export default function AgentDashboard() {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {stats.map((stat) => (
-          <div key={stat.name} className="bg-white border border-border/40 p-8 group hover:border-gold/30 transition-all duration-500">
+          <div key={stat.name} className="bg-white border border-border/40 p-8 group hover:border-emerald/30 transition-all duration-500">
             <div className="flex justify-between items-start mb-6">
-              <div className="p-3 bg-silk border border-border/40 text-gold group-hover:bg-gold group-hover:text-silk transition-all duration-500">
+              <div className="p-3 bg-silk border border-border/40 text-emerald group-hover:bg-emerald group-hover:text-silk transition-all duration-500">
                 <stat.icon className="w-5 h-5" strokeWidth={1.5} />
               </div>
               <div className={cn(
@@ -119,13 +119,13 @@ export default function AgentDashboard() {
         <div className="lg:col-span-2 bg-white border border-border/40 overflow-hidden">
           <div className="p-8 border-b border-border/40 flex justify-between items-center">
             <h3 className="text-[10px] font-bold uppercase tracking-[0.3em]">Priority Intelligence (Leads)</h3>
-            <button className="text-[10px] font-bold text-gold uppercase tracking-widest hover:text-forest transition-colors">View All Leads</button>
+            <button className="text-[10px] font-bold text-emerald uppercase tracking-widest hover:text-forest transition-colors">View All Leads</button>
           </div>
           <div className="divide-y divide-border/30">
             {leads.length > 0 ? leads.map((lead) => (
               <div key={lead.id} className="p-8 flex items-center justify-between group hover:bg-silk/40 transition-all duration-500">
                 <div className="flex items-center gap-6">
-                  <div className="w-12 h-12 bg-silk border border-border/40 flex items-center justify-center font-display text-lg text-gold group-hover:bg-gold group-hover:text-silk transition-all duration-500">
+                  <div className="w-12 h-12 bg-silk border border-border/40 flex items-center justify-center font-display text-lg text-emerald group-hover:bg-emerald group-hover:text-silk transition-all duration-500">
                     {lead.full_name?.charAt(0)}
                   </div>
                   <div>
@@ -137,7 +137,7 @@ export default function AgentDashboard() {
                 </div>
                 <div className="flex items-center gap-12">
                    <div className="hidden md:block text-right">
-                      <span className="block text-[10px] font-bold text-gold uppercase tracking-widest mb-1">{lead.status}</span>
+                      <span className="block text-[10px] font-bold text-emerald uppercase tracking-widest mb-1">{lead.status}</span>
                       <span className="flex items-center gap-2 text-[9px] text-muted uppercase tracking-widest">
                         <Clock className="w-3 h-3" /> {formatDistanceToNow(new Date(lead.created_at))} ago
                       </span>
@@ -159,12 +159,12 @@ export default function AgentDashboard() {
         <div className="space-y-8">
            <div className="bg-obsidian p-10 text-silk space-y-8">
               <div className="flex items-center gap-3">
-                 <Calendar className="w-5 h-5 text-gold" strokeWidth={1.5} />
+                 <Calendar className="w-5 h-5 text-emerald" strokeWidth={1.5} />
                  <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Upcoming Viewings</span>
               </div>
               <div className="space-y-6">
-                 <div className="p-6 bg-white/5 border border-white/10 hover:border-gold/30 transition-all cursor-pointer">
-                    <span className="block text-[9px] text-gold uppercase tracking-widest mb-2">Today, 14:30</span>
+                 <div className="p-6 bg-white/5 border border-white/10 hover:border-emerald/30 transition-all cursor-pointer">
+                    <span className="block text-[9px] text-emerald uppercase tracking-widest mb-2">Today, 14:30</span>
                     <span className="block text-body-sm font-bold mb-1 uppercase tracking-wider">Park Hall</span>
                     <span className="text-[9px] text-silk/40 uppercase tracking-widest">Viewing with Lord Harwood</span>
                  </div>

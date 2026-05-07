@@ -12,7 +12,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         <div key={item.label} className="flex items-center gap-4">
           <Link 
             href={item.href} 
-            className={index === items.length - 1 ? "text-obsidian" : "hover:text-gold transition-colors"}
+            className={index === items.length - 1 ? "text-obsidian" : "hover:text-emerald transition-colors"}
           >
             {item.label}
           </Link>

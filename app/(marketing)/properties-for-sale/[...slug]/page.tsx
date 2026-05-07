@@ -66,9 +66,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
               
               {/* Breadcrumbs */}
               <nav className="flex gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-muted mb-12">
-                 <Link href="/" className="hover:text-gold transition-colors">Home</Link> 
+                 <Link href="/" className="hover:text-emerald transition-colors">Home</Link> 
                  <span className="opacity-30">/</span> 
-                 <Link href="/search" className="hover:text-gold transition-colors">Search</Link> 
+                 <Link href="/search" className="hover:text-emerald transition-colors">Search</Link> 
                  <span className="opacity-30">/</span> 
                  <span className="text-forest">{page.h1}</span>
               </nav>
@@ -85,7 +85,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
 
               {/* Market Intelligence */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                 <div className="bg-white p-10 border border-border/40 shadow-sm group hover:border-gold/30 transition-all">
+                 <div className="bg-white p-10 border border-border/40 shadow-sm group hover:border-emerald/30 transition-all">
                     <p className="text-[10px] font-bold text-muted uppercase tracking-[0.3em] mb-4">Market Velocity</p>
                     <p className="text-display-xs font-display text-obsidian">High</p>
                     <div className="flex items-center gap-1 text-emerald text-[10px] font-bold mt-4">
@@ -99,7 +99,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                  </div>
                  <div className="bg-obsidian p-10 text-silk shadow-xl">
                     <p className="text-[10px] font-bold text-silk/40 uppercase tracking-[0.3em] mb-4">Nestiq Score</p>
-                    <p className="text-display-xs font-display text-gold">9.4/10</p>
+                    <p className="text-display-xs font-display text-emerald">9.4/10</p>
                     <p className="text-[10px] text-silk/40 font-bold mt-4 uppercase tracking-widest">Investment Grade</p>
                  </div>
               </div>
@@ -125,7 +125,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
                        <Link 
                          key={loc} 
                          href={`/properties-for-sale/${loc.toLowerCase().replace(/ /g, '-')}`}
-                         className="text-[11px] font-bold text-muted hover:text-gold uppercase tracking-[0.2em] transition-colors"
+                         className="text-[11px] font-bold text-muted hover:text-emerald uppercase tracking-[0.2em] transition-colors"
                        >
                           {loc}
                        </Link>
