@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Search, ChevronRight, Calculator, Home, Info, ArrowRight } from "lucide-react";
+import { Search, ChevronRight, Calculator, Home, Info, ArrowRight, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 interface ConsumerHubTemplateProps {
