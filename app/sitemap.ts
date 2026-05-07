@@ -1,34 +1,50 @@
 import { MetadataRoute } from 'next'
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://nestiq.avorria.com'
-
-  // Standard Pages
-  const routes = [
+  
+  // Marketing & Core Pages
+  const coreRoutes = [
     '',
+    '/about',
     '/search',
-    '/buy',
-    '/rent',
     '/agents',
-    '/market-data',
-    '/valuation',
+    '/agents/directory',
     '/pricing',
+    '/fair-portal-charter',
+    '/portal-cost-calculator',
+    '/resources',
+    '/tools',
+    '/buying-a-home',
+    '/renting-a-home',
+    '/selling-a-home',
+    '/landlords',
     '/new-homes',
+    '/commercial-property',
+    '/property-investors',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 1,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'weekly' as const,
+    priority: route === '' ? 1 : 0.8,
   }))
 
-  // Location Pages (Top 50)
-  const topCities = ['london', 'manchester', 'leeds', 'birmingham', 'sheffield', 'bristol', 'glasgow', 'liverpool']
-  const locationRoutes = topCities.map(city => ({
-    url: `${baseUrl}/properties-for-sale/${city}`,
-    lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: 0.8,
+  // SEO Campaign Cluster
+  const seoRoutes = [
+    '/rightmove-alternative-for-estate-agents',
+    '/rightmove-fees-claim',
+    '/estate-agent-portal-costs',
+    '/property-portal-alternative',
+    '/independent-estate-agent-software',
+    '/fair-property-portal',
+    '/estate-agent-lead-generation-platform',
+    '/reduce-rightmove-dependency',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date().toISOString(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
   }))
 
-  return [...routes, ...locationRoutes]
+  return [...coreRoutes, ...seoRoutes]
 }

@@ -78,16 +78,14 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-12 border-t border-silk/10 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-wrap justify-center gap-8 text-[9px] font-bold uppercase tracking-widest text-silk/20">
-            <span>© 2026 Nestiq Ltd</span>
+          <div className="flex flex-wrap items-center gap-8 text-[9px] font-bold uppercase tracking-widest text-silk/20">
+            <span>© 2026 NestIQ</span>
+            <span className="normal-case tracking-normal opacity-60">NestIQ is currently operated as an Avorria property technology project in founding partner beta.</span>
+          </div>
+          <div className="flex gap-8 text-[9px] font-bold uppercase tracking-widest text-silk/20 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-silk transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-silk transition-colors">Terms of Service</Link>
             <Link href="/cookies" className="hover:text-silk transition-colors">Cookie Policy</Link>
-          </div>
-          <div className="flex items-center gap-6 opacity-20 grayscale brightness-200">
-             <span className="text-[10px] font-bold border px-2 py-1">NAEA PROPERTMARK</span>
-             <span className="text-[10px] font-bold border px-2 py-1">ARLA PROPERTMARK</span>
-             <span className="text-[10px] font-bold border px-2 py-1">THE PROPERTY OMBUDSMAN</span>
           </div>
         </div>
       </div>

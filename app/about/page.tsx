@@ -61,7 +61,7 @@ export default function AboutPage() {
           <div className="max-w-4xl">
             <span className="text-emerald font-bold uppercase tracking-[0.3em] text-[10px] mb-6 block">Our Mission</span>
             <h2 className="text-display-md text-obsidian mb-10 leading-tight">
-              The UK property market is broken. Rightmove has a 70%+ profit margin and raised fees by 18% in 2025 while inflation sat at 2.5%. 
+              The UK property portal market is broken. Amid reported high profit margins and market debate over escalating fees, independent agents are reassessing portal dependency.
             </h2>
             <p className="text-body-lg text-muted leading-relaxed mb-8">
               Independent agents — the backbone of the UK housing market — are being squeezed out. Nestiq was built to change that.

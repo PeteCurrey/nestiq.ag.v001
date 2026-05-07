@@ -168,7 +168,12 @@ export function PropertyDetail({ property }: { property: Property }) {
 
             {/* Description Tab Bar */}
             <div className="flex gap-8 md:gap-12 mb-12 md:mb-16 border-b border-border/30 overflow-x-auto no-scrollbar whitespace-nowrap">
-               {tabs.map(tab => (
+               {[
+                 { id: "overview", label: "Overview" },
+                 { id: "floorplan", label: "Floorplan & EPC" },
+                 { id: "location", label: "Local Area" },
+                 { id: "tour", label: "Virtual Tour" },
+               ].map(tab => (
                  <button
                    key={tab.id}
                    onClick={() => setActiveTab(tab.id)}
@@ -191,7 +196,7 @@ export function PropertyDetail({ property }: { property: Property }) {
                 exit={{ opacity: 0, y: -10 }}
                 className="prose prose-lg max-w-none"
               >
-                {activeTab === "description" && (
+                {(activeTab === "overview" || activeTab === "description") && (
                   <div className="space-y-16">
                     <div>
                       <h2 className="text-display-sm font-display mb-8">The Residence</h2>
@@ -202,7 +207,7 @@ export function PropertyDetail({ property }: { property: Property }) {
 
                     <div>
                       <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] mb-12 text-subtle border-b border-border/30 pb-4">
-                        Refined Specifications
+                        Key Features
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-20">
                         {property.features.map((feature, i) => (
@@ -216,11 +221,68 @@ export function PropertyDetail({ property }: { property: Property }) {
                   </div>
                 )}
 
-                {activeTab === "map" && (
-                  <div className="w-full h-[600px] bg-silk border border-border/30 relative">
-                     <div className="absolute inset-0 flex items-center justify-center bg-obsidian/5">
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-muted">Map view loading...</p>
-                     </div>
+                {activeTab === "floorplan" && (
+                  <div className="space-y-16">
+                    <div>
+                      <h2 className="text-display-sm font-display mb-8">Floorplan</h2>
+                      <div className="w-full aspect-[4/3] bg-silk border border-border/40 flex items-center justify-center p-12 relative overflow-hidden group">
+                         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
+                         <div className="text-center relative z-10">
+                           <Layers className="w-12 h-12 text-emerald mx-auto mb-6 opacity-80" />
+                           <p className="text-[12px] font-bold uppercase tracking-widest text-obsidian mb-4">Interactive Floorplan</p>
+                           <Button variant="outline" className="border-emerald text-emerald hover:bg-emerald hover:text-white">View Full Screen</Button>
+                         </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h2 className="text-display-sm font-display mb-8">Energy Performance</h2>
+                      <div className="flex flex-col md:flex-row gap-12 items-center bg-white p-12 border border-border/40">
+                         <div className="w-32 h-32 bg-emerald flex flex-col items-center justify-center text-white shrink-0">
+                            <span className="text-display-lg font-display leading-none">B</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest mt-2">Rating</span>
+                         </div>
+                         <div>
+                            <h3 className="text-body-xl font-display text-obsidian mb-2">High Efficiency Home</h3>
+                            <p className="text-muted text-body-sm leading-relaxed mb-6">This property benefits from modern insulation, double glazing throughout, and a recently upgraded central heating system. It falls within the top 20% of UK properties for energy efficiency.</p>
+                            <Button variant="outline" className="text-[10px] font-bold uppercase tracking-widest">Download Full Certificate</Button>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {(activeTab === "location" || activeTab === "map") && (
+                  <div className="space-y-12">
+                    <div className="w-full h-[500px] bg-silk border border-border/30 relative">
+                       <div className="absolute inset-0 flex items-center justify-center bg-obsidian/5">
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-muted">Interactive Map Loading...</p>
+                       </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                       <div className="bg-white p-8 border border-border/40 text-center">
+                          <span className="text-display-md font-display text-emerald block mb-2">0.4</span>
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-muted">Miles to Station</span>
+                       </div>
+                       <div className="bg-white p-8 border border-border/40 text-center">
+                          <span className="text-display-md font-display text-emerald block mb-2">3</span>
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-muted">Outstanding Schools</span>
+                       </div>
+                       <div className="bg-white p-8 border border-border/40 text-center">
+                          <span className="text-display-md font-display text-emerald block mb-2">94%</span>
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-muted">Area Safety Score</span>
+                       </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === "tour" && (
+                  <div className="w-full aspect-video bg-obsidian border border-border/30 flex flex-col items-center justify-center text-silk">
+                     <Video className="w-16 h-16 text-emerald mb-6" />
+                     <h3 className="text-body-xl font-display mb-2">Virtual Tour Available</h3>
+                     <p className="text-body-sm text-silk/60 max-w-md text-center">Step inside and explore every room of this property from your device.</p>
+                     <Button className="mt-8 bg-emerald text-white border-none">Start Tour</Button>
                   </div>
                 )}
               </motion.div>

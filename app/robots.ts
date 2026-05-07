@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/agent/', '/account/', '/api/'],
+      disallow: ['/api/', '/admin/', '/beta/', '/agent-dashboard-preview/'],
     },
     sitemap: 'https://nestiq.avorria.com/sitemap.xml',
   }

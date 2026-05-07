@@ -38,11 +38,11 @@ export function AgentShowcase() {
             >
               <span className="text-[10px] font-bold text-emerald uppercase tracking-[0.4em] mb-8 block">The Agent Standard</span>
               <h2 className="text-display-lg font-display mb-12 leading-[1.1]">
-                Stop Paying Rightmove. <br />
+                Reduce Portal Dependency. <br />
                 <span className="italic font-normal">Start Growing With Nestiq.</span>
               </h2>
               <p className="text-body-xl text-silk/80 mb-16 max-w-xl leading-relaxed">
-                Save up to £6,000 a month. Get a full CRM, AI listing tools, compliance tracking, and analytics — all included from £199/month.
+                Join the growing number of independent agents reassessing their portal spend. Get AI listing tools, compliance tracking, and market analytics built-in.
               </p>
               
               <div className="space-y-12 mb-16">

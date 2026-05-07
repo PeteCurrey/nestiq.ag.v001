@@ -8,7 +8,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="text-display-xs text-obsidian mb-6 uppercase tracking-wider">1. Who we are</h2>
             <p>
-              Nestiq Ltd is a company registered in England and Wales, based in Chesterfield, Derbyshire. We operate the Nestiq property portal, connecting buyers and renters with estate agents across the United Kingdom.
+              NestIQ is currently operated as an Avorria property technology project in founding partner beta. We provide a property portal connecting buyers and renters with independent estate agents across the United Kingdom.
             </p>
           </section>
 

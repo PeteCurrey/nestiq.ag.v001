@@ -28,17 +28,55 @@ export const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NESTIQ | Find Home. Fair and Fast.",
-  description: "The AI-powered property marketplace for buying, selling, renting and letting residential and commercial property in the UK.",
-  keywords: ["property", "uk", "real estate", "buy", "rent", "commercial", "nestiq"],
+  title: "NestIQ | The Fair Property Portal Built for Independent Agents",
+  description: "The AI-powered property portal and growth platform for independent estate agents. Fair pricing, true data ownership, and high-intent leads.",
+  keywords: ["property portal", "estate agent software", "rightmove alternative", "uk real estate", "property leads"],
+  metadataBase: new URL('https://nestiq.avorria.com'),
   openGraph: {
-    title: "NESTIQ | Find Home. Fair and Fast.",
-    description: "The AI-powered property marketplace for buying, selling, renting and letting.",
+    title: "NestIQ | The Fair Property Portal",
+    description: "The AI-powered property portal and growth platform for independent estate agents.",
     url: "https://nestiq.avorria.com",
-    siteName: "NESTIQ",
+    siteName: "NestIQ",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop",
+        width: 1200,
+        height: 630,
+        alt: "NestIQ Agent Dashboard",
+      },
+    ],
     locale: "en_GB",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "NestIQ | The Fair Property Portal",
+    description: "The AI-powered property portal and growth platform for independent estate agents.",
+    images: ["https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop"],
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "NestIQ Agent Platform",
+      "operatingSystem": "Web",
+      "applicationCategory": "BusinessApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "99.00",
+        "priceCurrency": "GBP"
+      }
+    },
+    {
+      "@type": "Organization",
+      "name": "Avorria Property Technology Project",
+      "url": "https://nestiq.avorria.com",
+      "logo": "https://nestiq.avorria.com/logo.png"
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -48,6 +86,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={cn(
           dmSans.variable,

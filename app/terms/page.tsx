@@ -40,7 +40,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-display-xs text-obsidian mb-6 uppercase tracking-wider">5. Intellectual Property</h2>
             <p>
-              Property listings, including photographs and descriptions, remain the intellectual property of the listing agent or their licensors. Nestiq's logo, design, and platform code are the exclusive property of Nestiq Ltd.
+              Property listings, including photographs and descriptions, remain the intellectual property of the listing agent or their licensors. NestIQ's logo, design, and platform code are the exclusive property of the Avorria project.
             </p>
           </section>
 
