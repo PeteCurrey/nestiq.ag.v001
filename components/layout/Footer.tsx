@@ -7,9 +7,9 @@ const footerLinks = [
   {
     title: "Search",
     links: [
-      { name: "Houses for Sale", href: "/search?type=house" },
-      { name: "Flats to Rent", href: "/search?type=flat" },
-      { name: "New Builds", href: "/search?type=newbuild" },
+      { name: "Property for Sale", href: "/search?type=sale" },
+      { name: "Property to Rent", href: "/search?type=rent" },
+      { name: "New Homes", href: "/search?type=newbuild" },
       { name: "Commercial", href: "/search?type=commercial" },
     ],
   },
@@ -17,19 +17,19 @@ const footerLinks = [
     title: "Intelligence",
     links: [
       { name: "Market Reports", href: "/market-data" },
-      { name: "Pricing & Plans", href: "/pricing" },
+      { name: "Free Valuation", href: "/valuation" },
       { name: "Partner Login", href: "/login?role=agent" },
-      { name: "Valuation API", href: "/valuation" },
+      { name: "Become a Partner", href: "/pricing" },
     ],
   },
   {
     title: "Company",
     links: [
       { name: "Our Standard", href: "/about" },
-      { name: "Agent Benefits", href: "/agents" },
       { name: "Partner Network", href: "/agents/directory" },
       { name: "Press Office", href: "/press" },
-      { name: "Contact", href: "/contact" },
+      { name: "Contact Partnership Team", href: "/contact" },
+      { name: "Privacy & Terms", href: "/privacy" },
     ],
   },
 ];
@@ -43,7 +43,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-8">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="bg-gold p-1 rounded-none group-hover:bg-silk transition-colors duration-500">
+              <div className="bg-emerald p-1 rounded-none group-hover:bg-silk transition-colors duration-500">
                 <Building2 className="w-5 h-5 text-obsidian" strokeWidth={1.5} />
               </div>
               <span className="text-lg font-display font-medium tracking-[0.2em] uppercase">
@@ -54,16 +54,15 @@ export function Footer() {
               The UK property portal built for agents, not against them. Providing a faster, fairer way to find your next home.
             </p>
             <div className="flex gap-6">
-              <Globe className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
-              <Shield className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
-              <Mail className="w-4 h-4 text-silk/20 hover:text-gold cursor-pointer transition-colors" />
+              <Mail className="w-4 h-4 text-silk/20 hover:text-emerald cursor-pointer transition-colors" />
+              <Globe className="w-4 h-4 text-silk/20 hover:text-emerald cursor-pointer transition-colors" />
             </div>
           </div>
 
           {/* Links Columns */}
           {footerLinks.map((column) => (
             <div key={column.title} className="space-y-8">
-              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">{column.title}</h4>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-emerald">{column.title}</h4>
               <ul className="space-y-4">
                 {column.links.map((link) => (
                   <li key={link.name}>

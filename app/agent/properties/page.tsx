@@ -57,10 +57,10 @@ export default function AgentProperties() {
       {/* Header */}
       <div className="flex justify-between items-end">
         <div>
-          <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-4 block">Asset Management</span>
+          <span className="text-[10px] font-bold text-emerald uppercase tracking-[0.4em] mb-4 block">Listing Management</span>
           <h1 className="text-display-md font-display leading-tight">My Listings</h1>
         </div>
-        <Button variant="primary">
+        <Button variant="primary" className="bg-emerald text-white hover:bg-forest">
           <Plus className="w-4 h-4 mr-2" />
           List New Property
         </Button>
@@ -99,7 +99,38 @@ export default function AgentProperties() {
                </tr>
             </thead>
             <tbody className="divide-y divide-border/30">
-               {agentProperties.map((prop) => (
+               {[
+                 {
+                   id: "1209",
+                   title: "Park Hall",
+                   price: "£3,250,000",
+                   address: "Parkhall Lane, Derbyshire",
+                   status: "Active",
+                   views: "12.4K",
+                   leads: "14",
+                   image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=400&auto=format&fit=crop"
+                 },
+                 {
+                   id: "1204",
+                   title: "Cuckoostone Grange",
+                   price: "£2,750,000",
+                   address: "Matlock Moor, Matlock",
+                   status: "Active",
+                   views: "8.2K",
+                   leads: "9",
+                   image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=400&auto=format&fit=crop"
+                 },
+                 {
+                   id: "924",
+                   title: "Yew Tree Farm",
+                   price: "£1,495,000",
+                   address: "Walton Back Lane, Chesterfield",
+                   status: "Under Offer",
+                   views: "14.1K",
+                   leads: "22",
+                   image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=400&auto=format&fit=crop"
+                 }
+               ].map((prop) => (
                   <tr key={prop.id} className="group hover:bg-silk/30 transition-all duration-500">
                      <td className="px-8 py-8">
                         <div className="flex items-center gap-6">
@@ -109,7 +140,7 @@ export default function AgentProperties() {
                            <div>
                               <span className="block text-body-md font-bold text-obsidian mb-1">{prop.title}</span>
                               <div className="flex items-center gap-2 text-[10px] text-muted uppercase tracking-widest">
-                                 <MapPin className="w-3 h-3 text-gold" />
+                                 <MapPin className="w-3 h-3 text-emerald" />
                                  {prop.address}
                               </div>
                            </div>
@@ -119,7 +150,7 @@ export default function AgentProperties() {
                         <div className="flex items-center gap-3">
                            <div className={cn(
                               "w-1.5 h-1.5 rounded-full",
-                              prop.status === "Active" ? "bg-emerald" : "bg-gold"
+                              prop.status === "Active" ? "bg-emerald" : "bg-forest"
                            )} />
                            <span className="text-[10px] font-bold uppercase tracking-widest text-obsidian">{prop.status}</span>
                         </div>

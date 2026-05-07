@@ -95,11 +95,11 @@ export function PropertyDetail({ property }: { property: Property }) {
               </div>
             </div>
 
-            <div className="bg-white/95 backdrop-blur-xl p-10 md:p-12 border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.3)] min-w-[380px]">
+            <div className="bg-white/95 backdrop-blur-xl p-10 md:p-12 border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.3)] w-full md:min-w-[380px]">
               <span className="text-[10px] font-bold text-muted uppercase tracking-[0.4em] mb-4 block text-center">
                 Market Value
               </span>
-              <div className="text-[3.5rem] font-display text-obsidian text-center leading-none mb-8">
+              <div className="text-[2.5rem] md:text-[3.5rem] font-display text-obsidian text-center leading-none mb-8">
                 £{property.price.toLocaleString()}
               </div>
               <div className="grid grid-cols-1 gap-4">
@@ -125,12 +125,12 @@ export function PropertyDetail({ property }: { property: Property }) {
       </section>
 
       {/* Content */}
-      <main className="max-w-[1800px] mx-auto px-6 md:px-12 py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-24 items-start">
+      <main className="max-w-[1800px] mx-auto px-6 md:px-12 py-16 md:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24 items-start">
           {/* Main Content Area */}
           <div className="lg:col-span-2">
             {/* Highlights Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/20 border border-border/20 mb-20 overflow-hidden">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border/20 border border-border/20 mb-12 md:mb-20 overflow-hidden">
               {[
                 { icon: Bed, value: property.bedrooms, label: "Bedrooms" },
                 { icon: Bath, value: property.bathrooms, label: "Bathrooms" },
@@ -139,10 +139,10 @@ export function PropertyDetail({ property }: { property: Property }) {
               ].map(({ icon: Icon, value, label }) => (
                 <div
                   key={label}
-                  className="p-10 bg-white text-center group hover:bg-silk transition-colors"
+                  className="p-6 md:p-10 bg-white text-center group hover:bg-silk transition-colors"
                 >
                   <Icon className="w-5 h-5 text-gold mx-auto mb-4 opacity-60 group-hover:opacity-100 transition-opacity" strokeWidth={1.5} />
-                  <span className="block text-display-xs font-display text-obsidian mb-1">
+                  <span className="block text-[20px] md:text-display-xs font-display text-obsidian mb-1">
                     {value}
                   </span>
                   <span className="text-[9px] font-bold text-muted uppercase tracking-[0.2em]">
@@ -153,21 +153,21 @@ export function PropertyDetail({ property }: { property: Property }) {
             </div>
 
             {/* AI Summary Section */}
-            <div className="relative p-12 bg-obsidian text-silk mb-24 overflow-hidden">
+            <div className="relative p-8 md:p-12 bg-obsidian text-silk mb-16 md:mb-24 overflow-hidden">
                <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 blur-[80px] rounded-full -mr-32 -mt-32" />
                <div className="relative z-10">
-                 <div className="flex items-center gap-3 text-gold mb-8">
+                 <div className="flex items-center gap-3 text-gold mb-6 md:mb-8">
                    <ShieldCheck className="w-5 h-5" />
                    <span className="text-[10px] font-bold uppercase tracking-[0.4em]">Nestiq Intelligence Report</span>
                  </div>
-                 <p className="text-display-xs font-display leading-relaxed italic text-silk/90">
+                 <p className="text-[20px] md:text-display-xs font-display leading-relaxed italic text-silk/90">
                    &ldquo;{property.ai_summary || `This ${property.bedrooms}-bedroom property in ${property.town} represents a premier investment opportunity. Our data indicates high market velocity in this specific postcode area, driven by recent local infrastructure improvements and school catchment prestige.`}&rdquo;
                  </p>
                </div>
             </div>
 
             {/* Description Tab Bar */}
-            <div className="flex gap-12 mb-16 border-b border-border/30">
+            <div className="flex gap-8 md:gap-12 mb-12 md:mb-16 border-b border-border/30 overflow-x-auto no-scrollbar whitespace-nowrap">
                {tabs.map(tab => (
                  <button
                    key={tab.id}

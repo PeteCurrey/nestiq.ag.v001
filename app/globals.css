@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  /* Primary - Luxury Institutional Palette */
-  --color-forest: #0B241A; /* Deeper British Racing Green */
-  --color-emerald: #154734; /* Muted Emerald */
+  /* Primary - Nestiq Brand Palette */
+  --color-forest: #1A6B4A;  /* Primary Brand Green */
+  --color-emerald: #2ECC87; /* Accent / CTAs */
   --color-obsidian: #0A0A0A;
-  --color-gold: #C5A059; /* Champagne Gold Accent */
-  --color-silk: #FDFCFB; /* Off-white silk */
+  --color-silk: #FDFCFB;    /* Off-white silk */
 
   /* Neutrals */
   --color-pearl: #F5F5F7;
@@ -16,21 +15,21 @@
   --color-subtle: #9CA3AF;
 
   /* Semantic */
-  --color-success: #065F46;
+  --color-success: #2ECC87;
   --color-warning: #B45309;
   --color-error: #991B1B;
   --color-info: #1E40AF;
 
   /* Property status */
-  --color-for-sale: #0B241A;
+  --color-for-sale: #1A6B4A;
   --color-to-rent: #111827;
   --color-sold: #4B5563;
   --color-let: #374151;
-  --color-new-build: #854D0E;
+  --color-new-build: #1A6B4A;
 
   /* Font Families */
   --font-sans: var(--font-sans), ui-sans-serif, system-ui;
-  --font-display: var(--font-display), ui-serif, serif; /* Favor Serif for display */
+  --font-display: var(--font-display), ui-serif, serif;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
 
   /* Font Sizes */
@@ -72,7 +71,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 500; /* Lighter weight for luxury serifs */
+    font-weight: 500;
     color: var(--color-obsidian);
     letter-spacing: var(--letter-spacing-tight);
   }
@@ -80,15 +79,15 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-forest hover:bg-obsidian text-white font-medium py-4 px-10 rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px];
+    @apply bg-emerald hover:bg-forest text-white font-medium py-4 px-10 rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px];
   }
 
   .btn-secondary {
-    @apply bg-transparent border border-obsidian hover:bg-obsidian hover:text-white text-obsidian font-medium py-4 px-10 rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px];
+    @apply bg-transparent border border-forest hover:bg-forest hover:text-white text-forest font-medium py-4 px-10 rounded-sm transition-all duration-500 uppercase tracking-widest text-[10px];
   }
 
   .hairline {
-    @apply border border-border/50;
+    @apply border border-border/30;
   }
 }
 

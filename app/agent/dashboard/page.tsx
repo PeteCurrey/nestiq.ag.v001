@@ -76,19 +76,19 @@ export default function AgentDashboard() {
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8 md:space-y-12 pb-12">
       {/* Welcome Header */}
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div>
           <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-4 block">Institutional Command</span>
-          <h1 className="text-display-md font-display leading-tight">
+          <h1 className="text-display-sm md:text-display-md font-display leading-tight">
             Welcome back, <br />
             <span className="italic font-normal">{agency?.name || 'Partner Agent'}.</span>
           </h1>
         </div>
-        <div className="flex gap-4">
-           <Button variant="secondary" className="border-border/50">Market Report</Button>
-           <Button variant="primary" href="/agent/listings/new">New Listing</Button>
+        <div className="flex flex-wrap gap-4 w-full md:w-auto">
+           <Button variant="secondary" className="flex-1 md:flex-none border-border/50 text-[10px] h-14">Market Report</Button>
+           <Button variant="primary" href="/agent/listings/new" className="flex-1 md:flex-none h-14 text-[10px]">New Listing</Button>
         </div>
       </div>
 

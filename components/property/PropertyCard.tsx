@@ -61,7 +61,8 @@ export function PropertyCard({
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         onClick={() => router.push(`/property/${property.slug}`)}
-        className="group flex bg-white rounded-none overflow-hidden border border-border/60 hover:border-gold/30 transition-all duration-700 cursor-pointer h-[320px]"
+        onClick={() => router.push(`/property/${property.slug}`)}
+        className="group flex bg-white rounded-none overflow-hidden border border-border/60 hover:border-emerald/30 transition-all duration-700 cursor-pointer h-[320px]"
       >
         {/* Image - 45% */}
         <div className="relative w-[45%] h-full overflow-hidden">
@@ -96,14 +97,14 @@ export function PropertyCard({
             
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-3 text-[10px] font-bold text-obsidian uppercase tracking-widest">
-                <Bed className="w-3.5 h-3.5 text-gold/60" strokeWidth={1.5} /> {property.bedrooms} Bed
+                <Bed className="w-3.5 h-3.5 text-emerald/60" strokeWidth={1.5} /> {property.bedrooms} Bed
               </div>
               <div className="flex items-center gap-3 text-[10px] font-bold text-obsidian uppercase tracking-widest">
-                <Bath className="w-3.5 h-3.5 text-gold/60" strokeWidth={1.5} /> {property.bathrooms} Bath
+                <Bath className="w-3.5 h-3.5 text-emerald/60" strokeWidth={1.5} /> {property.bathrooms} Bath
               </div>
               {property.sqft && (
                 <div className="flex items-center gap-3 text-[10px] font-bold text-obsidian uppercase tracking-widest">
-                  <Move className="w-3.5 h-3.5 text-gold/60" strokeWidth={1.5} /> {property.sqft.toLocaleString()} Sq Ft
+                  <Move className="w-3.5 h-3.5 text-emerald/60" strokeWidth={1.5} /> {property.sqft.toLocaleString()} Sq Ft
                 </div>
               )}
             </div>
@@ -127,7 +128,7 @@ export function PropertyCard({
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
       onClick={() => router.push(`/property/${property.slug}`)}
-      className="group bg-white rounded-none overflow-hidden border border-border/50 hover:border-gold/30 transition-all duration-700 cursor-pointer shadow-sm hover:shadow-xl"
+      className="group bg-white rounded-none overflow-hidden border border-border/50 hover:border-emerald/30 transition-all duration-700 cursor-pointer shadow-sm hover:shadow-xl"
     >
       <div className="relative aspect-[5/4] overflow-hidden">
         <Image
@@ -163,10 +164,10 @@ export function PropertyCard({
         <div className="flex items-center justify-between border-t border-border/40 pt-6">
            <div className="flex items-center gap-6">
               <div className="flex items-center gap-2 text-[10px] font-bold text-obsidian uppercase tracking-widest">
-                <Bed className="w-3 h-3 text-gold/60" strokeWidth={1.5} /> {property.bedrooms}
+                <Bed className="w-3 h-3 text-emerald/60" strokeWidth={1.5} /> {property.bedrooms}
               </div>
               <div className="flex items-center gap-2 text-[10px] font-bold text-obsidian uppercase tracking-widest">
-                <Bath className="w-3 h-3 text-gold/60" strokeWidth={1.5} /> {property.bathrooms}
+                <Bath className="w-3 h-3 text-emerald/60" strokeWidth={1.5} /> {property.bathrooms}
               </div>
            </div>
            <span className="text-[9px] font-bold text-subtle uppercase tracking-[0.2em]">{displayAgency}</span>

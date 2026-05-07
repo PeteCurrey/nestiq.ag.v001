@@ -95,7 +95,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className={cn(
             "p-1 rounded-none transition-colors duration-500",
-            isScrolled ? "bg-obsidian group-hover:bg-forest" : "bg-silk group-hover:bg-gold"
+            isScrolled ? "bg-obsidian group-hover:bg-forest" : "bg-silk group-hover:bg-emerald"
           )}>
             <Building2 className={cn("w-5 h-5 transition-colors duration-500", isScrolled ? "text-silk" : "text-obsidian")} strokeWidth={1.5} />
           </div>
@@ -115,7 +115,7 @@ export function Header() {
               href={link.href}
               className={cn(
                 "text-[12px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
-                isScrolled ? "text-obsidian/60 hover:text-forest" : "text-silk/80 hover:text-gold"
+                isScrolled ? "text-obsidian/60 hover:text-forest" : "text-silk/80 hover:text-emerald"
               )}
             >
               {link.name}
@@ -131,7 +131,7 @@ export function Header() {
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className={cn(
                   "flex items-center justify-center w-8 h-8 rounded-full border transition-all",
-                  isScrolled ? "border-obsidian/20 text-obsidian bg-white hover:border-forest hover:text-forest" : "border-silk/20 text-silk bg-obsidian/20 hover:border-gold hover:text-gold"
+                  isScrolled ? "border-obsidian/20 text-obsidian bg-white hover:border-forest hover:text-forest" : "border-silk/20 text-silk bg-obsidian/20 hover:border-emerald hover:text-emerald"
                 )}
               >
                 <span className="text-xs font-bold">{getInitials(user.email)}</span>

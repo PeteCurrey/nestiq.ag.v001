@@ -72,25 +72,25 @@ export function EditorialHero() {
         </video>
       </div>
 
-      <div className="relative z-20 w-full px-6 md:px-12">
-        <div className="max-w-[1400px] mx-auto pt-20">
+      <div className="relative z-20 w-full px-6 md:px-12 py-20 md:py-32">
+        <div className="max-w-[1400px] mx-auto pt-10 md:pt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="max-w-4xl"
           >
-            <div className="inline-flex items-center gap-4 text-silk font-medium text-[10px] uppercase tracking-[0.5em] mb-10">
-              <div className="w-12 h-px bg-gold" />
-              Search thousands of properties across the UK. Free for buyers and renters, always.
+            <div className="inline-flex items-center gap-4 text-silk font-medium text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] mb-8 md:mb-10">
+              <div className="hidden md:block w-12 h-px bg-emerald" />
+              <span className="leading-relaxed">Search thousands of properties across the UK. <br className="md:hidden" /> Always free for buyers and renters.</span>
             </div>
             
-            <h1 className="text-silk text-[clamp(3rem,8vw,6.5rem)] font-display leading-[0.85] mb-12 tracking-tight">
+            <h1 className="text-silk text-[clamp(2.25rem,10vw,6.5rem)] font-display leading-[0.85] mb-10 md:mb-12 tracking-tight">
               Find Your Next <br />
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="italic font-normal text-gold inline-block"
+                className="italic font-normal text-emerald inline-block"
               >
                 <TypewriterLoop 
                   words={["Home", "Flat", "Rental", "Investment", "Forever Place"]} 
@@ -98,18 +98,18 @@ export function EditorialHero() {
               </motion.span>
             </h1>
 
-            <div className="flex flex-col md:flex-row gap-8 items-start md:items-center mb-24">
-              <div className="flex flex-col border-l border-gold pl-6">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center mb-16 md:mb-24">
+              <div className="flex flex-col border-l border-emerald pl-6">
                 <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Properties Found</span>
-                <span className="text-silk font-display text-3xl">12,400+</span>
+                <span className="text-silk font-display text-2xl md:text-3xl">12,400+</span>
               </div>
               <div className="flex flex-col border-l border-silk/20 pl-6">
                 <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Partner Agents</span>
-                <span className="text-silk font-display text-3xl">800+</span>
+                <span className="text-silk font-display text-2xl md:text-3xl">800+</span>
               </div>
               <div className="flex flex-col border-l border-silk/20 pl-6">
                 <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Market Search</span>
-                <span className="text-silk font-display text-3xl italic">Always Free</span>
+                <span className="text-silk font-display text-2xl md:text-3xl italic">Always Free</span>
               </div>
             </div>
           </motion.div>
@@ -117,27 +117,27 @@ export function EditorialHero() {
       </div>
 
       {/* Hero Search Bar - Institutional Layout */}
-      <div className="absolute bottom-16 left-0 right-0 z-30 px-6 md:px-12">
+      <div className="relative md:absolute md:bottom-16 left-0 right-0 z-30 px-6 md:px-12 pb-16 md:pb-0">
         <div className="max-w-[1400px] mx-auto bg-white shadow-[0_40px_80px_rgba(0,0,0,0.15)] p-1 rounded-none border border-border/10">
           <div className="flex flex-col lg:flex-row items-stretch">
-            <div className="flex-[2] flex items-center px-8 py-7 border-b lg:border-b-0 lg:border-r border-border/30 group">
-              <MapPin className="w-4 h-4 text-gold mr-6 group-hover:scale-110 transition-transform" />
+            <div className="flex-[2] flex items-center px-6 md:px-8 py-5 md:py-7 border-b lg:border-b-0 lg:border-r border-border/30 group">
+              <MapPin className="w-4 h-4 text-emerald mr-4 md:mr-6 group-hover:scale-110 transition-transform" />
               <input 
                 type="text" 
-                placeholder="Search by city, postcode or development name..." 
-                className="w-full bg-transparent border-none focus:outline-none text-body-md font-medium text-obsidian placeholder:text-muted/40 uppercase tracking-widest"
+                placeholder="City, postcode or development..." 
+                className="w-full bg-transparent border-none focus:outline-none text-[11px] md:text-body-md font-medium text-obsidian placeholder:text-muted/40 uppercase tracking-widest"
               />
             </div>
-            <div className="flex-1 flex items-center px-8 py-7 border-b lg:border-b-0 lg:border-r border-border/30 bg-silk/30">
-              <Search className="w-4 h-4 text-gold mr-6" />
-              <select className="w-full bg-transparent border-none focus:outline-none text-body-sm font-bold text-obsidian uppercase tracking-[0.2em] appearance-none cursor-pointer">
+            <div className="flex-1 flex items-center px-6 md:px-8 py-5 md:py-7 border-b lg:border-b-0 lg:border-r border-border/30 bg-silk/30">
+              <Search className="w-4 h-4 text-emerald mr-4 md:mr-6" />
+              <select className="w-full bg-transparent border-none focus:outline-none text-[10px] md:text-body-sm font-bold text-obsidian uppercase tracking-[0.2em] appearance-none cursor-pointer">
                 <option>For Sale</option>
                 <option>To Rent</option>
                 <option>Commercial</option>
                 <option>New Homes</option>
               </select>
             </div>
-            <button className="flex-1 bg-obsidian text-silk px-12 py-7 font-bold uppercase tracking-[0.4em] text-[10px] hover:bg-gold hover:text-silk transition-all duration-700">
+            <button className="flex-1 bg-forest text-silk px-12 py-5 md:py-7 font-bold uppercase tracking-[0.4em] text-[10px] hover:bg-emerald transition-all duration-700">
               Find Property
             </button>
           </div>
