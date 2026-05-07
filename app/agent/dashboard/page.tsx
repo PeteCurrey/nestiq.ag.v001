@@ -1,27 +1,80 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { 
   Users, Building2, Eye, TrendingUp, 
   ArrowUpRight, ArrowDownRight, Clock,
-  Calendar, ChevronRight
+  Calendar, ChevronRight, Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-
-const stats = [
-  { name: "Active Listings", value: "4", change: "+0", type: "neutral", icon: Building2 },
-  { name: "Total Impressions", value: "142.5K", change: "+12.3%", type: "increase", icon: Eye },
-  { name: "Lead Conversions", value: "28", change: "+4.2%", type: "increase", icon: Users },
-  { name: "Market Sentiment", value: "Bullish", change: "-0.5%", type: "decrease", icon: TrendingUp },
-];
-
-const recentLeads = [
-  { id: 1, name: "Alexander Thorne", property: "Park Hall", date: "2 mins ago", value: "£3.25M", status: "High Intent" },
-  { id: 2, name: "Beatrix Vane", property: "Box Farm", date: "45 mins ago", value: "£1.49M", status: "New Enquiry" },
-  { id: 3, name: "Julian Sterling", property: "Yew Tree Farm", date: "3 hours ago", value: "£1.49M", status: "Viewing Requested" },
-];
+import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils/cn";
+import { formatDistanceToNow } from "date-fns";
 
 export default function AgentDashboard() {
+  const [loading, setLoading] = useState(true);
+  const [agency, setAgency] = useState<any>(null);
+  const [leads, setLeads] = useState<any[]>([]);
+  const [stats, setStats] = useState<any[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadData() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Get profile and agency
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('*, agencies(*)')
+        .eq('id', user.id)
+        .single();
+
+      if (profile?.agencies) {
+        setAgency(profile.agencies);
+
+        // Fetch stats
+        const { count: listingsCount } = await supabase
+          .from('properties')
+          .select('*', { count: 'exact', head: true })
+          .eq('agency_id', profile.agencies.id);
+
+        const { count: leadsCount } = await supabase
+          .from('enquiries')
+          .select('*', { count: 'exact', head: true })
+          .eq('agency_id', profile.agencies.id);
+
+        setStats([
+          { name: "Active Listings", value: listingsCount?.toString() || "0", change: "+0", type: "neutral", icon: Building2 },
+          { name: "Total Impressions", value: "14.2K", change: "+12.3%", type: "increase", icon: Eye },
+          { name: "Lead Conversions", value: leadsCount?.toString() || "0", change: "+4.2%", type: "increase", icon: Users },
+          { name: "Market Sentiment", value: "Bullish", change: "-0.5%", type: "decrease", icon: TrendingUp },
+        ]);
+
+        // Fetch recent leads
+        const { data: recentEnquiries } = await supabase
+          .from('enquiries')
+          .select('*, properties(title, price)')
+          .eq('agency_id', profile.agencies.id)
+          .order('created_at', { ascending: false })
+          .limit(5);
+
+        setLeads(recentEnquiries || []);
+      }
+      setLoading(false);
+    }
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="h-[60vh] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-gold animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-12">
       {/* Welcome Header */}
@@ -30,12 +83,12 @@ export default function AgentDashboard() {
           <span className="text-[10px] font-bold text-gold uppercase tracking-[0.4em] mb-4 block">Institutional Command</span>
           <h1 className="text-display-md font-display leading-tight">
             Welcome back, <br />
-            <span className="italic font-normal">Dales & Peaks.</span>
+            <span className="italic font-normal">{agency?.name || 'Partner Agent'}.</span>
           </h1>
         </div>
         <div className="flex gap-4">
            <Button variant="secondary" className="border-border/50">Market Report</Button>
-           <Button variant="primary">New Listing</Button>
+           <Button variant="primary" href="/agent/listings/new">New Listing</Button>
         </div>
       </div>
 
@@ -69,22 +122,24 @@ export default function AgentDashboard() {
             <button className="text-[10px] font-bold text-gold uppercase tracking-widest hover:text-forest transition-colors">View All Leads</button>
           </div>
           <div className="divide-y divide-border/30">
-            {recentLeads.map((lead) => (
+            {leads.length > 0 ? leads.map((lead) => (
               <div key={lead.id} className="p-8 flex items-center justify-between group hover:bg-silk/40 transition-all duration-500">
                 <div className="flex items-center gap-6">
                   <div className="w-12 h-12 bg-silk border border-border/40 flex items-center justify-center font-display text-lg text-gold group-hover:bg-gold group-hover:text-silk transition-all duration-500">
-                    {lead.name.charAt(0)}
+                    {lead.full_name?.charAt(0)}
                   </div>
                   <div>
-                    <span className="block text-body-md font-bold text-obsidian">{lead.name}</span>
-                    <span className="text-[10px] text-muted uppercase tracking-widest">{lead.property} • {lead.value}</span>
+                    <span className="block text-body-md font-bold text-obsidian">{lead.full_name}</span>
+                    <span className="text-[10px] text-muted uppercase tracking-widest">
+                      {lead.properties?.title} • £{lead.properties?.price?.toLocaleString()}
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center gap-12">
                    <div className="hidden md:block text-right">
                       <span className="block text-[10px] font-bold text-gold uppercase tracking-widest mb-1">{lead.status}</span>
                       <span className="flex items-center gap-2 text-[9px] text-muted uppercase tracking-widest">
-                        <Clock className="w-3 h-3" /> {lead.date}
+                        <Clock className="w-3 h-3" /> {formatDistanceToNow(new Date(lead.created_at))} ago
                       </span>
                    </div>
                    <button className="p-2 border border-border/40 hover:bg-obsidian hover:text-silk transition-all">
@@ -92,7 +147,11 @@ export default function AgentDashboard() {
                    </button>
                 </div>
               </div>
-            ))}
+            )) : (
+              <div className="p-20 text-center text-muted uppercase tracking-widest text-[10px] font-bold">
+                No intelligence items currently available
+              </div>
+            )}
           </div>
         </div>
 
@@ -108,11 +167,6 @@ export default function AgentDashboard() {
                     <span className="block text-[9px] text-gold uppercase tracking-widest mb-2">Today, 14:30</span>
                     <span className="block text-body-sm font-bold mb-1 uppercase tracking-wider">Park Hall</span>
                     <span className="text-[9px] text-silk/40 uppercase tracking-widest">Viewing with Lord Harwood</span>
-                 </div>
-                 <div className="p-6 bg-white/5 border border-white/10 hover:border-gold/30 transition-all cursor-pointer">
-                    <span className="block text-[9px] text-gold uppercase tracking-widest mb-2">Tomorrow, 10:00</span>
-                    <span className="block text-body-sm font-bold mb-1 uppercase tracking-wider">Box Farm</span>
-                    <span className="text-[9px] text-silk/40 uppercase tracking-widest">Initial Appraisal</span>
                  </div>
               </div>
            </div>
@@ -131,8 +185,4 @@ export default function AgentDashboard() {
       </div>
     </div>
   );
-}
-
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(" ");
 }

@@ -6,66 +6,18 @@ import { PropertyTypeGrid } from "@/components/home/PropertyTypeGrid";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, TrendingUp, Globe, Shield } from "lucide-react";
 
-const featuredProperties = [
-  {
-    id: "1209",
-    slug: "parkhall-lane-spinkhill-sheffield",
-    title: "Park Hall Stately Residence",
-    price: 3250000,
-    address: "Parkhall Lane, Spinkhill, Sheffield, S21",
-    bedrooms: 9,
-    bathrooms: 7,
-    sqft: 16006,
-    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/C0aPq4B4PEClE8FmDhVChg.jpg",
-    status: "for-sale" as const,
-    featured: true,
-    agencyName: "Dales & Peaks"
-  },
-  {
-    id: "1204",
-    slug: "chesterfield-road-matlock-moor-matlock",
-    title: "Cuckoostone Grange Estate",
-    price: 2750000,
-    address: "Chesterfield Road, Matlock Moor, Matlock",
-    bedrooms: 13,
-    bathrooms: 11,
-    sqft: 8500,
-    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/v_K_1bV8mkm4A6lM067Y0A.jpg",
-    status: "for-sale" as const,
-    featured: true,
-    agencyName: "Dales & Peaks"
-  },
-  {
-    id: "924",
-    slug: "walton-back-lane-walton-chesterfield",
-    title: "Contemporary Detached Masterpiece",
-    price: 1495000,
-    address: "Walton Back Lane, Walton, Chesterfield",
-    bedrooms: 5,
-    bathrooms: 4,
-    sqft: 3000,
-    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/9p_3-1PT4kmTVmyz6P73-w.jpg",
-    status: "for-sale" as const,
-    featured: true,
-    agencyName: "Dales & Peaks"
-  },
-  {
-    id: "1214",
-    slug: "northedge-lane-tupton-chesterfield",
-    title: "Architectural Rural Residence",
-    price: 1495000,
-    address: "Northedge Lane, Tupton, Chesterfield",
-    bedrooms: 4,
-    bathrooms: 3,
-    sqft: 4200,
-    imageUrl: "https://alto-live.s3.amazonaws.com/YinTGGgENeIQ2WUY9Pxr8DkOPKw/Wn53RYR2c1d9iSAZJEAEK_jJs4U/Photo/[3]/DRZGR1I64kqALacXcrdkPA.jpg",
-    status: "for-sale" as const,
-    featured: true,
-    agencyName: "Dales & Peaks"
-  }
-];
+import { createClient } from "@/lib/supabase/server";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: featuredProperties } = await supabase
+    .from('properties')
+    .select('*, property_images(url, sort_order), agencies(name, logo_url)')
+    .eq('featured', true)
+    .eq('status', 'active')
+    .limit(3);
+
+  const safeProperties = (featuredProperties || []) as any[];
   return (
     <div className="flex flex-col bg-pearl">
       <EditorialHero />
@@ -114,8 +66,8 @@ export default function Home() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {featuredProperties.map((prop) => (
-            <PropertyCard key={prop.id} property={prop as any} />
+          {safeProperties.map((prop) => (
+            <PropertyCard key={prop.id} property={prop} />
           ))}
         </div>
       </section>

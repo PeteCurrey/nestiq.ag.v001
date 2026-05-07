@@ -1,110 +1,133 @@
+import { createClient } from "@/lib/supabase/server";
+import { notFound } from "next/navigation";
 import { SearchFilters } from "@/components/search/SearchFilters";
 import { PropertyCard } from "@/components/property/PropertyCard";
-import { SearchMap } from "@/components/search/SearchMap";
 import { Badge } from "@/components/ui/Badge";
-import { MapPin, Info, TrendingUp, Home } from "lucide-react";
+import { MapPin, Info, TrendingUp, Home, Building2 } from "lucide-react";
 import Link from "next/link";
 
-// This is the core Programmatic SEO handler for ~130k combinations
-// Supported paths: 
-// /properties-for-sale/[county]
-// /properties-for-sale/[county]/[town]
-// /houses-for-sale-in-[town]
-// /flats-to-rent-in-[town]
-
 interface LocationPageProps {
-  params: {
+  params: Promise<{
     slug: string[];
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: LocationPageProps) {
-  const slug = params.slug.join(' ');
-  // Logic to parse slug into human readable: "Houses for sale in Leeds"
-  const title = `Properties for Sale in ${slug.charAt(0).toUpperCase() + slug.slice(1)} | Nestiq`;
-  const description = `Browse the latest property listings in ${slug}. Find houses, flats, and bungalows for sale from top local agents.`;
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
+  const currentSlug = slug.join('/');
+  const supabase = await createClient();
   
+  const { data: page } = await supabase
+    .from('location_pages')
+    .select('*')
+    .eq('slug', currentSlug)
+    .single();
+
+  if (!page) return { title: 'Properties for Sale | Nestiq' };
+
   return {
-    title,
-    description,
-    alternates: {
-       canonical: `https://nestiq.avorria.com/properties-for-sale/${params.slug.join('/')}`
-    }
+    title: page.meta_title || `${page.h1} | Nestiq`,
+    description: page.meta_description,
   };
 }
 
-export default function LocationPage({ params }: LocationPageProps) {
-  const locationName = params.slug[params.slug.length - 1].replace(/-/g, ' ');
-  const capitalizedLocation = locationName.charAt(0).toUpperCase() + locationName.slice(1);
+export default async function LocationPage({ params }: LocationPageProps) {
+  const { slug } = await params;
+  const currentSlug = slug.join('/');
+  const supabase = await createClient();
+
+  const { data: page } = await supabase
+    .from('location_pages')
+    .select('*')
+    .eq('slug', currentSlug)
+    .single();
+
+  if (!page) {
+    notFound();
+  }
+
+  // Fetch properties for this location (simplified logic for now)
+  const town = page.town || page.h1.split(' ').pop();
+  const { data: properties } = await supabase
+    .from('properties')
+    .select('*, property_images(*), agencies(*)')
+    .ilike('town', `%${town}%`)
+    .limit(10);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-silk">
       <SearchFilters />
       
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
         
         {/* Results Side */}
-        <div className="w-full lg:w-[60%] overflow-y-auto px-4 py-12 bg-pearl">
-           <div className="max-w-[800px] mx-auto">
+        <div className="w-full lg:w-[60%] overflow-y-auto px-4 py-16 bg-pearl">
+           <div className="max-w-[850px] mx-auto">
               
               {/* Breadcrumbs */}
-              <nav className="flex gap-2 text-[10px] font-bold uppercase tracking-widest text-muted mb-8">
-                 <Link href="/">Home</Link> <span>/</span> 
-                 <Link href="/search">Search</Link> <span>/</span> 
-                 <span className="text-forest">{capitalizedLocation}</span>
+              <nav className="flex gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-muted mb-12">
+                 <Link href="/" className="hover:text-gold transition-colors">Home</Link> 
+                 <span className="opacity-30">/</span> 
+                 <Link href="/search" className="hover:text-gold transition-colors">Search</Link> 
+                 <span className="opacity-30">/</span> 
+                 <span className="text-forest">{page.h1}</span>
               </nav>
 
               {/* SEO Content Header */}
-              <div className="mb-12">
-                 <h1 className="text-display-md font-display font-extrabold text-obsidian mb-4">
-                    Properties for Sale in <span className="text-forest">{capitalizedLocation}</span>
+              <div className="mb-20">
+                 <h1 className="text-display-md font-display font-extrabold text-obsidian mb-8 leading-[1.1]">
+                    {page.h1}
                  </h1>
-                 <p className="text-body-lg text-muted leading-relaxed">
-                    Explore 1,240+ homes currently on the market in {capitalizedLocation}. 
-                    From luxury city centre apartments to spacious family homes in the suburbs, 
-                    Nestiq brings you the most comprehensive property data in Yorkshire.
-                 </p>
+                 <div className="prose prose-lg prose-forest max-w-none text-muted leading-relaxed">
+                    <p className="whitespace-pre-line">{page.content || `Discover the finest properties in ${town}. From characterful conversions to modern architectural statements, our curated collection showcases the best of local living.`}</p>
+                 </div>
               </div>
 
-              {/* Market Quick Stats */}
-              <div className="grid grid-cols-3 gap-6 mb-12">
-                 <div className="bg-white p-6 rounded-2xl border border-border shadow-sm">
-                    <p className="text-[10px] font-bold text-muted uppercase tracking-widest mb-1">Avg. House Price</p>
-                    <p className="text-body-lg font-display font-bold text-obsidian">£245,000</p>
-                    <div className="flex items-center gap-1 text-emerald text-[10px] font-bold mt-1">
-                       <TrendingUp className="w-3 h-3" /> +4.2%
+              {/* Market Intelligence */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                 <div className="bg-white p-10 border border-border/40 shadow-sm group hover:border-gold/30 transition-all">
+                    <p className="text-[10px] font-bold text-muted uppercase tracking-[0.3em] mb-4">Market Velocity</p>
+                    <p className="text-display-xs font-display text-obsidian">High</p>
+                    <div className="flex items-center gap-1 text-emerald text-[10px] font-bold mt-4">
+                       <TrendingUp className="w-3 h-3" /> Demand up 12%
                     </div>
                  </div>
-                 <div className="bg-white p-6 rounded-2xl border border-border shadow-sm">
-                    <p className="text-[10px] font-bold text-muted uppercase tracking-widest mb-1">Total Listings</p>
-                    <p className="text-body-lg font-display font-bold text-obsidian">1,240</p>
-                    <p className="text-[10px] text-muted font-bold mt-1 uppercase">Active today</p>
+                 <div className="bg-white p-10 border border-border/40 shadow-sm">
+                    <p className="text-[10px] font-bold text-muted uppercase tracking-[0.3em] mb-4">Total Listings</p>
+                    <p className="text-display-xs font-display text-obsidian">{properties?.length || 0}</p>
+                    <p className="text-[10px] text-muted font-bold mt-4 uppercase tracking-widest">Active today</p>
                  </div>
-                 <div className="bg-white p-6 rounded-2xl border border-border shadow-sm">
-                    <p className="text-[10px] font-bold text-muted uppercase tracking-widest mb-1">Demand Score</p>
-                    <p className="text-body-lg font-display font-bold text-forest">High</p>
-                    <p className="text-[10px] text-muted font-bold mt-1 uppercase">Top 10% in UK</p>
+                 <div className="bg-obsidian p-10 text-silk shadow-xl">
+                    <p className="text-[10px] font-bold text-silk/40 uppercase tracking-[0.3em] mb-4">Nestiq Score</p>
+                    <p className="text-display-xs font-display text-gold">9.4/10</p>
+                    <p className="text-[10px] text-silk/40 font-bold mt-4 uppercase tracking-widest">Investment Grade</p>
                  </div>
               </div>
 
               {/* Results Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                 {/* This would be dynamically fetched via Algolia/Supabase based on location */}
-                 <PropertyCard property={mockProp1 as any} />
-                 <PropertyCard property={mockProp2 as any} />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20">
+                 {properties && properties.length > 0 ? (
+                   properties.map(prop => (
+                     <PropertyCard key={prop.id} property={prop as any} />
+                   ))
+                 ) : (
+                   <div className="col-span-full py-20 text-center bg-warm border border-dashed border-border/60">
+                      <p className="text-[10px] font-bold text-muted uppercase tracking-[0.4em]">No listings match this specific catch-all route yet</p>
+                   </div>
+                 )}
               </div>
 
-              {/* Internal Linking / SEO Footer */}
-              <div className="bg-warm p-10 rounded-3xl border border-border">
-                 <h3 className="text-body-lg font-display font-bold text-obsidian mb-6">Nearby Locations</h3>
-                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {['Headingley', 'Chapel Allerton', 'Roundhay', 'Horsforth', 'Otley', 'Wetherby'].map(loc => (
+              {/* Internal Linking */}
+              <div className="bg-white p-12 border border-border/40">
+                 <h3 className="text-body-lg font-display font-bold text-obsidian mb-10 uppercase tracking-wider">Explore Nearby</h3>
+                 <div className="grid grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-12">
+                    {['Chesterfield', 'Matlock', 'Sheffield', 'Dronfield', 'Derbyshire', 'Peak District'].map(loc => (
                        <Link 
                          key={loc} 
-                         href={`/properties-for-sale/${loc.toLowerCase()}`}
-                         className="text-body-sm text-muted hover:text-forest font-medium transition-colors"
+                         href={`/properties-for-sale/${loc.toLowerCase().replace(/ /g, '-')}`}
+                         className="text-[11px] font-bold text-muted hover:text-gold uppercase tracking-[0.2em] transition-colors"
                        >
-                          Properties in {loc}
+                          {loc}
                        </Link>
                     ))}
                  </div>
@@ -112,15 +135,14 @@ export default function LocationPage({ params }: LocationPageProps) {
            </div>
         </div>
 
-        {/* Map Side */}
-        <div className="hidden lg:block lg:w-[40%] h-[calc(100vh-130px)] sticky top-[130px]">
-           <SearchMap properties={[]} />
+        {/* Map View */}
+        <div className="hidden lg:block lg:w-[40%] h-[calc(100vh-130px)] sticky top-[130px] border-l border-border/20">
+           <div className="w-full h-full bg-silk flex items-center justify-center">
+              <p className="text-[10px] font-bold text-muted uppercase tracking-widest">Map view localized to {town}</p>
+           </div>
         </div>
 
       </div>
     </div>
   );
 }
-
-const mockProp1 = { id: "1", slug: "test-1", title: "Modern Apartment", price: 250000, address: "Leeds LS1", bedrooms: 2, bathrooms: 1, sqft: 850, imageUrl: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800", status: "for-sale" };
-const mockProp2 = { id: "2", slug: "test-2", title: "Family House", price: 450000, address: "Leeds LS6", bedrooms: 3, bathrooms: 2, sqft: 1400, imageUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800", status: "for-sale" };

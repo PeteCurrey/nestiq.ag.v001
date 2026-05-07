@@ -114,7 +114,7 @@ export function Header() {
               key={link.name}
               href={link.href}
               className={cn(
-                "text-[10px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
+                "text-[12px] font-bold uppercase tracking-[0.25em] transition-colors duration-500",
                 isScrolled ? "text-obsidian/60 hover:text-forest" : "text-silk/80 hover:text-gold"
               )}
             >
@@ -180,7 +180,7 @@ export function Header() {
                 size="sm" 
                 onClick={() => router.push('/login')}
                 className={cn(
-                  "text-[9px] uppercase tracking-[0.2em] font-bold border px-6",
+                  "text-[10px] uppercase tracking-[0.2em] font-bold border px-6",
                   isScrolled ? "border-obsidian/20 text-obsidian hover:bg-obsidian/5" : "border-silk/20 text-silk hover:bg-silk/10"
                 )}
               >
@@ -190,7 +190,7 @@ export function Header() {
                 variant="primary" 
                 size="sm" 
                 onClick={() => router.push('/agents')}
-                className="text-[9px] uppercase tracking-[0.2em] font-bold bg-emerald text-white hover:bg-emerald/90 border-none px-6"
+                className="text-[10px] uppercase tracking-[0.2em] font-bold bg-emerald text-white hover:bg-emerald/90 border-none px-6"
               >
                 Partner With Us
               </Button>

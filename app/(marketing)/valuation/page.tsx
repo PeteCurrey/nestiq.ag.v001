@@ -157,7 +157,7 @@ export default function ValuationPage() {
                   Instant AI Valuation <ArrowRight className="ml-3 w-4 h-4" />
                 </Button>
                 <p className="text-[10px] text-white/40 font-bold uppercase tracking-[0.2em]">
-                  Not an agent? Request a free valuation and we'll connect you with a local Nestiq partner agent.
+                  Not an estate agent? Request a free valuation and we'll connect you with a local Nestiq partner agent.
                 </p>
               </div>
             </motion.div>

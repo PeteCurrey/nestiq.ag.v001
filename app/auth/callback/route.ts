@@ -12,16 +12,26 @@ export async function GET(request: Request) {
     const supabase = await createClient()
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      const forwardedHost = request.headers.get('x-forwarded-host') // i.e. vercel.com
-      const isLocalEnv = process.env.NODE_ENV === 'development'
-      if (isLocalEnv) {
-        // we can skip health check or any other checks in local development
-        return NextResponse.redirect(`${origin}${next}`)
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`)
-      } else {
-        return NextResponse.redirect(`${origin}${next}`)
+      const { data: { user } } = await supabase.auth.getUser()
+      let redirectTo = next
+
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role, onboarding_completed')
+          .eq('id', user.id)
+          .single()
+
+        if (profile?.role === 'agent' && !profile.onboarding_completed) {
+          redirectTo = '/agent/onboarding'
+        }
       }
+
+      const forwardedHost = request.headers.get('x-forwarded-host')
+      const isLocalEnv = process.env.NODE_ENV === 'development'
+      
+      const baseUrl = isLocalEnv ? origin : (forwardedHost ? `https://${forwardedHost}` : origin)
+      return NextResponse.redirect(`${baseUrl}${redirectTo}`)
     }
   }
 

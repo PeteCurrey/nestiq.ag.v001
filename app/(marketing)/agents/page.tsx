@@ -60,7 +60,7 @@ export default function AgentMarketingPage() {
               transition={{ delay: 0.2 }}
               className="text-white/50 text-body-xl mb-12 max-w-xl leading-relaxed"
             >
-              NestIQ is the first UK property portal that prioritizes independent agents. No hidden fees, no data harvesting, and a platform designed to win you instructions.
+              Nestiq is an estate agent platform. Properties are listed exclusively by our verified partner agencies. We prioritize independent agents with a platform designed to win you instructions.
             </motion.p>
             
             <motion.div
