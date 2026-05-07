@@ -90,7 +90,8 @@ export function PropertyDetail({ property }: { property: Property }) {
                 {property.title}
               </h1>
               <div className="flex items-center gap-3 text-white/70 text-body-lg font-medium tracking-wide">
-                <MapPin className="w-5 h-5 text-gold" strokeWidth={2} />
+              <div className="flex items-center gap-3 text-white/70 text-body-lg font-medium tracking-wide">
+                <MapPin className="w-5 h-5 text-emerald" strokeWidth={2} />
                 {property.address_line1}, {property.town}
               </div>
             </div>
@@ -141,7 +142,7 @@ export function PropertyDetail({ property }: { property: Property }) {
                   key={label}
                   className="p-6 md:p-10 bg-white text-center group hover:bg-silk transition-colors"
                 >
-                  <Icon className="w-5 h-5 text-gold mx-auto mb-4 opacity-60 group-hover:opacity-100 transition-opacity" strokeWidth={1.5} />
+                  <Icon className="w-5 h-5 text-emerald mx-auto mb-4 opacity-60 group-hover:opacity-100 transition-opacity" strokeWidth={1.5} />
                   <span className="block text-[20px] md:text-display-xs font-display text-obsidian mb-1">
                     {value}
                   </span>
@@ -154,9 +155,9 @@ export function PropertyDetail({ property }: { property: Property }) {
 
             {/* AI Summary Section */}
             <div className="relative p-8 md:p-12 bg-obsidian text-silk mb-16 md:mb-24 overflow-hidden">
-               <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 blur-[80px] rounded-full -mr-32 -mt-32" />
+               <div className="absolute top-0 right-0 w-64 h-64 bg-emerald/5 blur-[80px] rounded-full -mr-32 -mt-32" />
                <div className="relative z-10">
-                 <div className="flex items-center gap-3 text-gold mb-6 md:mb-8">
+                 <div className="flex items-center gap-3 text-emerald mb-6 md:mb-8">
                    <ShieldCheck className="w-5 h-5" />
                    <span className="text-[10px] font-bold uppercase tracking-[0.4em]">Nestiq Intelligence Report</span>
                  </div>
@@ -178,7 +179,7 @@ export function PropertyDetail({ property }: { property: Property }) {
                    )}
                  >
                    {tab.label}
-                   {activeTab === tab.id && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold" />}
+                   {activeTab === tab.id && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald" />}
                  </button>
                ))}
             </div>
@@ -236,7 +237,7 @@ export function PropertyDetail({ property }: { property: Property }) {
                   {property.agencies?.logo_url ? (
                     <img src={property.agencies.logo_url} className="w-full h-full object-contain p-2" alt={property.agencies.name} />
                   ) : (
-                    <Building2 className="w-8 h-8 text-gold" />
+                    <Building2 className="w-8 h-8 text-emerald" />
                   )}
                 </div>
                 <div>
@@ -263,7 +264,7 @@ export function PropertyDetail({ property }: { property: Property }) {
             {/* Mortgage Insight */}
             <div className="p-10 bg-silk border border-border/40 space-y-8">
                <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-obsidian flex items-center gap-2">
-                 <TrendingUp className="w-4 h-4 text-gold" /> Finance Insight
+                 <TrendingUp className="w-4 h-4 text-emerald" /> Finance Insight
                </h4>
                <div className="space-y-6">
                  <div>
@@ -330,28 +331,28 @@ function EnquiryForm({ propertyId, agencyId }: { propertyId: string; agencyId: s
           required 
           name="fullName" 
           placeholder="FULL NAME" 
-          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-gold/30 transition-all"
+          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-emerald/30 transition-all"
         />
         <input 
           required 
           type="email" 
           name="email" 
           placeholder="EMAIL ADDRESS" 
-          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-gold/30 transition-all"
+          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-emerald/30 transition-all"
         />
         <input 
           required 
           type="tel" 
           name="phone" 
           placeholder="PHONE NUMBER" 
-          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-gold/30 transition-all"
+          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-emerald/30 transition-all"
         />
         <textarea 
           required 
           name="message" 
           rows={4} 
           placeholder="YOUR MESSAGE..." 
-          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-gold/30 transition-all resize-none"
+          className="w-full bg-silk border-none px-6 py-4 text-[10px] font-bold uppercase tracking-widest outline-none focus:ring-1 focus:ring-emerald/30 transition-all resize-none"
         />
       </div>
       <Button 
@@ -393,7 +394,7 @@ function ImageGallery({ images }: { images: string[] }) {
            </div>
            <button
              onClick={(e) => { e.stopPropagation(); setCurrent((prev) => (prev + 1) % images.length); }}
-             className="bg-white/95 backdrop-blur-xl p-5 rounded-full shadow-2xl hover:bg-gold hover:text-white transition-all duration-500 group/btn"
+             className="bg-white/95 backdrop-blur-xl p-5 rounded-full shadow-2xl hover:bg-emerald hover:text-white transition-all duration-500 group/btn"
            >
              <ChevronRight className="w-6 h-6 group-hover/btn:translate-x-1 transition-transform" />
            </button>
