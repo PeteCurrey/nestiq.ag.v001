@@ -8,8 +8,40 @@ import {
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
+
+function TypewriterLoop({ words }: { words: string[] }) {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [speed, setSpeed] = useState(150);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const fullText = words[index];
+      setText(
+        isDeleting
+          ? fullText.substring(0, text.length - 1)
+          : fullText.substring(0, text.length + 1)
+      );
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % words.length);
+      }
+
+      setSpeed(isDeleting ? 75 : 150);
+    };
+
+    const timer = setTimeout(handleTyping, speed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, index, words, speed]);
+
+  return <span>{text}</span>;
+}
 
 export default function AgentMarketingPage() {
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
@@ -26,71 +58,91 @@ export default function AgentMarketingPage() {
   return (
     <div className="bg-silk min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[85vh] flex items-center overflow-hidden bg-obsidian">
-        <div className="absolute inset-0 z-0 opacity-50">
-          <motion.img 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2400&auto=format&fit=crop" 
-            className="w-full h-full object-cover grayscale brightness-50"
-            alt="Modern Agency Hub"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-transparent" />
+      <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-stone-900">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-obsidian/75 via-obsidian/40 to-obsidian/65 z-10" />
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop"
+            key="hero-waves-video"
+            className="w-full h-full object-cover scale-[1.04] object-center"
+          >
+            <source
+              src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4"
+              type="video/mp4"
+            />
+            <source
+              src="https://videos.pexels.com/video-files/6474855/6474855-uhd_3840_2160_25fps.mp4"
+              type="video/mp4"
+            />
+          </video>
         </div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full">
-          <div className="max-w-3xl">
+
+        <div className="relative z-20 w-full px-6 md:px-12 py-20 md:py-32">
+          <div className="max-w-[1400px] mx-auto pt-10 md:pt-20">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-3 px-4 py-2 bg-emerald/10 border border-emerald/20 rounded-full mb-8"
-            >
-              <Building2 className="w-4 h-4 text-emerald" />
-              <span className="text-[10px] font-bold text-emerald uppercase tracking-[0.5em]">Agent Growth Platform</span>
-            </motion.div>
-            
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-white text-[clamp(2.5rem,6vw,5.5rem)] font-display leading-[1.05] mb-8"
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="max-w-4xl"
             >
-              The fairer property portal for <span className="italic font-normal text-emerald">independent agents.</span>
-            </motion.h1>
-            
-            <motion.p 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-white/70 text-body-xl mb-12 max-w-xl leading-relaxed"
-            >
-              List properties, capture better leads, reduce portal dependency, and keep total control of your data.
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-6"
-            >
-              <Button 
-                variant="primary" 
-                size="lg" 
-                onClick={() => document.getElementById('founding-programme')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-emerald text-obsidian hover:bg-white px-12 h-16 text-[11px] font-bold uppercase tracking-[0.3em] transition-all"
-              >
-                Join Founding Programme <ArrowRight className="ml-3 w-4 h-4" />
-              </Button>
-              <Link href="/portal-cost-calculator">
-                <Button 
-                  variant="secondary" 
-                  size="lg" 
-                  className="border-white/20 text-white hover:bg-white/5 px-12 h-16 text-[11px] font-bold uppercase tracking-[0.3em]"
+              <div className="inline-flex items-center gap-4 text-silk font-medium text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] mb-8 md:mb-10">
+                <div className="hidden md:block w-12 h-px bg-emerald" />
+                <span className="leading-relaxed">Now Onboarding Founding Partner Agencies</span>
+              </div>
+              
+              <h1 className="text-silk text-[clamp(2.25rem,6vw,4.5rem)] font-display leading-[1.05] mb-8 tracking-tight">
+                The fair property portal for <br />
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="italic font-normal text-emerald inline-block"
                 >
-                  Compare Portal Costs
+                  <TypewriterLoop 
+                    words={["independent estate agents.", "letting agents.", "new homes developers."]} 
+                  />
+                </motion.span>
+              </h1>
+              
+              <p className="text-silk/80 text-body-xl max-w-2xl leading-relaxed mb-12">
+                A smarter way to list, search, nurture leads and reduce portal dependency.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-16 md:mb-24">
+                <Button 
+                  variant="primary" 
+                  onClick={() => document.getElementById('founding-programme')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="bg-emerald text-obsidian hover:bg-emerald/90 border-none px-8 py-4"
+                >
+                  Join the Founding Agent Programme
                 </Button>
-              </Link>
+                <Button 
+                  variant="outline" 
+                  href="/fair-portal-charter"
+                  className="border-silk/30 text-silk hover:bg-silk/10 hover:border-silk px-8 py-4"
+                >
+                  View the Fair Portal Charter
+                </Button>
+              </div>
+
+              <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
+                <div className="flex flex-col border-l border-emerald pl-6">
+                  <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Status</span>
+                  <span className="text-silk font-display text-xl md:text-2xl italic">Beta</span>
+                </div>
+                <div className="flex flex-col border-l border-silk/20 pl-6">
+                  <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Model</span>
+                  <span className="text-silk font-display text-xl md:text-2xl">Fairer Pricing</span>
+                </div>
+                <div className="flex flex-col border-l border-silk/20 pl-6">
+                  <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Data</span>
+                  <span className="text-silk font-display text-xl md:text-2xl">Agent-Owned</span>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>

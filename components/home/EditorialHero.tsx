@@ -84,55 +84,55 @@ export function EditorialHero() {
           >
             <div className="inline-flex items-center gap-4 text-silk font-medium text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] mb-8 md:mb-10">
               <div className="hidden md:block w-12 h-px bg-emerald" />
-              <span className="leading-relaxed">Now Onboarding Founding Partner Agencies</span>
+              <span className="leading-relaxed">Find your next home with confidence</span>
             </div>
             
             <h1 className="text-silk text-[clamp(2.25rem,6vw,4.5rem)] font-display leading-[1.05] mb-8 tracking-tight">
-              The fair property portal for <br />
+              A smarter way to search for <br />
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="italic font-normal text-emerald inline-block"
               >
                 <TypewriterLoop 
-                  words={["independent estate agents.", "letting agents.", "new homes developers."]} 
+                  words={["houses for sale.", "flats to rent.", "new build homes.", "commercial property."]} 
                 />
               </motion.span>
             </h1>
             
             <p className="text-silk/80 text-body-xl max-w-2xl leading-relaxed mb-12">
-              A smarter way to list, search, nurture leads and reduce portal dependency.
+              Connect with verified local independent agents and uncover properties before they hit the mass market.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-16 md:mb-24">
               <Button 
                 variant="primary" 
-                href="/agents"
+                href="/properties-for-sale"
                 className="bg-emerald text-obsidian hover:bg-emerald/90 border-none px-8 py-4"
               >
-                Join the Founding Agent Programme
+                Browse Properties
               </Button>
               <Button 
                 variant="outline" 
-                href="/fair-portal-charter"
+                href="/tools"
                 className="border-silk/30 text-silk hover:bg-silk/10 hover:border-silk px-8 py-4"
               >
-                View the Fair Portal Charter
+                Explore Consumer Tools
               </Button>
             </div>
 
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
               <div className="flex flex-col border-l border-emerald pl-6">
                 <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Status</span>
-                <span className="text-silk font-display text-xl md:text-2xl italic">Beta</span>
+                <span className="text-silk font-display text-xl md:text-2xl italic">Live Beta</span>
               </div>
               <div className="flex flex-col border-l border-silk/20 pl-6">
-                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Model</span>
-                <span className="text-silk font-display text-xl md:text-2xl">Fairer Pricing</span>
+                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Listings</span>
+                <span className="text-silk font-display text-xl md:text-2xl">Verified Agents</span>
               </div>
               <div className="flex flex-col border-l border-silk/20 pl-6">
-                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Data</span>
-                <span className="text-silk font-display text-xl md:text-2xl">Agent-Owned</span>
+                <span className="text-silk/60 text-[9px] font-bold uppercase tracking-[0.3em] mb-1">Focus</span>
+                <span className="text-silk font-display text-xl md:text-2xl">Hyper-Local</span>
               </div>
             </div>
           </motion.div>
