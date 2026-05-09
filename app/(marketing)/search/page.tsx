@@ -1,11 +1,11 @@
-import { SearchClient } from "@/components/search/SearchClient";
+import { Suspense } from 'react'
+import SearchResults from '@/components/search/SearchResults'
+import { SearchPageSkeleton } from '@/components/search/SearchPageSkeleton'
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const { q } = await searchParams;
-
-  return <SearchClient initialQuery={q} />;
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SearchPageSkeleton />}>
+      <SearchResults />
+    </Suspense>
+  )
 }

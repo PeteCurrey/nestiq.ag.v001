@@ -44,9 +44,11 @@ export function EditorialHero() {
   const [type, setType] = useState("For Sale");
 
   const handleSearch = () => {
-    if (!location.trim()) return;
-    const query = encodeURIComponent(location.trim());
-    router.push(`/search?q=${query}&type=${encodeURIComponent(type)}`);
+    const params = new URLSearchParams();
+    if (location.trim()) params.set('location', location.trim());
+    if (type) params.set('type', type === 'For Sale' ? 'sale' : type === 'To Rent' ? 'rent' : type.toLowerCase());
+    
+    router.push(`/search?${params.toString()}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

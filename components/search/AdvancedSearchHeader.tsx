@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { Search, MapPin, Sparkles, SlidersHorizontal, ChevronDown, List, Grid, Map as MapIcon, Bell } from "lucide-react";
-import { useSearchBox, useMenu } from "react-instantsearch";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface AdvancedSearchHeaderProps {
   viewMode: "list" | "grid" | "map";
@@ -12,16 +12,26 @@ interface AdvancedSearchHeaderProps {
 }
 
 export function AdvancedSearchHeader({ viewMode, setViewMode }: AdvancedSearchHeaderProps) {
-  const { query, refine: refineQuery } = useSearchBox();
-  const [nlQuery, setNlQuery] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  const [nlQuery, setNlQuery] = useState(searchParams.get('location') || "");
+  const [type, setType] = useState(searchParams.get('type') || "sale");
   const [showFilters, setShowFilters] = useState(false);
 
-  // Demo functionality for natural language parsing UX
   const handleNlSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real implementation, this would hit an NLP API endpoint
-    // For now, we just pass the text to Algolia
-    refineQuery(nlQuery);
+    const params = new URLSearchParams(searchParams.toString());
+    if (nlQuery) params.set('location', nlQuery);
+    else params.delete('location');
+    router.push(`/search?${params.toString()}`);
+  };
+
+  const handleTypeChange = (newType: string) => {
+    setType(newType);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('type', newType);
+    router.push(`/search?${params.toString()}`);
   };
 
   return (
@@ -52,7 +62,11 @@ export function AdvancedSearchHeader({ viewMode, setViewMode }: AdvancedSearchHe
            
            <div className="flex flex-wrap items-center gap-3 md:gap-6 w-full lg:w-auto">
              {/* Quick Filters */}
-             <select className="bg-warm/50 border border-border/30 px-4 py-2.5 text-[10px] font-bold text-obsidian uppercase tracking-widest outline-none appearance-none pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[position:right_10px_center] bg-no-repeat cursor-pointer hover:border-emerald/40 transition-colors">
+             <select 
+               value={type}
+               onChange={(e) => handleTypeChange(e.target.value)}
+               className="bg-warm/50 border border-border/30 px-4 py-2.5 text-[10px] font-bold text-obsidian uppercase tracking-widest outline-none appearance-none pr-8 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[position:right_10px_center] bg-no-repeat cursor-pointer hover:border-emerald/40 transition-colors"
+             >
                <option value="sale">For Sale</option>
                <option value="rent">To Rent</option>
                <option value="commercial">Commercial</option>
