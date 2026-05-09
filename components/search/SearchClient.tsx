@@ -118,6 +118,11 @@ export function SearchClient({ initialQuery }: { initialQuery?: string }) {
     <InstantSearch 
       searchClient={searchClient} 
       indexName="nestiq_properties"
+      initialUiState={{
+        nestiq_properties: {
+          query: initialQuery
+        }
+      }}
       future={{ preserveSharedStateOnUnmount: true }}
     >
       <div className="flex flex-col min-h-screen">

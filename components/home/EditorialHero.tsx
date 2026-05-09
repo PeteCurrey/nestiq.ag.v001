@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Search } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 function TypewriterLoop({ words }: { words: string[] }) {
   const [index, setIndex] = useState(0);
@@ -38,6 +39,22 @@ function TypewriterLoop({ words }: { words: string[] }) {
 }
 
 export function EditorialHero() {
+  const router = useRouter();
+  const [location, setLocation] = useState("");
+  const [type, setType] = useState("For Sale");
+
+  const handleSearch = () => {
+    if (!location.trim()) return;
+    const query = encodeURIComponent(location.trim());
+    router.push(`/search?q=${query}&type=${encodeURIComponent(type)}`);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <section className="relative h-screen min-h-[800px] flex items-center overflow-hidden bg-stone-900">
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -148,19 +165,29 @@ export function EditorialHero() {
               <input 
                 type="text" 
                 placeholder="City, postcode or development..." 
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                onKeyDown={handleKeyDown}
                 className="w-full bg-transparent border-none focus:outline-none text-[11px] md:text-body-md font-medium text-obsidian placeholder:text-muted/40 uppercase tracking-widest"
               />
             </div>
             <div className="flex-1 flex items-center px-6 md:px-8 py-5 md:py-7 border-b lg:border-b-0 lg:border-r border-border/30 bg-silk/30">
               <Search className="w-4 h-4 text-emerald mr-4 md:mr-6" />
-              <select className="w-full bg-transparent border-none focus:outline-none text-[10px] md:text-body-sm font-bold text-obsidian uppercase tracking-[0.2em] appearance-none cursor-pointer">
+              <select 
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+                className="w-full bg-transparent border-none focus:outline-none text-[10px] md:text-body-sm font-bold text-obsidian uppercase tracking-[0.2em] appearance-none cursor-pointer"
+              >
                 <option>For Sale</option>
                 <option>To Rent</option>
                 <option>Commercial</option>
                 <option>New Homes</option>
               </select>
             </div>
-            <button className="flex-1 bg-forest text-silk px-12 py-5 md:py-7 font-bold uppercase tracking-[0.4em] text-[10px] hover:bg-emerald transition-all duration-700">
+            <button 
+              onClick={handleSearch}
+              className="flex-1 bg-forest text-silk px-12 py-5 md:py-7 font-bold uppercase tracking-[0.4em] text-[10px] hover:bg-emerald transition-all duration-700"
+            >
               Find Property
             </button>
           </div>
@@ -169,4 +196,5 @@ export function EditorialHero() {
     </section>
   );
 }
+
 
