@@ -27,10 +27,7 @@ export default function ScrapePage() {
   const [log, setLog] = useState<string[]>([]);
   const [status, setStatus] = useState<'idle' | 'running' | 'complete' | 'error'>('idle');
   const logEndRef = useRef<HTMLDivElement>(null);
-  const [branchId, setBranchId] = useState('');
-  const [jobId, setJobId] = useState<string | null>(null);
-  const [job, setJob] = useState<JobStatus | null>(null);
-  const [error, setError] = useState<string | null>(null);
+
 
   const handleScrape = async () => {
     setError(null);
@@ -63,22 +60,8 @@ export default function ScrapePage() {
       setLog(prev => [...prev, `Error: ${e.message}`]);
     }
   };
-    setError(null);
-    const resp = await fetch('/api/admin/scrape/rightmove', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
 
-      },
-      body: JSON.stringify({ rightmoveBranchId: branchId }),
-    });
-    const data = await resp.json();
-    if (!resp.ok) {
-      setError(data.error || 'Failed to start scrape');
-    } else {
-      setJobId(data.jobId);
-    }
-  };
+
 
   // Poll job status every 3 seconds
   useEffect(() => {
