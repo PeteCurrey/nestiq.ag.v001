@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
-import SearchResults from '@/components/search/SearchResults'
+import SearchResultsClient from '@/components/search/SearchResultsClient'
 import { SearchPageSkeleton } from '@/components/search/SearchPageSkeleton'
 
 export default function SearchPage() {
   return (
     <Suspense fallback={<SearchPageSkeleton />}>
-      <SearchResults />
+      <SearchResultsClient />
     </Suspense>
   )
 }

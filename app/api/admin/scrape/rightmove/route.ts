@@ -15,9 +15,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const { agencyId, rightmoveBranchId } = await req.json()
-  if (!agencyId || !rightmoveBranchId) {
-    return NextResponse.json({ error: 'agencyId and rightmoveBranchId required' }, { status: 400 })
+  const { rightmoveBranchId } = await req.json()
+  if (!rightmoveBranchId) {
+    return NextResponse.json({ error: 'rightmoveBranchId required' }, { status: 400 })
   }
 
   const jobId = randomUUID()
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   // Run import in background, capture progress
   ;(async () => {
     try {
-      const progress = await importFromRightmove(agencyId, rightmoveBranchId, (p) => {
+      const progress = await importFromRightmove(rightmoveBranchId, (p) => {
         updateJob(jobId, { progress: p, log: [] })
       })
       updateJob(jobId, { status: 'complete', progress, log: [] })

@@ -27,7 +27,6 @@ export interface ImportProgress {
 }
 
 export async function importFromRightmove(
-  agencyId: string,
   rightmoveBranchId: string,
   onProgress?: (p: ImportProgress) => void
 ): Promise<ImportProgress> {
@@ -76,6 +75,47 @@ export async function importFromRightmove(
   const allIds = Array.from(new Set([...saleIds, ...rentIds]))
   progress.total = allIds.length
   onProgress?.(progress)
+
+  if (allIds.length === 0) {
+    return { ...progress, message: 'No listings found for this branch ID' }
+  }
+
+  // Scrape first property to obtain agency details
+  const firstProp = await scrapeProperty(allIds[0])
+  const branchName = firstProp?.agentBranchName ?? 'Unknown Agency'
+
+  // Generate slug for agency
+  const agencySlug = branchName
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, '-')
+    .slice(0, 60)
+
+  // Upsert agency record
+  const { data: agency, error: agencyError } = await supabase
+    .from('agencies')
+    .upsert({
+      name: branchName,
+      slug: agencySlug,
+      town: firstProp?.town ?? '',
+      is_active: true,
+      is_verified: false,
+      plan: 'founding',
+      data_source: 'rightmove_demo',
+      rightmove_branch_id: rightmoveBranchId,
+    }, {
+      onConflict: 'rightmove_branch_id',
+      ignoreDuplicates: false,
+    })
+    .select('id, name')
+    .single()
+
+  if (agencyError || !agency) {
+    console.error('Agency upsert failed:', agencyError)
+    return { ...progress, message: 'Failed to create agency record' }
+  }
+
+  const agencyId = agency.id
 
   for (const rmId of allIds) {
     progress.currentSlug = rmId
