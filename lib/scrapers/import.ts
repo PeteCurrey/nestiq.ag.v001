@@ -9,37 +9,6 @@ import {
 
 import { randomUUID } from 'crypto'
 
-// Supabase client (service role)
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
-// Helper: upload image to Supabase storage
-async function migrateImage(
-  rightmoveUrl: string,
-  propertyId: string,
-  index: number
-): Promise<string | null> {
-  try {
-    const res = await fetch(rightmoveUrl)
-    if (!res.ok) return null
-    const buffer = await res.arrayBuffer()
-    const path = `properties/${propertyId}/${index}.jpg`
-    const { error } = await supabase.storage
-      .from('property-images')
-      .upload(path, Buffer.from(buffer), {
-        contentType: 'image/jpeg',
-        upsert: true,
-      })
-    if (error) return null
-    const { data } = supabase.storage.from('property-images').getPublicUrl(path)
-    return data.publicUrl
-  } catch {
-    return null
-  }
-}
-
 function generateSlug(address: string, postcode: string, id: string): string {
   return `${address}-${postcode}`
     .toLowerCase()
@@ -62,6 +31,35 @@ export async function importFromRightmove(
   rightmoveBranchId: string,
   onProgress?: (p: ImportProgress) => void
 ): Promise<ImportProgress> {
+  // Initialize Supabase client (service role) for this import run
+  const supabase = createClient(
+    process.env.SUPABASE_URL || 'https://hvgygzttersplxkgzjaq.supabase.co',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || 'mock_service_key'  );
+
+  // Helper: upload image to Supabase storage
+  async function migrateImage(
+    rightmoveUrl: string,
+    propertyId: string,
+    index: number
+  ): Promise<string | null> {
+    try {
+      const res = await fetch(rightmoveUrl);
+      if (!res.ok) return null;
+      const buffer = await res.arrayBuffer();
+      const path = `properties/${propertyId}/${index}.jpg`;
+      const { error } = await supabase.storage
+        .from('property-images')
+        .upload(path, Buffer.from(buffer), {
+          contentType: 'image/jpeg',
+          upsert: true,
+        });
+      if (error) return null;
+      const { data } = supabase.storage.from('property-images').getPublicUrl(path);
+      return data.publicUrl;
+    } catch {
+      return null;
+    }
+  }
   const progress: ImportProgress = {
     total: 0,
     processed: 0,
