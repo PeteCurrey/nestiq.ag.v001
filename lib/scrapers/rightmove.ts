@@ -50,7 +50,7 @@ export async function fetchBranchListingIds(
   const buildUrl = (pageIndex: number) => {
     const basePath = channel === 'BUY' ? 'property-for-sale' : 'property-to-rent';
     // Agency and town placeholders; Rightmove typically ignores these segments for branch searches.
-    const base = `https://www.rightmove.co.uk/${basePath}/find/agency/town.html`;
+    const base = `https://www.rightmove.co.uk/${basePath}/find/any/any.html`;
     const params = new URLSearchParams({
       locationIdentifier: `BRANCH^${branchId}`,
       index: pageIndex.toString(),
@@ -68,6 +68,7 @@ export async function fetchBranchListingIds(
   let hasMore = true;
   while (hasMore) {
     const url = buildUrl(pageIndex);
+    console.log('DEBUG: fetching Rightmove URL', url);
     try {
       const res = await fetch(url, { headers: HEADERS });
       if (!res.ok) {
@@ -75,6 +76,11 @@ export async function fetchBranchListingIds(
         break;
       }
       const html = await res.text();
+
+      // Debug: log HTML when no IDs have been collected yet (first page)
+      if (ids.size === 0 && pageIndex === 0) {
+        console.log('DEBUG: fetched HTML content (truncated):', html.slice(0, 500));
+      }
 
       // Attempt to extract IDs from __NEXT_DATA__ JSON first.
       const nextDataMatch = html.match(/<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/);
@@ -91,6 +97,7 @@ export async function fetchBranchListingIds(
             if (id) ids.add(String(id));
           }
           const totalCount = Number(searchResult?.resultCount ?? searchResult?.totalResultCount ?? 0);
+          console.log('DEBUG: totalCount from __NEXT_DATA__', totalCount, 'ids collected', ids.size);
           if (ids.size >= totalCount || properties.length < 24) {
             hasMore = false;
           } else {
@@ -103,6 +110,7 @@ export async function fetchBranchListingIds(
         }
       }
 
+      console.log('DEBUG: linkMatches IDs count', ids.size);
       // Fallback: scrape IDs from property links in the HTML.
       const linkMatches = html.matchAll(/\/properties\/(\d+)/g);
       for (const m of linkMatches) {
