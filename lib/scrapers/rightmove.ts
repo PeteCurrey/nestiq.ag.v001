@@ -57,6 +57,8 @@ export async function fetchBranchListingIds(
       numberOfPropertiesPerPage: '24',
       sortType: '6',
       viewType: 'LIST',
+      areaSizeUnit: 'sqft',
+      currencyCode: 'GBP',
       ...(channel === 'BUY'
         ? { includeSSTC: 'true', _includeSSTC: 'on' }
         : { propertyStatus: 'all' })
