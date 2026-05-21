@@ -31,7 +31,7 @@ export default function ScrapePage() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_ADMIN_SECRET}`,
+
       },
       body: JSON.stringify({ rightmoveBranchId: branchId }),
     });
