@@ -148,6 +148,7 @@ export async function importFromRightmove(
     // Images
     const imageResults = await Promise.all(
       scraped.images.slice(0, 10).map((url, i) => migrateImage(url, property.id, i))
+    );
     const validImages = imageResults
       .map((url, i) =>
         url
