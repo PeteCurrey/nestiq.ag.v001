@@ -46,49 +46,102 @@ export async function fetchBranchListingIds(
 ): Promise<string[]> {
   const ids: string[] = []
   let index = 0
-  let totalResults = Infinity
+  let hasMore = true
 
-  while (index < totalResults) {
-    const url = `https://www.rightmove.co.uk/api/_search?` +
-      `locationIdentifier=BRANCH^${branchId}` +
-      `&numberOfPropertiesPerPage=24` +
-      `&radius=0.0&sortType=6` +
-      `&index=${index}` +
-      `&viewType=LIST` +
-      `&channel=${channel}` +
-      `&areaSizeUnit=sqft` +
-      `&currencyCode=GBP` +
-      `&isFetching=false`
+  while (hasMore) {
+    const baseUrl = channel === 'BUY'
+      ? `https://www.rightmove.co.uk/property-for-sale/find.html`
+      : `https://www.rightmove.co.uk/property-to-rent/find.html`
+
+    const params = new URLSearchParams({
+      locationIdentifier: `BRANCH^${branchId}`,
+      index:              String(index),
+      numberOfPropertiesPerPage: '24',
+      sortType:           '6',
+      viewType:           'LIST',
+      ...(channel === 'BUY'
+        ? { includeSSTC: 'true' }
+ : { propertyStatus: 'all', includeLetAgreed: 'true' }
+      )
+    })
+
+    const url = `${baseUrl}?${params.toString()}`
+    console.log(`Fetching: ${url}`)
 
     try {
       const res = await fetch(url, { headers: HEADERS })
       if (!res.ok) {
-        console.error(`Rightmove search API returned ${res.status}`)
+        console.error(`HTTP ${res.status} for ${url}`)
         break
       }
-      const data = await res.json()
 
-      if (totalResults === Infinity) {
-        totalResults = data?.resultCount ?? 0
-        console.log(`Branch ${branchId}: ${totalResults} ${channel} properties`)
+      const html = await res.text()
+
+      // Extract __NEXT_DATA__ from the page
+      const match = html.match(
+        /<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/
+      )
+      if (!match) {
+        console.error('No __NEXT_DATA__ found in page')
+        // Fallback: extract property IDs from HTML links
+        const linkMatches = html.matchAll(/\/properties\/(\d+)/g)
+        for (const m of linkMatches) {
+          if (!ids.includes(m[1])) ids.push(m[1])
+        }
+        hasMore = false
+        break
       }
 
-      const properties = data?.properties ?? []
-      if (properties.length === 0) break
+      const nextData = JSON.parse(match[1])
 
-      for (const p of properties) {
-        if (p.id) ids.push(String(p.id))
+      // Navigate to properties array — path varies by page version
+      const pageProps = nextData?.props?.pageProps ?? {}
+      const searchResult = pageProps?.searchResult ?? 
+                           pageProps?.results ?? 
+                           pageProps?.propertiesForSale ??
+                           pageProps?.propertiesForRent ?? {}
+
+      const properties = searchResult?.properties ?? 
+                       searchResult?.propertyDetails ??
+                       []
+
+      console.log(`Page index ${index}: found ${properties.length} properties`)
+
+      if (properties.length === 0) {
+        hasMore = false
+        break
       }
 
-      index += 24
-      if (index < totalResults) await delay()
+      for (const prop of properties) {
+        const id = prop?.id ?? prop?.propertyId ?? prop?.rmID
+        if (id) ids.push(String(id))
+      }
+
+      // Check if there are more pages
+      const resultCount = searchResult?.resultCount ?? 
+                          searchResult?.totalResultCount ?? 0
+      const total = typeof resultCount === 'string'
+        ? parseInt(resultCount.replace(/,/g, ''), 10)
+        : resultCount
+
+      console.log(`Total results: ${total}, fetched so far: ${ids.length}`)
+
+      if (ids.length >= total || properties.length < 24) {
+        hasMore = false
+      } else {
+        index += 24
+        // Polite delay between pages
+        await delay(2000, 4000)
+      }
+
     } catch (e) {
-      console.error('Branch search failed:', e)
-      break
+      console.error('Fetch error:', e)
+      hasMore = false
     }
   }
 
-  return ids
+  console.log(`Branch ${branchId} ${channel}: found ${ids.length} IDs`)
+  return [...new Set(ids)]
 }
 
 /** Scrape a single property page */

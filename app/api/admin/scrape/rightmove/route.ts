@@ -1,4 +1,4 @@
-// app/api/admin/scrape/rightmove/route.ts
+import { getJob } from '@/lib/scrapers/jobs';
 
 import { NextRequest, NextResponse } from 'next/server'
 import { importFromRightmove } from '@/lib/scrapers/import'
