@@ -39,109 +39,84 @@ export interface ScrapedProperty {
   agentBranchName: string
 }
 
-/** Fetch all listing IDs for a branch */
+// lib/scrapers/rightmove.ts
 export async function fetchBranchListingIds(
   branchId: string,
   channel: 'BUY' | 'RENT' = 'BUY'
 ): Promise<string[]> {
-  const ids: string[] = []
-  let index = 0
-  let hasMore = true
+  const ids = new Set<string>();
 
-  while (hasMore) {
-    const baseUrl = channel === 'BUY'
-      ? `https://www.rightmove.co.uk/property-for-sale/find.html`
-      : `https://www.rightmove.co.uk/property-to-rent/find.html`
-
+  // Helper to construct the correct Rightmove URL using the required pattern.
+  const buildUrl = (pageIndex: number) => {
+    const basePath = channel === 'BUY' ? 'property-for-sale' : 'property-to-rent';
+    // Agency and town placeholders; Rightmove typically ignores these segments for branch searches.
+    const base = `https://www.rightmove.co.uk/${basePath}/find/agency/town.html`;
     const params = new URLSearchParams({
       locationIdentifier: `BRANCH^${branchId}`,
-      index:              String(index),
+      index: pageIndex.toString(),
       numberOfPropertiesPerPage: '24',
-      sortType:           '6',
-      viewType:           'LIST',
+      sortType: '6',
+      viewType: 'LIST',
       ...(channel === 'BUY'
-        ? { includeSSTC: 'true' }
- : { propertyStatus: 'all', includeLetAgreed: 'true' }
-      )
-    })
+        ? { includeSSTC: 'true', _includeSSTC: 'on' }
+        : { propertyStatus: 'all' })
+    });
+    return `${base}?${params.toString()}`;
+  };
 
-    const url = `${baseUrl}?${params.toString()}`
-    console.log(`Fetching: ${url}`)
-
+  let pageIndex = 0;
+  let hasMore = true;
+  while (hasMore) {
+    const url = buildUrl(pageIndex);
     try {
-      const res = await fetch(url, { headers: HEADERS })
+      const res = await fetch(url, { headers: HEADERS });
       if (!res.ok) {
-        console.error(`HTTP ${res.status} for ${url}`)
-        break
+        console.error(`HTTP ${res.status} for ${url}`);
+        break;
       }
+      const html = await res.text();
 
-      const html = await res.text()
-
-      // Extract __NEXT_DATA__ from the page
-      const match = html.match(
-        /<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/
-      )
-      if (!match) {
-        console.error('No __NEXT_DATA__ found in page')
-        // Fallback: extract property IDs from HTML links
-        const linkMatches = html.matchAll(/\/properties\/(\d+)/g)
-        for (const m of linkMatches) {
-          if (!ids.includes(m[1])) ids.push(m[1])
+      // Attempt to extract IDs from __NEXT_DATA__ JSON first.
+      const nextDataMatch = html.match(/<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/);
+      if (nextDataMatch) {
+        try {
+          const nextData = JSON.parse(nextDataMatch[1]);
+          const searchResult =
+            nextData?.props?.pageProps?.searchResult ??
+            nextData?.props?.pageProps?.results ??
+            {};
+          const properties = searchResult?.properties ?? [];
+          for (const p of properties) {
+            const id = p?.id ?? p?.propertyId ?? p?.rmID;
+            if (id) ids.add(String(id));
+          }
+          const totalCount = Number(searchResult?.resultCount ?? searchResult?.totalResultCount ?? 0);
+          if (ids.size >= totalCount || properties.length < 24) {
+            hasMore = false;
+          } else {
+            pageIndex += 24;
+            await delay();
+          }
+          continue; // proceed to next iteration or exit
+        } catch (e) {
+          console.error('Failed to parse __NEXT_DATA__', e);
         }
-        hasMore = false
-        break
       }
 
-      const nextData = JSON.parse(match[1])
-
-      // Navigate to properties array — path varies by page version
-      const pageProps = nextData?.props?.pageProps ?? {}
-      const searchResult = pageProps?.searchResult ?? 
-                           pageProps?.results ?? 
-                           pageProps?.propertiesForSale ??
-                           pageProps?.propertiesForRent ?? {}
-
-      const properties = searchResult?.properties ?? 
-                       searchResult?.propertyDetails ??
-                       []
-
-      console.log(`Page index ${index}: found ${properties.length} properties`)
-
-      if (properties.length === 0) {
-        hasMore = false
-        break
+      // Fallback: scrape IDs from property links in the HTML.
+      const linkMatches = html.matchAll(/\/properties\/(\d+)/g);
+      for (const m of linkMatches) {
+        ids.add(m[1]);
       }
-
-      for (const prop of properties) {
-        const id = prop?.id ?? prop?.propertyId ?? prop?.rmID
-        if (id) ids.push(String(id))
-      }
-
-      // Check if there are more pages
-      const resultCount = searchResult?.resultCount ?? 
-                          searchResult?.totalResultCount ?? 0
-      const total = typeof resultCount === 'string'
-        ? parseInt(resultCount.replace(/,/g, ''), 10)
-        : resultCount
-
-      console.log(`Total results: ${total}, fetched so far: ${ids.length}`)
-
-      if (ids.length >= total || properties.length < 24) {
-        hasMore = false
-      } else {
-        index += 24
-        // Polite delay between pages
-        await delay(2000, 4000)
-      }
-
+      // No reliable pagination info, stop after first page.
+      hasMore = false;
     } catch (e) {
-      console.error('Fetch error:', e)
-      hasMore = false
+      console.error('Scrape error', e);
+      break;
     }
   }
 
-  console.log(`Branch ${branchId} ${channel}: found ${ids.length} IDs`)
-  return [...new Set(ids)]
+  return Array.from(ids);
 }
 
 /** Scrape a single property page */
