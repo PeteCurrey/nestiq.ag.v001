@@ -70,35 +70,35 @@ export default function SettingsPage() {
               <label className="text-label font-bold text-muted uppercase tracking-widest block mb-2">
                 Agency Name
               </label>
-              <Input placeholder="e.g. Dales & Peaks" defaultValue="Dales & Peaks" />
+              <Input placeholder="e.g. Northgate Residential" />
             </div>
 
             <div>
               <label className="text-label font-bold text-muted uppercase tracking-widest block mb-2">
                 Phone Number
               </label>
-              <Input placeholder="01246 567540" defaultValue="01246 567540" />
+              <Input placeholder="01234 567890" />
             </div>
 
             <div>
               <label className="text-label font-bold text-muted uppercase tracking-widest block mb-2">
                 Email Address
               </label>
-              <Input type="email" placeholder="info@agency.co.uk" defaultValue="info@dalesandpeaks.co.uk" />
+              <Input type="email" placeholder="info@agency.co.uk" />
             </div>
 
             <div>
               <label className="text-label font-bold text-muted uppercase tracking-widest block mb-2">
                 Website
               </label>
-              <Input placeholder="https://..." defaultValue="https://dalesandpeaks.co.uk" />
+              <Input placeholder="https://..." />
             </div>
 
             <div>
               <label className="text-label font-bold text-muted uppercase tracking-widest block mb-2">
                 Postcode
               </label>
-              <Input placeholder="S41 7JD" defaultValue="S41 7JD" />
+              <Input placeholder="S41 7JD" />
             </div>
 
             <div className="md:col-span-2">
@@ -107,7 +107,7 @@ export default function SettingsPage() {
               </label>
               <textarea
                 className="w-full h-32 bg-warm border-none px-4 py-3 text-body-sm leading-relaxed focus:ring-2 focus:ring-forest resize-none"
-                defaultValue="Award-winning family estate agent covering Derbyshire, the Peak District and surrounding areas. Established 2006."
+                placeholder="Tell buyers and sellers what your agency is known for."
               />
             </div>
           </div>
@@ -117,8 +117,8 @@ export default function SettingsPage() {
             <h3 className="text-[10px] font-bold text-muted uppercase tracking-[0.3em] mb-6">Agency Logo</h3>
             <div className="flex items-center gap-8">
               <div className="w-24 h-24 bg-silk border-2 border-dashed border-border/40 flex items-center justify-center">
-                <span className="text-obsidian font-display font-bold text-xs text-center leading-tight">
-                  DALES<br />& PEAKS
+                <span className="text-muted font-display text-[10px] text-center leading-tight uppercase tracking-widest">
+                  No logo
                 </span>
               </div>
               <div className="space-y-3">

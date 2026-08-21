@@ -312,7 +312,7 @@ export function PropertyDetail({ property }: { property: Property }) {
               <div className="mt-10 pt-10 border-t border-border/30 flex items-center justify-center gap-12">
                  <div className="text-center">
                     <p className="text-[9px] font-bold text-muted uppercase tracking-widest mb-1">Direct Dial</p>
-                    <p className="text-body-sm font-bold text-obsidian">{property.agencies?.phone || '01246 567540'}</p>
+                    <p className="text-body-sm font-bold text-obsidian">{property.agencies?.phone}</p>
                  </div>
                  <div className="w-px h-8 bg-border/40" />
                  <div className="text-center">

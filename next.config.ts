@@ -1,11 +1,6 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // ppr: true, // Wait, PPR might require a specific Next.js canary version or flag in 15.0.0. 
-    // I'll keep it commented out if I'm not sure, but the user requested it.
-    // I'll enable it as requested.
-  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'res.cloudinary.com' },
@@ -13,6 +8,11 @@ const nextConfig: NextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+
+  // Both of these hide real defects. The codebase does not currently typecheck
+  // cleanly, so they stay on to keep `next build` green — but they are a debt,
+  // not a setting. Run `npm run typecheck` to see what they are masking, and
+  // turn `ignoreBuildErrors` off once the count reaches zero.
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -17,7 +17,7 @@ export const allProperties = [
     status: "for-sale" as const,
     lat: 53.3213,
     lng: -1.3547,
-    agencyName: "Dales & Peaks"
+    agencyName: "Northgate Residential"
   },
   {
     slug: "riggotts-lane-walton-chesterfield",
@@ -34,7 +34,7 @@ export const allProperties = [
     status: "for-sale" as const,
     lat: 53.2205,
     lng: -1.4580,
-    agencyName: "Dales & Peaks"
+    agencyName: "Northgate Residential"
   },
   {
     slug: "ashover-road-tupton-chesterfield",
@@ -51,7 +51,7 @@ export const allProperties = [
     status: "for-sale" as const,
     lat: 53.1900,
     lng: -1.4250,
-    agencyName: "Dales & Peaks"
+    agencyName: "Northgate Residential"
   },
   {
     slug: "london-road-derby",
@@ -68,7 +68,7 @@ export const allProperties = [
     status: "for-sale" as const,
     lat: 52.9225,
     lng: -1.4746,
-    agencyName: "Redbrik"
+    agencyName: "Brookfield & Co."
   },
   {
     slug: "chatsworth-road-chesterfield",
@@ -85,7 +85,7 @@ export const allProperties = [
     status: "for-sale" as const,
     lat: 53.2320,
     lng: -1.4550,
-    agencyName: "Dales & Peaks"
+    agencyName: "Northgate Residential"
   }
 ];
 

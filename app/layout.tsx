@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/shared/CookieBanner";
+import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
 
 export const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -100,6 +101,7 @@ export default function RootLayout({
           "min-h-screen bg-silk font-sans antialiased selection:bg-emerald/30 selection:text-forest"
         )}
       >
+        <SmoothScrollProvider />
         <div className="relative flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">{children}</main>

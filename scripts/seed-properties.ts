@@ -330,7 +330,7 @@ const properties = [
 async function seed() {
   console.log('Starting seed...')
   
-  // 1. Get Dales & Peaks agency id
+  // 1. Get the seed agency id
   const { data: agency, error: agencyError } = await supabase
     .from('agencies')
     .select('id')

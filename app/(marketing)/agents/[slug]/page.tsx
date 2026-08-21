@@ -79,7 +79,7 @@ export default async function AgentProfilePage({ params }: PageProps) {
              <div className="flex-1 space-y-6">
                 <div className="flex flex-wrap items-center gap-4">
                   <h1 className="text-display-md font-display font-bold">{agency.name}</h1>
-                  {agency.verified && (
+                  {agency.is_verified && (
                     <span className="bg-emerald/20 text-emerald text-[10px] font-bold px-3 py-1 uppercase tracking-widest flex items-center gap-2">
                       <ShieldCheck className="w-3 h-3" />
                       Verified Partner
@@ -99,7 +99,7 @@ export default async function AgentProfilePage({ params }: PageProps) {
                    )}
                    <div className="flex items-center gap-2 text-silk/60 text-sm">
                       <MapPin className="w-4 h-4 text-emerald" />
-                      {agency.city}, {agency.county}
+                      {agency.town}, {agency.county}
                    </div>
                 </div>
              </div>
@@ -114,8 +114,8 @@ export default async function AgentProfilePage({ params }: PageProps) {
                         <span className="text-[10px] font-bold uppercase tracking-widest">Call</span>
                      </a>
                    )}
-                   {agency.website_url && (
-                     <a href={agency.website_url} target="_blank" rel="noopener noreferrer" className="flex-1 h-12 border border-white/10 flex items-center justify-center gap-3 hover:bg-white/5 transition-colors">
+                   {agency.website && (
+                     <a href={agency.website} target="_blank" rel="noopener noreferrer" className="flex-1 h-12 border border-white/10 flex items-center justify-center gap-3 hover:bg-white/5 transition-colors">
                         <Globe className="w-3.5 h-3.5 text-emerald" />
                         <span className="text-[10px] font-bold uppercase tracking-widest">Website</span>
                      </a>
@@ -152,7 +152,7 @@ export default async function AgentProfilePage({ params }: PageProps) {
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-obsidian">Office Details</h4>
                 <div className="space-y-4">
                    <div className="flex flex-col gap-1 border-l-2 border-emerald pl-4">
-                      <p className="text-sm font-bold">{agency.city} Office</p>
+                      <p className="text-sm font-bold">{agency.town} Office</p>
                       <p className="text-[10px] text-muted uppercase">{agency.county}</p>
                    </div>
                 </div>
