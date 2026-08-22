@@ -13,7 +13,7 @@
     "db:migrate": "tsx scripts/db-migrate.ts",
     "db:verify": "tsx scripts/db-verify.ts",
     "db:export": "tsx scripts/db-export.ts",
-    "db:seed": "tsx scripts/seed-locations.ts && tsx scripts/seed-properties.ts"
+    "db:seed": "tsx scripts/db-seed.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",
