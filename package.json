@@ -9,7 +9,11 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test:unit": "tsx --test tests/unit/*.test.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "db:verify": "tsx scripts/db-verify.ts",
+    "db:export": "tsx scripts/db-export.ts",
+    "db:seed": "tsx scripts/seed-locations.ts && tsx scripts/seed-properties.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.92.0",
@@ -52,11 +56,14 @@
     "@tailwindcss/postcss": "^4",
     "@types/d3-geo": "^3.1.0",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-simple-maps": "^3.0.6",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "pg": "^8.23.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"

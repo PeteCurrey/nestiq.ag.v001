@@ -45,3 +45,6 @@ next-env.d.ts
 
 # Personal Claude Code settings (not team-wide)
 .claude/settings.local.json
+
+# Database exports — contain real contact details
+.backups/
