@@ -269,6 +269,23 @@ async function main() {
   }
   console.log(`  market    ${market.length} area records`);
 
+  // --- featured rail ----------------------------------------------------
+  // The homepage queries featured=true; without this the seed data is in the
+  // database but invisible on the one page most visitors land on first.
+  await client.query(`
+    UPDATE public.properties SET featured = FALSE WHERE data_source = 'agent_direct'
+  `);
+  const { rows: featured } = await client.query<{ title: string }>(`
+    UPDATE public.properties SET featured = TRUE
+     WHERE id IN (
+       SELECT id FROM public.properties
+        WHERE status = 'active' AND data_source = 'agent_direct'
+        ORDER BY completeness_score DESC, price DESC LIMIT 3
+     )
+     RETURNING title
+  `);
+  console.log(`  featured  ${featured.map((f) => f.title).join(", ")}`);
+
   // --- report ---------------------------------------------------------------
   const { rows: scores } = await client.query<{
     completeness_score: number; count: string;
