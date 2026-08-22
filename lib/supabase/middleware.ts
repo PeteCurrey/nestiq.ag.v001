@@ -58,6 +58,34 @@ export async function updateSession(request: NextRequest) {
     }
   }
 
+  // Protect admin routes — pages and API alike. These were previously wide
+  // open: /api/admin/scrape/rightmove could be POSTed by anyone.
+  if (
+    request.nextUrl.pathname === "/admin" ||
+    request.nextUrl.pathname.startsWith("/admin/") ||
+    request.nextUrl.pathname.startsWith("/api/admin/")
+  ) {
+    const isApi = request.nextUrl.pathname.startsWith("/api/");
+
+    if (!user) {
+      return isApi
+        ? NextResponse.json({ error: "Unauthorised" }, { status: 401 })
+        : NextResponse.redirect(new URL("/login?redirect=" + request.nextUrl.pathname, request.url));
+    }
+
+    const { data: adminProfile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (adminProfile?.role !== "admin") {
+      return isApi
+        ? NextResponse.json({ error: "Forbidden" }, { status: 403 })
+        : NextResponse.redirect(new URL("/", request.url));
+    }
+  }
+
   // Protect consumer account routes
   if (request.nextUrl.pathname.startsWith("/account")) {
     if (!user) {

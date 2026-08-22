@@ -141,6 +141,11 @@ export interface Database {
       }
       properties: {
         Row: {
+          branch_id: string | null
+          expires_at: string | null
+          compiled_at: string | null
+          source_url: string | null
+          provenance: Database['public']['Enums']['listing_provenance']
           id: string
           agency_id: string | null
           title: string
@@ -225,6 +230,11 @@ export interface Database {
           completeness_score: number | null
         }
         Insert: {
+          branch_id?: string | null
+          expires_at?: string | null
+          compiled_at?: string | null
+          source_url?: string | null
+          provenance?: Database['public']['Enums']['listing_provenance']
           id?: string
           agency_id?: string | null
           title: string
@@ -305,6 +315,11 @@ export interface Database {
           chain_notes?: string | null
         }
         Update: {
+          branch_id?: string | null
+          expires_at?: string | null
+          compiled_at?: string | null
+          source_url?: string | null
+          provenance?: Database['public']['Enums']['listing_provenance']
           id?: string
           agency_id?: string | null
           title?: string
@@ -866,6 +881,177 @@ export interface Database {
         }
         Relationships: []
       }
+      branches: {
+        Row: {
+          id: string
+          agency_id: string | null
+          name: string
+          slug: string
+          source_branch_id: string | null
+          source_name: string | null
+          phone: string | null
+          email: string | null
+          website: string | null
+          address_line1: string | null
+          town: string | null
+          postcode: string | null
+          lat: number | null
+          lng: number | null
+          claim_state: 'unclaimed' | 'invited' | 'claiming' | 'claimed' | 'opted_out'
+          claimed_at: string | null
+          claimed_by: string | null
+          opted_out_at: string | null
+          opt_out_reason: string | null
+          listing_count: number
+          leads_forwarded: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          agency_id?: string | null
+          name: string
+          slug: string
+          source_branch_id?: string | null
+          source_name?: string | null
+          phone?: string | null
+          email?: string | null
+          website?: string | null
+          address_line1?: string | null
+          town?: string | null
+          postcode?: string | null
+          lat?: number | null
+          lng?: number | null
+          claim_state?: 'unclaimed' | 'invited' | 'claiming' | 'claimed' | 'opted_out'
+          claimed_at?: string | null
+          claimed_by?: string | null
+          opted_out_at?: string | null
+          opt_out_reason?: string | null
+          listing_count?: number
+          leads_forwarded?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          agency_id?: string | null
+          name?: string
+          slug?: string
+          source_branch_id?: string | null
+          source_name?: string | null
+          phone?: string | null
+          email?: string | null
+          website?: string | null
+          address_line1?: string | null
+          town?: string | null
+          postcode?: string | null
+          lat?: number | null
+          lng?: number | null
+          claim_state?: 'unclaimed' | 'invited' | 'claiming' | 'claimed' | 'opted_out'
+          claimed_at?: string | null
+          claimed_by?: string | null
+          opted_out_at?: string | null
+          opt_out_reason?: string | null
+          listing_count?: number
+          leads_forwarded?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      branch_claims: {
+        Row: {
+          id: string
+          branch_id: string
+          token: string
+          sent_to_email: string
+          sent_at: string | null
+          opened_at: string | null
+          completed_at: string | null
+          expires_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          branch_id: string
+          token: string
+          sent_to_email: string
+          sent_at?: string | null
+          opened_at?: string | null
+          completed_at?: string | null
+          expires_at: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          branch_id?: string
+          token?: string
+          sent_to_email?: string
+          sent_at?: string | null
+          opened_at?: string | null
+          completed_at?: string | null
+          expires_at?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      forwarded_leads: {
+        Row: {
+          id: string
+          enquiry_id: string
+          branch_id: string
+          forwarded_to: string
+          forwarded_at: string
+          delivery_status: 'pending' | 'sent' | 'bounced' | 'failed'
+          provider_id: string | null
+        }
+        Insert: {
+          id?: string
+          enquiry_id: string
+          branch_id: string
+          forwarded_to: string
+          forwarded_at?: string
+          delivery_status?: 'pending' | 'sent' | 'bounced' | 'failed'
+          provider_id?: string | null
+        }
+        Update: {
+          id?: string
+          enquiry_id?: string
+          branch_id?: string
+          forwarded_to?: string
+          forwarded_at?: string
+          delivery_status?: 'pending' | 'sent' | 'bounced' | 'failed'
+          provider_id?: string | null
+        }
+        Relationships: []
+      }
+      property_status_events: {
+        Row: {
+          id: string
+          property_id: string
+          event: 'listed' | 'price_reduced' | 'price_increased' | 'under_offer' | 'sold_stc' | 'fell_through' | 'withdrawn' | 'relisted' | 'completed'
+          price_at_event: number | null
+          note: string | null
+          occurred_at: string
+        }
+        Insert: {
+          id?: string
+          property_id: string
+          event: 'listed' | 'price_reduced' | 'price_increased' | 'under_offer' | 'sold_stc' | 'fell_through' | 'withdrawn' | 'relisted' | 'completed'
+          price_at_event?: number | null
+          note?: string | null
+          occurred_at?: string
+        }
+        Update: {
+          id?: string
+          property_id?: string
+          event?: 'listed' | 'price_reduced' | 'price_increased' | 'under_offer' | 'sold_stc' | 'fell_through' | 'withdrawn' | 'relisted' | 'completed'
+          price_at_event?: number | null
+          note?: string | null
+          occurred_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -883,8 +1069,13 @@ export interface Database {
         Args: Record<string, never>
         Returns: string[]
       }
+      expire_compiled_listings: {
+        Args: Record<string, never>
+        Returns: number
+      }
     }
     Enums: {
+      listing_provenance: 'agent_direct' | 'agent_feed' | 'compiled'
       founding_state:
         | 'unclaimed'
         | 'viewed'
