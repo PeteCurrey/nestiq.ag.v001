@@ -50,7 +50,7 @@ export const schemas = {
     "address": {
       "@type": "PostalAddress",
       "streetAddress": agency.address_line1,
-      "addressLocality": agency.city,
+      "addressLocality": agency.town,
       "postalCode": agency.postcode,
       "addressCountry": "GB"
     },

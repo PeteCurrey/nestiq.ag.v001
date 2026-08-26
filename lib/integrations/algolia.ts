@@ -1,21 +1,30 @@
 import { algoliasearch } from 'algoliasearch';
-import { createClient } from "@supabase/supabase-js";
+import { createAdminClient } from "@/lib/supabase/admin";
 
-// Initialize Algolia client with the Admin Key
-const algoliaClient = algoliasearch(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
-  process.env.ALGOLIA_ADMIN_KEY!
-);
+const INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || 'nestiq_properties_dev';
 
-const INDEX_NAME = 'nestiq_properties_dev';
+/**
+ * Built lazily — constructing this at module scope crashes `next build`,
+ * which evaluates route modules without secrets present.
+ */
+function getAlgoliaClient() {
+  const appId = process.env.NEXT_PUBLIC_ALGOLIA_APP_ID;
+  const adminKey = process.env.ALGOLIA_ADMIN_KEY;
 
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+  if (!appId || !adminKey) {
+    throw new Error(
+      "Algolia sync needs NEXT_PUBLIC_ALGOLIA_APP_ID and ALGOLIA_ADMIN_KEY. Copy .env.example to .env.local and fill them in."
+    );
+  }
+
+  return algoliasearch(appId, adminKey);
+}
 
 export async function syncPropertiesToAlgolia() {
   console.log("Starting Algolia sync...");
+
+  const supabaseAdmin = createAdminClient();
+  const algoliaClient = getAlgoliaClient();
   
   // Fetch properties and related images/agencies
   const { data: properties, error } = await supabaseAdmin

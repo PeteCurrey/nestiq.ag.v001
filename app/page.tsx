@@ -76,16 +76,27 @@ export default async function Home() {
 
       <AgentShowcase />
 
-      {/* Partner Agencies */}
+      {/* Founding partners — replaces the previous "Trusted by" logo wall.
+          That wall named four real agencies who are not customers, which is a
+          false endorsement claim under the CPRs. Restore a logo wall only once
+          there are signed partners who have agreed to be named. */}
       <section className="py-32 bg-obsidian text-silk overflow-hidden">
-         <div className="max-w-[1800px] mx-auto px-6 md:px-12">
-            <p className="text-center text-[10px] font-medium uppercase tracking-[0.4em] text-silk/40 mb-16">Trusted by Leading Independent Agencies</p>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-32 opacity-60">
-               <span className="text-display-sm font-display font-bold uppercase tracking-widest text-[18px]">Dales & Peaks</span>
-               <span className="text-display-sm font-display lowercase italic opacity-80">Redbrik</span>
-               <span className="text-display-sm font-display font-medium tracking-tighter">Saxton Mee</span>
-               <span className="text-display-sm font-display italic">Blenheim</span>
-            </div>
+         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
+            <p className="text-[10px] font-medium uppercase tracking-[0.4em] text-emerald mb-8">Founding Partner Programme</p>
+            <h2 className="text-display-md mb-8 text-silk">
+              We&rsquo;re opening in <span className="italic font-normal text-emerald">one region at a time.</span>
+            </h2>
+            <p className="text-body-lg text-silk/60 leading-relaxed mb-12">
+              NestIQ launches with a limited group of founding independent agents, each holding
+              exclusivity in their postcode district. Rates are fixed for the life of the account.
+            </p>
+            <Button
+              variant="secondary"
+              href="/founding"
+              className="border-silk/30 text-silk hover:bg-silk hover:text-obsidian"
+            >
+              See if your area is available <ArrowRight className="ml-2 w-3 h-3" />
+            </Button>
          </div>
       </section>
 

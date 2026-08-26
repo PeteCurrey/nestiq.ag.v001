@@ -74,10 +74,10 @@ export default function AgentLayout({
           <div className="pt-8 border-t border-silk/10 mt-auto">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-10 h-10 bg-emerald/20 flex items-center justify-center border border-emerald/30">
-                <span className="text-emerald font-bold">DP</span>
+                <span className="text-emerald font-bold">NR</span>
               </div>
               <div>
-                <span className="block text-[10px] font-bold uppercase tracking-widest text-silk">Dales & Peaks</span>
+                <span className="block text-[10px] font-bold uppercase tracking-widest text-silk">Northgate Residential</span>
                 <span className="block text-[9px] text-silk/40 uppercase tracking-widest">Premium Agent</span>
               </div>
             </div>

@@ -46,7 +46,7 @@ export default function IntegrationsPage() {
                  </div>
                  <div>
                     <h4 className="text-lg font-display font-bold text-obsidian">Alto CRM</h4>
-                    <p className="text-sm text-muted mt-1">Branch: Dales &amp; Peaks Chesterfield</p>
+                    <p className="text-sm text-muted mt-1">Branch: Northgate Residential Chesterfield</p>
                     <div className="flex items-center gap-3 mt-4">
                        <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 uppercase tracking-wider flex items-center gap-1.5">
                           <CheckCircle2 className="w-3 h-3" />

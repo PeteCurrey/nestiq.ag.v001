@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Keep the environment template tracked
+!.env.example
+
+# Personal Claude Code settings (not team-wide)
+.claude/settings.local.json
+
+# Database exports — contain real contact details
+.backups/

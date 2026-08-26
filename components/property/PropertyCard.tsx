@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/cn";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Property {
   id: string;
@@ -49,7 +49,6 @@ export function PropertyCard({
   onSave,
   isSaved = false,
 }: PropertyCardProps) {
-  const router = useRouter();
 
   const displayAddress = property.address || `${property.address_line1}${property.town ? `, ${property.town}` : ""}`;
   const displayImage = property.imageUrl || (property.property_images && property.property_images.length > 0 
@@ -73,7 +72,7 @@ export function PropertyCard({
         className="group flex flex-col md:flex-row bg-white rounded-none overflow-hidden border border-border/60 hover:border-emerald/30 transition-all duration-700 min-h-[320px]"
       >
         {/* Image - 40% */}
-        <div className="relative w-full md:w-[40%] h-[240px] md:h-auto overflow-hidden cursor-pointer" onClick={() => router.push(`/property/${property.slug}`)}>
+        <Link href={`/property/${property.slug}`} aria-label={property.title} className="relative w-full md:w-[40%] h-[240px] md:h-auto overflow-hidden block">
           <Image
             src={displayImage}
             alt={property.title}
@@ -95,7 +94,7 @@ export function PropertyCard({
                 EPC {epc}
              </div>
           </div>
-        </div>
+        </Link>
 
         {/* Details - 60% */}
         <div className="flex-1 p-6 md:p-8 flex flex-col justify-between">
@@ -118,7 +117,7 @@ export function PropertyCard({
                  </button>
                </div>
             </div>
-            <h3 className="text-body-xl font-display font-medium text-obsidian mb-1 cursor-pointer hover:text-emerald transition-colors" onClick={() => router.push(`/property/${property.slug}`)}>{property.title}</h3>
+            <h3 className="text-body-xl font-display font-medium text-obsidian mb-1"><Link href={`/property/${property.slug}`} className="hover:text-emerald transition-colors focus-visible:outline-2 focus-visible:outline-emerald">{property.title}</Link></h3>
             <p className="text-body-sm text-muted/80 tracking-wide mb-6">{displayAddress}</p>
             
             <div className="flex items-center gap-6 mb-6">
@@ -161,8 +160,7 @@ export function PropertyCard({
             <Button 
               variant="outline" 
               className="w-full md:w-auto border-emerald text-emerald hover:bg-emerald hover:text-white px-6 py-2 h-10 group"
-              onClick={() => router.push(`/property/${property.slug}`)}
-            >
+                          >
               View Details <ArrowRight className="ml-2 w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
@@ -180,7 +178,7 @@ export function PropertyCard({
       viewport={{ once: true }}
       className="group flex flex-col bg-white rounded-none overflow-hidden border border-border/50 hover:border-emerald/30 transition-all duration-700 shadow-sm hover:shadow-xl h-full"
     >
-      <div className="relative aspect-[4/3] overflow-hidden cursor-pointer" onClick={() => router.push(`/property/${property.slug}`)}>
+      <Link href={`/property/${property.slug}`} aria-label={property.title} className="relative aspect-[4/3] overflow-hidden block">
         <Image
           src={displayImage}
           alt={property.title}
@@ -204,7 +202,7 @@ export function PropertyCard({
              <Heart className="w-3.5 h-3.5" />
            </button>
         </div>
-      </div>
+      </Link>
 
       <div className="p-6 flex flex-col flex-1">
         <div className="mb-4 space-y-1">
@@ -216,7 +214,7 @@ export function PropertyCard({
           )}
         </div>
 
-        <h3 className="text-body-lg font-display font-medium text-obsidian mb-1 truncate cursor-pointer hover:text-emerald transition-colors" onClick={() => router.push(`/property/${property.slug}`)}>{property.title}</h3>
+        <h3 className="text-body-lg font-display font-medium text-obsidian mb-1 truncate"><Link href={`/property/${property.slug}`} className="hover:text-emerald transition-colors focus-visible:outline-2 focus-visible:outline-emerald">{property.title}</Link></h3>
         <p className="text-body-sm text-muted/80 mb-6 truncate tracking-wide">{displayAddress}</p>
 
         <div className="flex items-center gap-4 mb-6">
