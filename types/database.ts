@@ -21,6 +21,17 @@ export interface Database {
     Tables: {
       profiles: {
         Row: {
+          readiness_score: number | null
+          readiness_updated_at: string | null
+          id_verified: boolean
+          moving_timescale: string | null
+          min_bedrooms: number | null
+          preferred_areas: string[] | null
+          deposit_available: number | null
+          budget_max: number | null
+          budget_min: number | null
+          mortgage_status: Database['public']['Enums']['mortgage_status'] | null
+          buyer_position: Database['public']['Enums']['buyer_position'] | null
           onboarding_completed: boolean
           id: string
           full_name: string | null
@@ -31,6 +42,16 @@ export interface Database {
           updated_at: string
         }
         Insert: {
+          readiness_updated_at?: string | null
+          id_verified?: boolean
+          moving_timescale?: string | null
+          min_bedrooms?: number | null
+          preferred_areas?: string[] | null
+          deposit_available?: number | null
+          budget_max?: number | null
+          budget_min?: number | null
+          mortgage_status?: Database['public']['Enums']['mortgage_status'] | null
+          buyer_position?: Database['public']['Enums']['buyer_position'] | null
           onboarding_completed?: boolean
           id: string
           full_name?: string | null
@@ -41,6 +62,16 @@ export interface Database {
           updated_at?: string
         }
         Update: {
+          readiness_updated_at?: string | null
+          id_verified?: boolean
+          moving_timescale?: string | null
+          min_bedrooms?: number | null
+          preferred_areas?: string[] | null
+          deposit_available?: number | null
+          budget_max?: number | null
+          budget_min?: number | null
+          mortgage_status?: Database['public']['Enums']['mortgage_status'] | null
+          buyer_position?: Database['public']['Enums']['buyer_position'] | null
           onboarding_completed?: boolean
           id?: string
           full_name?: string | null
@@ -137,7 +168,15 @@ export interface Database {
           specialisms?: string[] | null
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "agencies_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       properties: {
         Row: {
@@ -399,7 +438,22 @@ export interface Database {
           chain_status?: 'no_chain' | 'chain_below' | 'chain_above' | 'chain_both' | 'chain_complete' | null
           chain_notes?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "properties_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "properties_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       property_images: {
         Row: {
@@ -426,10 +480,20 @@ export interface Database {
           sort_order?: number | null
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "property_images_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       enquiries: {
         Row: {
+          buyer_position_at_enquiry: Database['public']['Enums']['buyer_position'] | null
+          readiness_at_enquiry: number | null
           id: string
           property_id: string | null
           agency_id: string | null
@@ -444,6 +508,8 @@ export interface Database {
           created_at: string
         }
         Insert: {
+          buyer_position_at_enquiry?: Database['public']['Enums']['buyer_position'] | null
+          readiness_at_enquiry?: number | null
           id?: string
           property_id?: string | null
           agency_id?: string | null
@@ -458,6 +524,8 @@ export interface Database {
           created_at?: string
         }
         Update: {
+          buyer_position_at_enquiry?: Database['public']['Enums']['buyer_position'] | null
+          readiness_at_enquiry?: number | null
           id?: string
           property_id?: string | null
           agency_id?: string | null
@@ -471,28 +539,74 @@ export interface Database {
           ai_intent_summary?: string | null
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "enquiries_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enquiries_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enquiries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       saved_properties: {
         Row: {
+          price_at_save: number | null
+          notes: string | null
+          collection_id: string | null
           id: string
           user_id: string
           property_id: string
           created_at: string
         }
         Insert: {
+          price_at_save?: number | null
+          notes?: string | null
+          collection_id?: string | null
           id?: string
           user_id: string
           property_id: string
           created_at?: string
         }
         Update: {
+          price_at_save?: number | null
+          notes?: string | null
+          collection_id?: string | null
           id?: string
           user_id?: string
           property_id?: string
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "saved_properties_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_properties_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       saved_searches: {
         Row: {
@@ -525,7 +639,15 @@ export interface Database {
           last_alerted_at?: string | null
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "saved_searches_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       contacts: {
         Row: {
@@ -579,7 +701,15 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "contacts_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       market_data: {
         Row: {
@@ -696,7 +826,22 @@ export interface Database {
           is_published?: boolean
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "agent_reviews_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "agent_reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       valuation_requests: {
         Row: {
@@ -768,7 +913,15 @@ export interface Database {
           details?: string | null
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "sync_logs_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       property_status_events: {
         Row: {
@@ -795,7 +948,15 @@ export interface Database {
           note?: string | null
           occurred_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "property_status_events_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       bookings: {
         Row: {
@@ -957,7 +1118,15 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "branches_agency_id_fkey"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "agencies"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       branch_claims: {
         Row: {
@@ -993,7 +1162,15 @@ export interface Database {
           expires_at?: string
           created_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "branch_claims_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       forwarded_leads: {
         Row: {
@@ -1023,34 +1200,96 @@ export interface Database {
           delivery_status?: 'pending' | 'sent' | 'bounced' | 'failed'
           provider_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "forwarded_leads_enquiry_id_fkey"
+            columns: ["enquiry_id"]
+            isOneToOne: false
+            referencedRelation: "enquiries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "forwarded_leads_branch_id_fkey"
+            columns: ["branch_id"]
+            isOneToOne: false
+            referencedRelation: "branches"
+            referencedColumns: ["id"]
+          }
+        ]
       }
-      property_status_events: {
+      collections: {
         Row: {
           id: string
-          property_id: string
-          event: 'listed' | 'price_reduced' | 'price_increased' | 'under_offer' | 'sold_stc' | 'fell_through' | 'withdrawn' | 'relisted' | 'completed'
-          price_at_event: number | null
-          note: string | null
-          occurred_at: string
+          user_id: string
+          name: string
+          description: string | null
+          is_default: boolean
+          created_at: string
+          updated_at: string
         }
         Insert: {
           id?: string
-          property_id: string
-          event: 'listed' | 'price_reduced' | 'price_increased' | 'under_offer' | 'sold_stc' | 'fell_through' | 'withdrawn' | 'relisted' | 'completed'
-          price_at_event?: number | null
-          note?: string | null
-          occurred_at?: string
+          user_id: string
+          name: string
+          description?: string | null
+          is_default?: boolean
+          created_at?: string
+          updated_at?: string
         }
         Update: {
           id?: string
-          property_id?: string
-          event?: 'listed' | 'price_reduced' | 'price_increased' | 'under_offer' | 'sold_stc' | 'fell_through' | 'withdrawn' | 'relisted' | 'completed'
-          price_at_event?: number | null
-          note?: string | null
-          occurred_at?: string
+          user_id?: string
+          name?: string
+          description?: string | null
+          is_default?: boolean
+          created_at?: string
+          updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "collections_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      property_views: {
+        Row: {
+          id: string
+          user_id: string
+          property_id: string
+          viewed_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          property_id: string
+          viewed_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          property_id?: string
+          viewed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_views_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "property_views_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
@@ -1075,6 +1314,12 @@ export interface Database {
       }
     }
     Enums: {
+      buyer_position:
+        | 'first_time_buyer' | 'chain_free' | 'selling_first' | 'in_chain'
+        | 'cash_buyer' | 'investor' | 'renting'
+      mortgage_status:
+        | 'not_started' | 'researching' | 'agreement_in_principle'
+        | 'offer_issued' | 'cash_no_mortgage'
       listing_provenance: 'agent_direct' | 'agent_feed' | 'compiled'
       founding_state:
         | 'unclaimed'
